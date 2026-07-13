@@ -7,7 +7,7 @@
 #   local:   retype wallet --add <your-license-key>
 #   CI:      set the RETYPE_KEY secret (see .github/workflows/retype.yml)
 # -----------------------------------------------------------------------------
-
+ 
 input: .
 output: .retype
 
