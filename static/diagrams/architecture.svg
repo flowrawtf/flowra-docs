@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 316" font-family="'Halyard Display','Inter','Segoe UI',system-ui,-apple-system,sans-serif">
+  <defs>
+    <marker id="aha" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1F2E73"/>
+    </marker>
+    <marker id="ahag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8A8478"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="314" rx="16" fill="#F2EEE9" stroke="#E2DBCE" stroke-width="1.5"/>
+
+  <!-- top row -->
+  <rect x="44" y="56" width="150" height="58" rx="10" fill="#FBF9F5" stroke="#8A8478" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="119" y="81" text-anchor="middle" font-size="13" font-weight="650" fill="#05161B">User transactions</text>
+  <text x="119" y="99" text-anchor="middle" font-size="10.5" fill="#6B675C">wallets · apps · RPC</text>
+
+  <rect x="266" y="56" width="200" height="58" rx="10" fill="#FBF9F5" stroke="#1F2E73" stroke-width="1.6"/>
+  <text x="366" y="81" text-anchor="middle" font-size="13" font-weight="650" fill="#1F2E73">Flowra Relayer</text>
+  <text x="366" y="99" text-anchor="middle" font-size="10.5" fill="#6B675C">TPU proxy · dedup + forward</text>
+
+  <rect x="538" y="56" width="200" height="58" rx="10" fill="#FBF9F5" stroke="#1F2E73" stroke-width="1.6"/>
+  <text x="638" y="81" text-anchor="middle" font-size="13" font-weight="650" fill="#1F2E73">Flowra Block Engine</text>
+  <text x="638" y="99" text-anchor="middle" font-size="10.5" fill="#6B675C">stream · auction · build</text>
+
+  <rect x="800" y="56" width="130" height="58" rx="10" fill="#FBF9F5" stroke="#F1561B" stroke-width="1.6"/>
+  <text x="865" y="81" text-anchor="middle" font-size="13" font-weight="650" fill="#F1561B">Searchers</text>
+  <text x="865" y="99" text-anchor="middle" font-size="10.5" fill="#6B675C">open access</text>
+
+  <!-- top arrows + step badges -->
+  <line x1="194" y1="85" x2="259" y2="85" stroke="#1F2E73" stroke-width="2" marker-end="url(#aha)"/>
+  <circle cx="227" cy="85" r="9" fill="#1F2E73"/><text x="227" y="88.5" text-anchor="middle" font-size="10" font-weight="700" fill="#F2EEE9">1</text>
+  <line x1="466" y1="85" x2="531" y2="85" stroke="#1F2E73" stroke-width="2" marker-end="url(#aha)"/>
+  <circle cx="499" cy="85" r="9" fill="#1F2E73"/><text x="499" y="88.5" text-anchor="middle" font-size="10" font-weight="700" fill="#F2EEE9">2</text>
+  <line x1="738" y1="85" x2="793" y2="85" stroke="#1F2E73" stroke-width="2" marker-end="url(#aha)"/>
+  <circle cx="766" cy="85" r="9" fill="#1F2E73"/><text x="766" y="88.5" text-anchor="middle" font-size="10" font-weight="700" fill="#F2EEE9">3</text>
+
+  <!-- searchers -> block engine (bundles) -->
+  <path d="M865 114 L865 156 Q865 164 857 164 L686 164 Q678 164 678 156 L678 121" fill="none" stroke="#1F2E73" stroke-width="2" marker-end="url(#aha)"/>
+  <circle cx="771" cy="164" r="9" fill="#1F2E73"/><text x="771" y="167.5" text-anchor="middle" font-size="10" font-weight="700" fill="#F2EEE9">4</text>
+
+  <!-- block engine -> validator -->
+  <rect x="266" y="210" width="200" height="58" rx="10" fill="#05161B"/>
+  <text x="366" y="235" text-anchor="middle" font-size="13" font-weight="650" fill="#F2EEE9">Validator Client</text>
+  <text x="366" y="253" text-anchor="middle" font-size="10.5" fill="#9DB0B5">local fallback always on</text>
+
+  <path d="M570 120 L570 231 Q570 239 562 239 L473 239" fill="none" stroke="#1F2E73" stroke-width="2" marker-end="url(#aha)"/>
+  <circle cx="570" cy="180" r="9" fill="#1F2E73"/><text x="570" y="183.5" text-anchor="middle" font-size="10" font-weight="700" fill="#F2EEE9">5</text>
+
+  <!-- validator -> block -->
+  <rect x="44" y="210" width="150" height="58" rx="10" fill="#1F2E73"/>
+  <text x="119" y="235" text-anchor="middle" font-size="13" font-weight="650" fill="#F2EEE9">Leader block</text>
+  <text x="119" y="253" text-anchor="middle" font-size="10.5" fill="#B9C0DE">winners first, then fees</text>
+
+  <line x1="266" y1="239" x2="201" y2="239" stroke="#1F2E73" stroke-width="2" marker-end="url(#aha)"/>
+  <circle cx="233" cy="239" r="9" fill="#1F2E73"/><text x="233" y="242.5" text-anchor="middle" font-size="10" font-weight="700" fill="#F2EEE9">6</text>
+
+  <!-- TPU delegation (validator -> relayer) -->
+  <line x1="405" y1="210" x2="405" y2="121" stroke="#8A8478" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ahag)"/>
+  <text x="415" y="170" font-size="10" fill="#8A8478">delegates TPU</text>
+
+  <!-- legend -->
+  <g font-size="11" fill="#6B675C">
+    <rect x="44" y="288" width="14" height="14" rx="4" fill="#05161B"/>
+    <text x="66" y="299">Your validator</text>
+    <rect x="180" y="288" width="14" height="14" rx="4" fill="#FBF9F5" stroke="#1F2E73" stroke-width="1.6"/>
+    <text x="202" y="299">Flowra infrastructure</text>
+    <rect x="360" y="288" width="14" height="14" rx="4" fill="#FBF9F5" stroke="#F1561B" stroke-width="1.6"/>
+    <text x="382" y="299">Searchers (permissionless)</text>
+  </g>
+</svg>

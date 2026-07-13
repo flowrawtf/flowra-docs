@@ -1,0 +1,39 @@
+﻿#  | Flowra Docs
+
+> Flowra is institutional-grade validator infrastructure for Solana: policy-controlled block production, made accountable by an open orderflow auction.
+
+- [Flowra Documentation](https://docs.flowra.wtf/index.md): Flowra Documentation
+- [Concepts](https://docs.flowra.wtf/concepts/index.md): The ideas behind Flowra: institutional-grade validation, the Programmable Block Policy, and the open orderflow auction that makes both accountable.
+- [Validators](https://docs.flowra.wtf/validators/index.md): Why run Flowra as a validator, and how to get started.
+- [Searchers](https://docs.flowra.wtf/searchers/index.md): Permissionless access to Solana orderflow: standardized streams, open auctions, atomic bundles.
+- [Resources](https://docs.flowra.wtf/resources/index.md): Roadmap, FAQ, and glossary.
+
+## Concepts
+
+- [Institutional-Grade Validation](https://docs.flowra.wtf/concepts/institutional-validation.md): What it takes for regulated operators to run Solana validators, and how Flowra provides it.
+- [Programmable Block Policy (PBP)](https://docs.flowra.wtf/concepts/programmable-block-policy.md): Flowra's core feature: validator-defined, hot-reloadable rules for block composition.
+- [Open Orderflow & Accountability](https://docs.flowra.wtf/concepts/open-orderflow-auction.md): Why Flowra opens the orderflow: verifiable policy enforcement first, better markets second.
+- [Auction Mechanics](https://docs.flowra.wtf/concepts/auction-mechanics.md): 50 ms mini-auctions, conflict-aware selection, atomic execution, and why open competition raises tips.
+- [Architecture](https://docs.flowra.wtf/concepts/architecture.md): The components that make up Flowra and how a transaction flows through them.
+- [Orderflow on Solana](https://docs.flowra.wtf/concepts/orderflow-on-solana.md): What orderflow is, how it gets monetized, and why Solana's architecture makes it a dark pool.
+- [The Problem](https://docs.flowra.wtf/concepts/the-problem.md): Unaccountable block production, concentrated infrastructure, and blind fees on Solana.
+
+## Validators
+
+- [Getting Started](https://docs.flowra.wtf/validators/getting-started.md): Onboard your validator to Flowra: registration, installation, configuration, and verification.
+- [Configuration](https://docs.flowra.wtf/validators/configuration.md): Flowra Validator Client flags and the Programmable Block Policy file.
+- [Endpoints & Addresses](https://docs.flowra.wtf/validators/endpoints.md): Regional Flowra endpoints and on-chain program addresses.
+- [Validator FAQ](https://docs.flowra.wtf/validators/faq.md): Common questions from validator operators evaluating Flowra.
+
+## Searchers
+
+- [Getting Started](https://docs.flowra.wtf/searchers/getting-started.md): Authenticate against the Block Engine and make your first calls.
+- [Orderflow Stream](https://docs.flowra.wtf/searchers/orderflow-stream.md): Subscribing to the pending-transaction stream: message contents and delivery semantics.
+- [Bundles](https://docs.flowra.wtf/searchers/bundles.md): Bundle structure, tipping, auction submission, and best practices.
+- [API Reference](https://docs.flowra.wtf/searchers/api-reference.md): gRPC services, messages, and result states for the searcher API.
+
+## Resources
+
+- [Roadmap](https://docs.flowra.wtf/resources/roadmap.md): Flowra's path from foundation to mainnet and beyond.
+- [FAQ](https://docs.flowra.wtf/resources/faq.md): General questions about Flowra, for users, stakers, and the curious.
+- [Glossary](https://docs.flowra.wtf/resources/glossary.md): Definitions of terms used throughout the Flowra documentation.

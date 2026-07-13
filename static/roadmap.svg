@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 292" font-family="'Halyard Display','Inter','Segoe UI',system-ui,-apple-system,sans-serif">
+  <!-- Flowra brand palette: orange #F1561B · navy #1F2E73 · cream #F2EEE9 · ink #05161B -->
+
+  <!-- card -->
+  <rect x="1" y="1" width="958" height="290" rx="16" fill="#F2EEE9" stroke="#E2DBCE" stroke-width="1.5"/>
+
+  <!-- timeline -->
+  <line x1="120" y1="132" x2="840" y2="132" stroke="#DDD5C6" stroke-width="4" stroke-linecap="round"/>
+  <line x1="120" y1="132" x2="600" y2="132" stroke="#1F2E73" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- ============ Phase 1 ============ -->
+  <text x="120" y="88" text-anchor="middle" font-size="12" font-weight="600" letter-spacing="1.5" fill="#8A8478">Q1 2026</text>
+  <circle cx="120" cy="132" r="13" fill="#1F2E73"/>
+  <path transform="translate(120,132)" d="M-5.5 0.5 L-1.5 4.5 L6 -4" fill="none" stroke="#F2EEE9" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="120" y="178" text-anchor="middle" font-size="15.5" font-weight="650" fill="#05161B">Foundation</text>
+  <text x="120" y="200" text-anchor="middle" font-size="12" fill="#6B675C">Team, architecture,</text>
+  <text x="120" y="217" text-anchor="middle" font-size="12" fill="#6B675C">core prototypes</text>
+  <text x="120" y="244" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="1.2" fill="#1F2E73">COMPLETE</text>
+
+  <!-- ============ Phase 2 ============ -->
+  <text x="360" y="88" text-anchor="middle" font-size="12" font-weight="600" letter-spacing="1.5" fill="#8A8478">Q2 2026</text>
+  <circle cx="360" cy="132" r="13" fill="#1F2E73"/>
+  <path transform="translate(360,132)" d="M-5.5 0.5 L-1.5 4.5 L6 -4" fill="none" stroke="#F2EEE9" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="360" y="178" text-anchor="middle" font-size="15.5" font-weight="650" fill="#05161B">Testnet</text>
+  <text x="360" y="200" text-anchor="middle" font-size="12" fill="#6B675C">Full pipeline live,</text>
+  <text x="360" y="217" text-anchor="middle" font-size="12" fill="#6B675C">first validator partners</text>
+  <text x="360" y="244" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="1.2" fill="#1F2E73">COMPLETE</text>
+
+  <!-- ============ Phase 3 (current) ============ -->
+  <text x="600" y="88" text-anchor="middle" font-size="12" font-weight="600" letter-spacing="1.5" fill="#F1561B">Q3 2026</text>
+  <circle cx="600" cy="132" r="20" fill="none" stroke="#F1561B" stroke-width="3" opacity="0.35"/>
+  <circle cx="600" cy="132" r="13.5" fill="#F1561B"/>
+  <circle cx="600" cy="132" r="5" fill="#F2EEE9"/>
+  <text x="600" y="178" text-anchor="middle" font-size="15.5" font-weight="650" fill="#05161B">Mainnet Launch</text>
+  <text x="600" y="200" text-anchor="middle" font-size="12" fill="#6B675C">Initial validator cohort,</text>
+  <text x="600" y="217" text-anchor="middle" font-size="12" fill="#6B675C">searcher API release</text>
+  <text x="600" y="244" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="1.2" fill="#F1561B">IN PROGRESS</text>
+
+  <!-- ============ Phase 4 ============ -->
+  <text x="840" y="88" text-anchor="middle" font-size="12" font-weight="600" letter-spacing="1.5" fill="#8A8478">Q4 2026 +</text>
+  <circle cx="840" cy="132" r="12" fill="#F9F7F2" stroke="#C9C2B2" stroke-width="3"/>
+  <text x="840" y="178" text-anchor="middle" font-size="15.5" font-weight="650" fill="#05161B">Institutional Expansion</text>
+  <text x="840" y="200" text-anchor="middle" font-size="12" fill="#6B675C">Policy reporting, filters,</text>
+  <text x="840" y="217" text-anchor="middle" font-size="12" fill="#6B675C">public dashboards</text>
+  <text x="840" y="244" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="1.2" fill="#8A8478">PLANNED</text>
+</svg>
