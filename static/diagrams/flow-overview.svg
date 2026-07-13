@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" font-family="'Halyard Display','Inter','Segoe UI',system-ui,-apple-system,sans-serif">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1F2E73"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="298" rx="16" fill="#F2EEE9" stroke="#E2DBCE" stroke-width="1.5"/>
+
+  <!-- top row -->
+  <rect x="44" y="60" width="150" height="58" rx="10" fill="#FBF9F5" stroke="#8A8478" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="119" y="85" text-anchor="middle" font-size="13.5" font-weight="650" fill="#05161B">User transactions</text>
+  <text x="119" y="103" text-anchor="middle" font-size="10.5" fill="#6B675C">wallets · apps · RPC</text>
+
+  <rect x="246" y="60" width="190" height="58" rx="10" fill="#FBF9F5" stroke="#1F2E73" stroke-width="1.6"/>
+  <text x="341" y="85" text-anchor="middle" font-size="13.5" font-weight="650" fill="#1F2E73">Flowra Relayer</text>
+  <text x="341" y="103" text-anchor="middle" font-size="10.5" fill="#6B675C">TPU proxy · dedup</text>
+
+  <rect x="488" y="60" width="210" height="58" rx="10" fill="#FBF9F5" stroke="#1F2E73" stroke-width="1.6"/>
+  <text x="593" y="85" text-anchor="middle" font-size="13.5" font-weight="650" fill="#1F2E73">Flowra Block Engine</text>
+  <text x="593" y="103" text-anchor="middle" font-size="10.5" fill="#6B675C">orderflow stream · 50 ms auctions</text>
+
+  <rect x="750" y="60" width="170" height="58" rx="10" fill="#FBF9F5" stroke="#F1561B" stroke-width="1.6"/>
+  <text x="835" y="85" text-anchor="middle" font-size="13.5" font-weight="650" fill="#F1561B">Searchers</text>
+  <text x="835" y="103" text-anchor="middle" font-size="10.5" fill="#6B675C">open access</text>
+
+  <line x1="194" y1="89" x2="239" y2="89" stroke="#1F2E73" stroke-width="2" marker-end="url(#ah)"/>
+  <line x1="436" y1="89" x2="481" y2="89" stroke="#1F2E73" stroke-width="2" marker-end="url(#ah)"/>
+  <line x1="698" y1="89" x2="743" y2="89" stroke="#1F2E73" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="724" y="48" text-anchor="middle" font-size="10" fill="#6B675C">open stream</text>
+
+  <!-- searchers -> block engine (bundles) -->
+  <path d="M835 118 L835 152 Q835 160 827 160 L601 160 Q593 160 593 152 L593 125" fill="none" stroke="#1F2E73" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="714" y="178" text-anchor="middle" font-size="10.5" fill="#6B675C">tip-bearing bundles</text>
+
+  <!-- block engine -> validator -->
+  <rect x="44" y="210" width="230" height="58" rx="10" fill="#05161B"/>
+  <text x="159" y="235" text-anchor="middle" font-size="13.5" font-weight="650" fill="#F2EEE9">Your validator</text>
+  <text x="159" y="253" text-anchor="middle" font-size="10.5" fill="#9DB0B5">Flowra Client · policy authority</text>
+
+  <path d="M520 118 L520 231 Q520 239 512 239 L281 239" fill="none" stroke="#1F2E73" stroke-width="2" marker-end="url(#ah)"/>
+  <text x="397" y="259" text-anchor="middle" font-size="10.5" fill="#6B675C">winning bundles, included first in the block</text>
+</svg>

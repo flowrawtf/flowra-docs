@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 352" font-family="'Halyard Display','Inter','Segoe UI',system-ui,-apple-system,sans-serif">
+  <rect x="1" y="1" width="958" height="350" rx="16" fill="#F2EEE9" stroke="#E2DBCE" stroke-width="1.5"/>
+
+  <text x="48" y="44" font-size="14" font-weight="650" fill="#05161B">Validator share of a 100 SOL opportunity</text>
+  <text x="48" y="63" font-size="11" fill="#8A8478">Illustrative: the same opportunity under rising searcher competition</text>
+
+  <!-- gridlines -->
+  <g stroke="#E2DBCE" stroke-width="1">
+    <line x1="90" y1="100" x2="910" y2="100"/>
+    <line x1="90" y1="150" x2="910" y2="150"/>
+    <line x1="90" y1="200" x2="910" y2="200"/>
+    <line x1="90" y1="250" x2="910" y2="250"/>
+  </g>
+  <g font-size="10.5" fill="#8A8478" text-anchor="end">
+    <text x="80" y="104">100</text>
+    <text x="80" y="154">75</text>
+    <text x="80" y="204">50</text>
+    <text x="80" y="254">25</text>
+    <text x="80" y="304">0</text>
+  </g>
+  <text x="48" y="86" font-size="10.5" fill="#8A8478">SOL to validator</text>
+
+  <!-- bars (baseline y=300, 2px per SOL) -->
+  <path d="M155 300 L155 244 Q155 240 159 240 L261 240 Q265 240 265 244 L265 300 Z" fill="#1F2E73"/>
+  <text x="210" y="228" text-anchor="middle" font-size="13" font-weight="700" fill="#05161B">30</text>
+
+  <path d="M355 300 L355 184 Q355 180 359 180 L461 180 Q465 180 465 184 L465 300 Z" fill="#1F2E73"/>
+  <text x="410" y="168" text-anchor="middle" font-size="13" font-weight="700" fill="#05161B">60</text>
+
+  <path d="M555 300 L555 134 Q555 130 559 130 L661 130 Q665 130 665 134 L665 300 Z" fill="#1F2E73"/>
+  <text x="610" y="118" text-anchor="middle" font-size="13" font-weight="700" fill="#05161B">85</text>
+
+  <path d="M755 300 L755 124 Q755 120 759 120 L861 120 Q865 120 865 124 L865 300 Z" fill="#F1561B"/>
+  <text x="810" y="108" text-anchor="middle" font-size="13" font-weight="700" fill="#05161B">90</text>
+
+  <!-- baseline -->
+  <line x1="90" y1="300" x2="910" y2="300" stroke="#C9C2B2" stroke-width="1.5"/>
+
+  <!-- category labels -->
+  <g font-size="11.5" fill="#6B675C" text-anchor="middle">
+    <text x="210" y="322">1 searcher (closed)</text>
+    <text x="410" y="322">2 searchers</text>
+    <text x="610" y="322">4 searchers</text>
+    <text x="810" y="322" font-weight="600" fill="#F1561B">Many (open market)</text>
+  </g>
+</svg>

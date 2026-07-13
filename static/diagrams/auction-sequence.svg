@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 424" font-family="'Halyard Display','Inter','Segoe UI',system-ui,-apple-system,sans-serif">
+  <defs>
+    <marker id="ahs" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1F2E73"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="422" rx="16" fill="#F2EEE9" stroke="#E2DBCE" stroke-width="1.5"/>
+
+  <!-- lifelines -->
+  <g stroke="#C9C2B2" stroke-width="1.5" stroke-dasharray="4 4">
+    <line x1="140" y1="80" x2="140" y2="400"/>
+    <line x1="420" y1="80" x2="420" y2="400"/>
+    <line x1="650" y1="80" x2="650" y2="400"/>
+    <line x1="872" y1="80" x2="872" y2="400"/>
+  </g>
+
+  <!-- headers -->
+  <rect x="60" y="28" width="160" height="48" rx="10" fill="#FBF9F5" stroke="#1F2E73" stroke-width="1.6"/>
+  <text x="140" y="49" text-anchor="middle" font-size="13" font-weight="650" fill="#1F2E73">Relayer</text>
+  <text x="140" y="66" text-anchor="middle" font-size="10" fill="#6B675C">TPU proxy</text>
+
+  <rect x="340" y="28" width="160" height="48" rx="10" fill="#FBF9F5" stroke="#1F2E73" stroke-width="1.6"/>
+  <text x="420" y="49" text-anchor="middle" font-size="13" font-weight="650" fill="#1F2E73">Block Engine</text>
+  <text x="420" y="66" text-anchor="middle" font-size="10" fill="#6B675C">auction host</text>
+
+  <rect x="570" y="28" width="160" height="48" rx="10" fill="#FBF9F5" stroke="#F1561B" stroke-width="1.6"/>
+  <text x="650" y="49" text-anchor="middle" font-size="13" font-weight="650" fill="#F1561B">Searchers</text>
+  <text x="650" y="66" text-anchor="middle" font-size="10" fill="#6B675C">bidders</text>
+
+  <rect x="792" y="28" width="160" height="48" rx="10" fill="#05161B"/>
+  <text x="872" y="49" text-anchor="middle" font-size="13" font-weight="650" fill="#F2EEE9">Validator</text>
+  <text x="872" y="66" text-anchor="middle" font-size="10" fill="#9DB0B5">Flowra Client</text>
+
+  <!-- messages -->
+  <line x1="140" y1="124" x2="413" y2="124" stroke="#1F2E73" stroke-width="1.8" marker-end="url(#ahs)"/>
+  <text x="280" y="114" text-anchor="middle" font-size="11" fill="#6B675C">deduplicated transaction packets</text>
+
+  <line x1="420" y1="168" x2="643" y2="168" stroke="#1F2E73" stroke-width="1.8" marker-end="url(#ahs)"/>
+  <text x="532" y="158" text-anchor="middle" font-size="11" fill="#6B675C">open orderflow stream (gRPC)</text>
+
+  <line x1="650" y1="212" x2="427" y2="212" stroke="#1F2E73" stroke-width="1.8" marker-end="url(#ahs)"/>
+  <text x="538" y="202" text-anchor="middle" font-size="11" fill="#6B675C">tip-bearing bundles</text>
+
+  <!-- 50ms loop -->
+  <rect x="315" y="248" width="210" height="60" rx="8" fill="none" stroke="#F1561B" stroke-width="1.6" stroke-dasharray="5 4"/>
+  <rect x="315" y="237" width="88" height="20" rx="6" fill="#F1561B"/>
+  <text x="359" y="251" text-anchor="middle" font-size="9.5" font-weight="700" letter-spacing="0.8" fill="#F2EEE9">EVERY 50 MS</text>
+  <text x="420" y="279" text-anchor="middle" font-size="10.5" fill="#6B675C">conflict-aware selection</text>
+  <text x="420" y="295" text-anchor="middle" font-size="10.5" fill="#6B675C">of the highest-tip set</text>
+
+  <line x1="420" y1="336" x2="865" y2="336" stroke="#1F2E73" stroke-width="1.8" marker-end="url(#ahs)"/>
+  <text x="642" y="326" text-anchor="middle" font-size="11" fill="#6B675C">winning bundles + remaining packets</text>
+
+  <!-- validator-side note -->
+  <rect x="768" y="356" width="180" height="44" rx="8" fill="#E7E9F4" stroke="#1F2E73" stroke-width="1.2"/>
+  <text x="858" y="375" text-anchor="middle" font-size="10.5" font-weight="600" fill="#05161B">executed atomically,</text>
+  <text x="858" y="391" text-anchor="middle" font-size="10.5" font-weight="600" fill="#05161B">first in the block</text>
+</svg>

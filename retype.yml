@@ -1,0 +1,119 @@
+# -----------------------------------------------------------------------------
+# Flowra Docs — Retype configuration
+# https://retype.com/configuration/project/
+#
+# PRO features (theme, scheme, toc, breadcrumb, outbound, hub, poweredByRetype)
+# require an activated Retype PRO license:
+#   local:   retype wallet --add <your-license-key>
+#   CI:      set the RETYPE_KEY secret (see .github/workflows/retype.yml)
+# -----------------------------------------------------------------------------
+
+input: .
+output: .retype
+
+# Custom domain — Retype auto-generates the CNAME file from this URL.
+url: https://docs.flowra.wtf
+
+locale: en
+
+exclude:
+  - "SETUP.md"
+
+# Brand palette (Flowra Branding Deck):
+#   orange #F1561B · navy #1F2E73 · cream #F2EEE9 · ink #05161B
+branding:
+  title: Flowra
+  label: Docs
+  logo: static/flowra-logo.svg
+  logoDark: static/flowra-logo-dark.svg
+  logoAlign: left
+  baseColor: "#1F2E73"
+  colors:
+    label:
+      text: "#F2EEE9"
+      background: "#F1561B"
+
+favicon: static/favicon.png
+
+meta:
+  title: " | Flowra Docs"
+
+# Light by default (user can still toggle dark mode).
+scheme:
+  mode: light
+
+theme:
+  base:
+    base-color: "#1F2E73"
+    base-bg: "#F2EEE9"
+  dark:
+    base-color: "#F1561B"
+    base-bg: "#05161B"
+
+links:
+  - text: Website
+    link: https://flowra.wtf
+    icon: globe
+    target: blank
+  - text: Blog
+    link: https://flowra.wtf/blog
+    icon: book
+    target: blank
+  - text: Contact
+    link: "mailto:info@flowra.wtf"
+    icon: mail
+
+footer:
+  copyright: "&copy; {{ year }} Flowra &mdash; Institutional-grade validation for Solana"
+  links:
+    - text: Website
+      link: https://flowra.wtf
+      target: blank
+    - text: Blog
+      link: https://flowra.wtf/blog
+      target: blank
+    - text: Contact
+      link: "mailto:info@flowra.wtf"
+
+hub:
+  link: https://flowra.wtf
+  alt: Go to flowra.wtf
+  target: blank
+
+toc:
+  depth: 2-3
+  label: On this page
+
+breadcrumb:
+  enabled: true
+
+nextprev:
+  mode: show
+
+outbound:
+  enabled: true
+  icon: link-external
+  iconAlign: right
+  target: blank
+
+search:
+  mode: full
+  hotkeys:
+    - "/"
+
+# Custom UI labels error (not just warn) when no Retype Key is present.
+# Re-enable once RETYPE_KEY is configured everywhere you build.
+#
+# labels:
+#   default:
+#     search_input_placeholder: Search Flowra Docs
+
+# Uncomment once the public docs repository exists, to enable
+# "Edit this page" links:
+#
+# edit:
+#   repo: "https://github.com/flowra/docs"
+#   branch: main
+#   label: Edit this page
+
+poweredByRetype: false

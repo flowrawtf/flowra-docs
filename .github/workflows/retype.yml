@@ -1,0 +1,36 @@
+name: Publish Flowra Docs to GitHub Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    name: Build and publish to retype branch
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      # fetch-depth: 0 pulls full git history so Retype can generate
+      # accurate "last updated" metadata from commit dates.
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      # RETYPE_KEY unlocks PRO features (theme, toc, breadcrumb, etc.).
+      # Add your license key at: Settings → Secrets and variables →
+      # Actions → New repository secret → name: RETYPE_KEY
+      - uses: retypeapp/action-build@latest
+        env:
+          RETYPE_KEY: ${{ secrets.RETYPE_KEY }}
+
+      # Publishes the built site to the `retype` branch.
+      # In repo Settings → Pages, set the source branch to `retype`,
+      # then add the custom domain docs.flowra.wtf (CNAME is generated
+      # automatically from `url` in retype.yml).
+      - uses: retypeapp/action-github-pages@latest
+        with:
+          update-branch: true

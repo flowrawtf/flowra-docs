@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 320" font-family="'Halyard Display','Inter','Segoe UI',system-ui,-apple-system,sans-serif">
+  <defs>
+    <marker id="ahp" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1F2E73"/>
+    </marker>
+    <marker id="ahpo" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#F1561B"/>
+    </marker>
+    <marker id="ahpk" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#05161B"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="318" rx="16" fill="#F2EEE9" stroke="#E2DBCE" stroke-width="1.5"/>
+
+  <!-- candidate bundles -->
+  <rect x="44" y="88" width="170" height="64" rx="10" fill="#FBF9F5" stroke="#8A8478" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="129" y="115" text-anchor="middle" font-size="13.5" font-weight="650" fill="#05161B">Candidate bundles</text>
+  <text x="129" y="134" text-anchor="middle" font-size="10.5" fill="#6B675C">from searchers</text>
+
+  <!-- block engine -->
+  <rect x="300" y="88" width="240" height="64" rx="10" fill="#1F2E73"/>
+  <text x="420" y="113" text-anchor="middle" font-size="14" font-weight="650" fill="#F2EEE9">Block Engine</text>
+  <text x="420" y="133" text-anchor="middle" font-size="10.5" fill="#B9C0DE">enforces policy before the auction</text>
+
+  <line x1="214" y1="120" x2="293" y2="120" stroke="#1F2E73" stroke-width="2" marker-end="url(#ahp)"/>
+
+  <!-- validator (policy authority) -->
+  <rect x="300" y="228" width="240" height="64" rx="10" fill="#05161B"/>
+  <text x="420" y="253" text-anchor="middle" font-size="14" font-weight="650" fill="#F2EEE9">Your validator</text>
+  <text x="420" y="273" text-anchor="middle" font-size="10.5" fill="#9DB0B5">policy authority · flowra-pbp.toml</text>
+
+  <line x1="420" y1="228" x2="420" y2="159" stroke="#05161B" stroke-width="2" marker-end="url(#ahpk)"/>
+  <text x="408" y="185" text-anchor="end" font-size="10.5" font-weight="600" fill="#05161B">pushes policy</text>
+  <text x="408" y="200" text-anchor="end" font-size="10" fill="#6B675C">re-pushed on file change</text>
+
+  <!-- pass branch -->
+  <path d="M540 104 L558 104 Q566 104 566 96 L566 72 Q566 64 574 64 L580 64" fill="none" stroke="#1F2E73" stroke-width="2" marker-end="url(#ahp)"/>
+  <text x="671" y="26" text-anchor="middle" font-size="10.5" font-weight="700" letter-spacing="0.5" fill="#1F2E73">CONFORMING</text>
+  <rect x="586" y="36" width="170" height="56" rx="10" fill="#FBF9F5" stroke="#1F2E73" stroke-width="1.6"/>
+  <text x="671" y="60" text-anchor="middle" font-size="13" font-weight="650" fill="#1F2E73">50 ms auction</text>
+  <text x="671" y="78" text-anchor="middle" font-size="10.5" fill="#6B675C">highest tip wins</text>
+
+  <line x1="756" y1="64" x2="800" y2="64" stroke="#1F2E73" stroke-width="2" marker-end="url(#ahp)"/>
+  <rect x="806" y="36" width="130" height="56" rx="10" fill="#1F2E73"/>
+  <text x="871" y="60" text-anchor="middle" font-size="13" font-weight="650" fill="#F2EEE9">Your block</text>
+  <text x="871" y="78" text-anchor="middle" font-size="10.5" fill="#B9C0DE">winners first</text>
+
+  <!-- fail branch -->
+  <path d="M540 136 L558 136 Q566 136 566 144 L566 168 Q566 176 574 176 L580 176" fill="none" stroke="#F1561B" stroke-width="2" marker-end="url(#ahpo)"/>
+  <text x="671" y="222" text-anchor="middle" font-size="10.5" font-weight="700" letter-spacing="0.5" fill="#F1561B">VIOLATES POLICY</text>
+  <rect x="586" y="148" width="170" height="56" rx="10" fill="#FBF9F5" stroke="#F1561B" stroke-width="1.6"/>
+  <text x="671" y="172" text-anchor="middle" font-size="13" font-weight="650" fill="#F1561B">Rejected</text>
+  <text x="671" y="190" text-anchor="middle" font-size="10.5" fill="#6B675C">never enters your auction</text>
+
+  <!-- caption -->
+  <text x="44" y="304" font-size="11" fill="#6B675C">The validator owns the policy file. The Block Engine can only auction what the policy allows.</text>
+</svg>

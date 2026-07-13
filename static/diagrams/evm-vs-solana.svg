@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 372" font-family="'Halyard Display','Inter','Segoe UI',system-ui,-apple-system,sans-serif">
+  <defs>
+    <marker id="ahe" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1F2E73"/>
+    </marker>
+    <marker id="ahc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#F2EEE9"/>
+    </marker>
+    <marker id="aho" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#F1561B"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="370" rx="16" fill="#F2EEE9" stroke="#E2DBCE" stroke-width="1.5"/>
+
+  <!-- ================= Ethereum panel (lit) ================= -->
+  <rect x="32" y="28" width="436" height="316" rx="12" fill="#FBF9F5" stroke="#E2DBCE" stroke-width="1.5"/>
+  <text x="56" y="58" font-size="12" font-weight="700" letter-spacing="1.5" fill="#1F2E73">ETHEREUM</text>
+  <text x="150" y="58" font-size="10.5" fill="#8A8478">lit by default</text>
+
+  <g>
+    <rect x="130" y="76" width="240" height="42" rx="8" fill="#F2EEE9" stroke="#1F2E73" stroke-width="1.5"/>
+    <text x="250" y="102" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1F2E73">User transaction</text>
+    <line x1="250" y1="118" x2="250" y2="141" stroke="#1F2E73" stroke-width="2" marker-end="url(#ahe)"/>
+
+    <rect x="130" y="146" width="240" height="42" rx="8" fill="#F2EEE9" stroke="#1F2E73" stroke-width="1.5"/>
+    <text x="250" y="172" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1F2E73">Public mempool</text>
+    <line x1="250" y1="188" x2="250" y2="211" stroke="#1F2E73" stroke-width="2" marker-end="url(#ahe)"/>
+
+    <rect x="130" y="216" width="240" height="42" rx="8" fill="#F2EEE9" stroke="#1F2E73" stroke-width="1.5"/>
+    <text x="250" y="242" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1F2E73">Every searcher sees it</text>
+    <line x1="250" y1="258" x2="250" y2="281" stroke="#1F2E73" stroke-width="2" marker-end="url(#ahe)"/>
+
+    <rect x="130" y="286" width="240" height="42" rx="8" fill="#F2EEE9" stroke="#1F2E73" stroke-width="1.5"/>
+    <text x="250" y="312" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1F2E73">Builders / validators</text>
+  </g>
+
+  <!-- ================= Solana panel (dark) ================= -->
+  <rect x="492" y="28" width="436" height="316" rx="12" fill="#05161B"/>
+  <text x="516" y="58" font-size="12" font-weight="700" letter-spacing="1.5" fill="#F2EEE9">SOLANA TODAY</text>
+  <text x="632" y="58" font-size="10.5" fill="#9DB0B5">a dark pool by design</text>
+
+  <g>
+    <rect x="590" y="76" width="240" height="42" rx="8" fill="none" stroke="#F2EEE9" stroke-width="1.5"/>
+    <text x="710" y="102" text-anchor="middle" font-size="12.5" font-weight="600" fill="#F2EEE9">User transaction</text>
+    <line x1="710" y1="118" x2="710" y2="141" stroke="#F2EEE9" stroke-width="2" marker-end="url(#ahc)"/>
+
+    <rect x="590" y="146" width="240" height="42" rx="8" fill="none" stroke="#F2EEE9" stroke-width="1.5"/>
+    <text x="710" y="172" text-anchor="middle" font-size="12.5" font-weight="600" fill="#F2EEE9">RPC / private pipeline</text>
+
+    <!-- direct forward to leader -->
+    <path d="M645 188 L645 262" fill="none" stroke="#F2EEE9" stroke-width="2" marker-end="url(#ahc)"/>
+    <text x="633" y="228" text-anchor="end" font-size="10.5" fill="#9DB0B5">direct forward</text>
+
+    <rect x="530" y="268" width="180" height="42" rx="8" fill="none" stroke="#F2EEE9" stroke-width="1.5"/>
+    <text x="620" y="294" text-anchor="middle" font-size="12.5" font-weight="600" fill="#F2EEE9">Leader</text>
+
+    <!-- privileged access -->
+    <path d="M790 188 L790 262" fill="none" stroke="#F1561B" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#aho)"/>
+    <text x="800" y="228" font-size="10.5" fill="#F1561B">privileged access only</text>
+
+    <rect x="736" y="268" width="172" height="42" rx="8" fill="none" stroke="#F1561B" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text x="822" y="288" text-anchor="middle" font-size="12" font-weight="600" fill="#F1561B">Selected searchers</text>
+    <text x="822" y="302" text-anchor="middle" font-size="10" fill="#9DB0B5">no public visibility</text>
+  </g>
+</svg>
