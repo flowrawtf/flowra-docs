@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841668691016">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841668770529">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -38,11 +38,11 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.6.0.841668691016" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.6.0.841668770529" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841668691016" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841668770529" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841668691016" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841668770529" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -307,7 +307,7 @@ Signing | Every transaction fully signed before submission; each transaction's f
 <h3 id="keep-the-tip-inside-the-core-transaction">Keep the tip inside the core transaction</h3>
 <p>Attach the tip transfer within a transaction that is essential to the bundle&#x27;s success, not as a detached final transfer. This prevents any path where your tip could land while your strategy legs do not.</p>
 <h3 id="one-bundle-per-opportunity">One bundle per opportunity</h3>
-<p>Overlapping variants supersede each other within the 2-second window. Pick your bid and let the bundle re-enter ticks on its own.</p>
+<p>Once a bundle has been sent to a leader, the engine remembers its transaction signatures for 2 seconds and drops any later bundle that reuses one of them (<code translate="no" v-pre>Dropped / PartiallyProcessed</code>). So do not submit several bundles that share a transaction — the same swap wrapped with different tips, say — expecting the best one to win: only the first to reach a leader counts, and the rest are dropped. Submit one bundle per opportunity with the bid you actually want; if it loses a tick it competes again in the following ticks by itself, so there is nothing to resubmit.</p>
 <h3 id="treat-results-as-market-data">Treat results as market data</h3>
 <p><code translate="no" v-pre>Rejected</code> and <code translate="no" v-pre>Dropped</code> results carry structured reasons, the failing signature, and simulation logs. They are calibration signals, not errors.</p>
 <p>
