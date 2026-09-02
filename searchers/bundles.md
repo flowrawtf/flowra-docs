@@ -18,7 +18,7 @@ Before a bundle can enter the auction, the Block Engine simulates it against the
 
 ## Tipping
 
-Your tip is your **bid** in the 10&nbsp;ms auction:
+Your tip is your **bid** in the auction:
 
 - Fetch the current tip accounts with `GetTipAccounts`, then include a lamport transfer to one of them inside your bundle.
 - Your bid equals the **sum of transfers to tip accounts** across the bundle, as measured in simulation. Misreported tips are caught there and the bundle is dropped.
@@ -58,12 +58,7 @@ A bundle that loses a tick is not gone: it re-enters the following ticks and kee
 
 ### Overlapping bundles
 
-The engine remembers every transaction signature it has sent to a leader for the last **2 seconds**. A later bundle that repeats one of those signatures can only land if the earlier bundle fails — a signature executes once — so the engine does not drop it, but it does not let it compete on equal terms either:
-
-- It is forwarded **behind every bundle that carries no repeated signature** in that tick. If the earlier bundle executed, it fails cheaply at the leader; if the earlier bundle died on a leg of its own, it is the one that lands.
-- At most **3 bundles per signature** are forwarded within the window, best reward first. Further repeats are dropped with `Dropped / PartiallyProcessed` and the shared signature named in the result.
-
-This is what makes hedged variants work — `[A, C]` and `[A, B, C]` for the same opportunity both go out, and whichever fits lands — while keeping one hot transaction from filling the leader's bundle window with copies. Keep it to a few deliberate variants; a resubmission of the same bundle gains nothing.
+If several of your bundles share a transaction, the engine forwards them in order but puts every bundle that repeats an already-sent signature **behind** the bundles that do not, and forwards at most **three** per shared signature; further repeats are dropped with `Dropped / PartiallyProcessed`. A repeated transaction executes once, so only one of them can land. Send the variants you mean, not copies.
 
 ## Timing your submissions
 
@@ -71,32 +66,8 @@ Bundles only land while a Flowra validator is the leader. Use `GetNextScheduledL
 
 ## What gets you sanctioned
 
-Flowra keeps the stream open by holding keys accountable rather than by gating access. Two mechanisms act on a key:
+**The validator's policy.** Each validator sets its own [block policy](../concepts/programmable-block-policy.md) — blocked addresses and programs, searcher allowlists, and its stance on aggressive MEV. A bundle the policy disallows is rejected at submission with `PERMISSION_DENIED: PBP violation: <reason>`.
 
-**The validator's policy (PBP).** Each validator sets its own [block policy](../concepts/programmable-block-policy.md). A bundle that violates it — a blacklisted address or program, a searcher outside a whitelist, or a sandwich pattern where `allow_aggressive_mev` is off — is rejected at submission with `PERMISSION_DENIED: PBP violation: <reason>`. The engine classifies a bundle as a sandwich when it has three or more transactions, the first and last share a fee payer, and a middle transaction has a different one.
-
-**Network-level sanctions.** Aggressive MEV strategies such as sandwiching, and bundle spamming (sustained submission far above your key's limit), can get a key restricted — from a lower bundle limit to losing the mempool stream or being suspended. Restrictions are applied by the Flowra operators and shown on the portal, with the reason.
-
-## Best practices
-
-### Simulate before you submit
-
-The engine will catch failing bundles for free, but a submission that was never viable wastes your latency window. Run `simulateTransaction` against fresh state for each leg first.
-
-### Guard your assumptions in-program
-
-Where possible, encode pre- and post-checks into the transactions themselves (balance assertions, slippage bounds). Atomicity protects you from partial execution; assertions protect you from *successful* execution under moved markets.
-
-### Keep the tip inside the core transaction
-
-Attach the tip transfer within a transaction that is essential to the bundle's success, not as a detached final transfer. This prevents any path where your tip could land while your strategy legs do not.
-
-### A few variants, not a spray
-
-Overlapping variants of one opportunity are allowed and go out behind the fresh bundles, up to three per shared signature. Beyond that they are dropped, and none of them can beat a bundle that carries no repeat. Submit the two or three variants you actually mean, with the bids you actually want; a bundle that loses a tick competes again by itself, so there is nothing to resubmit.
-
-### Treat results as market data
-
-`Rejected` and `Dropped` results carry structured reasons, the failing signature, and simulation logs; a rejection at `SendBundle` names the exact number that was short. They are calibration signals, not errors.
+**Network-level sanctions.** Abusive strategies and bundle spamming (sustained submission far above your key's limit) can get a key restricted or suspended. Restrictions are applied by the Flowra operators and shown on the portal, with the reason.
 
 [!ref Full API reference](api-reference.md)

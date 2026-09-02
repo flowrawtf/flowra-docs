@@ -1,6 +1,6 @@
 # Getting Started
 
-Searcher access is **open**: anyone can sign up, register a key, and start bidding once the key is approved. Registration exists so that the network can hold a key accountable: aggressive MEV strategies such as sandwiching, and bundle spamming, can get a key sanctioned.
+Searcher access is **open**: anyone can sign up, register a key, and start bidding once the key is approved. Registration exists so that the network can hold a key accountable: abusive strategies and bundle spamming can get a key sanctioned.
 
 ## Prerequisites
 
@@ -31,19 +31,18 @@ Paste the signature, add a name and a one-line purpose, and submit.
 
 >>> Wait for approval
 
-Keys are reviewed by the Flowra operators. Until a key is approved, `GenerateAuthChallenge` answers `PERMISSION_DENIED: Searcher key is pending`. Approved keys show their status, mempool scope, and bundle limit on the portal.
+Keys are reviewed by the Flowra operators. Until a key is approved, `GenerateAuthChallenge` answers `PERMISSION_DENIED: Searcher key is pending`. Approved keys show their status and limits on the portal.
 
 >>>
 
-Each key carries two operator-set attributes you can read on the portal:
+Each key carries operator-set limits you can read on the portal:
 
 Attribute | Meaning
 --- | ---
-Mempool scope | **Full**: every pending transaction. **Leader scope**: transactions only while one of the validators in your scope is about to lead (within the next 8 slots).
 Bundle limit | Maximum `SendBundle` calls per second for this key (default 20). Exceeding it returns `RESOURCE_EXHAUSTED`.
 Minimum tip | The network floor is 1,000 lamports per bundle; a key can be given its own floor, or exempted.
 
-Keys are held accountable: aggressive MEV strategies such as sandwiching, and bundle spamming, can get a key restricted or suspended. See [Bundles](bundles.md#what-gets-you-sanctioned).
+Keys are held accountable: abusive strategies and bundle spamming can get a key restricted or suspended. See [Bundles](bundles.md#what-gets-you-sanctioned).
 
 ## Authentication flow
 
@@ -110,7 +109,7 @@ The concepts map directly: bundles, tips, atomic execution, auth via challenge-r
 
 - **The orderflow stream is part of the product.** You subscribe to pending transactions from the same interface you submit to.
 - **Keys are registered.** One-time registration on the portal, then the same auth flow you already run.
-- **Tips are auction bids** settled every 10&nbsp;ms, with a 5% protocol fee.
-- **Sandwiching is a policy decision, not a given.** Each validator decides through its [block policy](../concepts/programmable-block-policy.md); where it is disallowed the engine rejects the bundle, and a key that keeps trying can be sanctioned.
+- **Tips are auction bids** settled in sub-slot ticks, with a 5% protocol fee.
+- **Validators set block policies.** A bundle that a validator's [block policy](../concepts/programmable-block-policy.md) disallows is rejected at submission.
 
 [!ref Next: subscribing to the stream](orderflow-stream.md)

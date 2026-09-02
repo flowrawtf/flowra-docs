@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841687769978">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841688099053">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -38,11 +38,11 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.6.0.841687769978" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.6.0.841688099053" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841687769978" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841688099053" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841687769978" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841688099053" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -233,13 +233,7 @@ SubscribePendingTransactions {
 <p><code translate="no" v-pre>accounts</code> is a list of base58 account addresses. When it is non-empty, the engine only forwards a transaction if at least one of its account keys is in your list; batches with no matching transaction are skipped entirely. An empty list, or a list containing <code translate="no" v-pre>&quot;*&quot;</code>, subscribes to the full firehose.</p>
 <p>Filtering happens before the packet leaves the engine, so a scoped subscription costs you no bandwidth for flow you would discard anyway. Use it: the pool, market, and program accounts your strategy watches make a short list.</p>
 <p>Today the Relayer still forwards the full flow to the engine (accounts-of-interest is wildcard); feeding the Relayer&#x27;s AOI/POI from live subscriptions is on the <a href="../../resources/roadmap/#phase-4-institutional-expansion-q4-2026-and-beyond">roadmap</a>, and at that point concrete filters may become mandatory.</p>
-<h3 id="mempool-scope">Mempool scope</h3>
-<p>Your key&#x27;s <strong>mempool scope</strong> (<a href="../getting-started/#registering-your-key">set at registration</a>) decides which slots you see flow for:</p>
-<ul>
-<li><strong>Full</strong> — every batch, all the time.</li>
-<li><strong>Leader scope</strong> — batches only while one of the validators in your scope is leading or about to lead (within the next 8 slots). Outside those windows the stream stays open but silent.</li>
-</ul>
-<p>The scope is re-checked on every batch, so a change made by an operator takes effect mid-stream without reconnecting. If your key is restricted or no longer approved, the stream ends with <code translate="no" v-pre>PERMISSION_DENIED</code> and the reason.</p>
+<p>If your key is restricted or no longer approved, the stream ends with <code translate="no" v-pre>PERMISSION_DENIED</code> and the reason.</p>
 <h2 id="whats-in-a-stream-message">What&#x27;s in a stream message</h2>
 <p>Messages carry packet batches with a timestamp header:</p>
 <retype-table copy-text="Field | Description
@@ -285,7 +279,7 @@ SubscribePendingTransactions {
 <li><strong>Keep the receive path fast.</strong> The engine broadcasts to every subscriber from one channel; a subscriber that cannot keep up is lagged and skips batches. Do parsing and strategy work off the receive thread.</li>
 </ul>
 <h2 id="regional-strategy">Regional strategy</h2>
-<p>Subscribe to the region nearest your infrastructure (<a href="../../endpoints/">endpoints</a>). Auctions settle every 10 ms per region, so detection and bidding from the same region minimizes the gap between seeing an opportunity and landing a bid inside the same tick. Use <code translate="no" v-pre>GetConnectedLeaders</code> to see which validators your region serves and <code translate="no" v-pre>GetNextScheduledLeader</code> to time submissions around upcoming Flowra leader slots.</p>
+<p>Subscribe to the region nearest your infrastructure (<a href="../../endpoints/">endpoints</a>). Auctions settle per region several times a slot, so detection and bidding from the same region minimizes the gap between seeing an opportunity and landing a bid inside the same tick. Use <code translate="no" v-pre>GetConnectedLeaders</code> to see which validators your region serves and <code translate="no" v-pre>GetNextScheduledLeader</code> to time submissions around upcoming Flowra leader slots.</p>
 <h2 id="fair-access-by-design">Fair access by design</h2>
 <p>Every searcher receives the same stream through the same interface. There are no premium feeds, no early-access tiers, and no private forwards inside the Flowra pipeline. The auction is the only way to convert observation into position.</p>
 <p>

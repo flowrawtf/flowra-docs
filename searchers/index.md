@@ -8,9 +8,9 @@ Flowra gives searchers what Solana has never had: **open, standardized access to
 
 Pending transactions from all participating validators, deduplicated and delivered over a single gRPC interface. One integration covers the whole Flowra validator set, and you can narrow it server-side to the accounts you care about. See [Orderflow Stream](orderflow-stream.md).
 
-### Auctions every 10 ms
+### Continuous auctions
 
-Auction ticks close every 10&nbsp;ms, roughly forty per Solana slot. Within a tick, the highest tip wins among non-conflicting bundles; you are racing bids, not nanoseconds. Mechanics: [Auction Mechanics](../concepts/auction-mechanics.md).
+Auction ticks close many times per slot. Within a tick, the highest tip wins among non-conflicting bundles; you are racing bids, not nanoseconds. Mechanics: [Auction Mechanics](../concepts/auction-mechanics.md).
 
 ### Atomic, all-or-nothing bundles
 

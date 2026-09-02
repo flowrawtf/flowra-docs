@@ -19,6 +19,6 @@ Solana's Gulf Stream design skips the public mempool: transactions go straight t
 Flowra's response has two parts that only work together:
 
 - **Programmable Block Policy**: validators declare enforceable rules over block composition (screening, program filters, MEV posture), enforced in the pipeline and re-verified by the validator's own client.
-- **Open Orderflow Auction**: pending transactions are streamed openly and bundle competition happens in transparent 10&nbsp;ms auctions, so policy enforcement can be checked rather than taken on faith.
+- **Open Orderflow Auction**: pending transactions are streamed openly and bundle competition happens in transparent sub-slot auctions, so policy enforcement can be checked rather than taken on faith.
 
 Control without accountability is a promise; accountability without control is a spectator sport. Flowra ships both, and the open competition it requires also raises validator returns.

@@ -26,14 +26,7 @@ Filtering happens before the packet leaves the engine, so a scoped subscription 
 
 Today the Relayer still forwards the full flow to the engine (accounts-of-interest is wildcard); feeding the Relayer's AOI/POI from live subscriptions is on the [roadmap](../resources/roadmap.md#phase-4-institutional-expansion-q4-2026-and-beyond), and at that point concrete filters may become mandatory.
 
-### Mempool scope
-
-Your key's **mempool scope** ([set at registration](getting-started.md#registering-your-key)) decides which slots you see flow for:
-
-- **Full** — every batch, all the time.
-- **Leader scope** — batches only while one of the validators in your scope is leading or about to lead (within the next 8 slots). Outside those windows the stream stays open but silent.
-
-The scope is re-checked on every batch, so a change made by an operator takes effect mid-stream without reconnecting. If your key is restricted or no longer approved, the stream ends with `PERMISSION_DENIED` and the reason.
+If your key is restricted or no longer approved, the stream ends with `PERMISSION_DENIED` and the reason.
 
 ## What's in a stream message
 
@@ -56,7 +49,7 @@ Parse `data` with any standard Solana transaction decoder to inspect accounts, p
 
 ## Regional strategy
 
-Subscribe to the region nearest your infrastructure ([endpoints](../endpoints.md)). Auctions settle every 10&nbsp;ms per region, so detection and bidding from the same region minimizes the gap between seeing an opportunity and landing a bid inside the same tick. Use `GetConnectedLeaders` to see which validators your region serves and `GetNextScheduledLeader` to time submissions around upcoming Flowra leader slots.
+Subscribe to the region nearest your infrastructure ([endpoints](../endpoints.md)). Auctions settle per region several times a slot, so detection and bidding from the same region minimizes the gap between seeing an opportunity and landing a bid inside the same tick. Use `GetConnectedLeaders` to see which validators your region serves and `GetNextScheduledLeader` to time submissions around upcoming Flowra leader slots.
 
 ## Fair access by design
 

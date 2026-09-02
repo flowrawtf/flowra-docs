@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841687769978">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841688099053">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -38,11 +38,11 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.6.0.841687769978" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.6.0.841688099053" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841687769978" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841688099053" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841687769978" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841688099053" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -220,7 +220,7 @@
 <dt id="atomic-execution">Atomic execution</dt>
 <dd>The guarantee that a bundle&#x27;s transactions land <strong>in full and in order, or not at all</strong>. A bundle with any failing transaction is dropped entirely.</dd>
 <dt id="auction-tick">Auction tick</dt>
-<dd>One 10 ms auction round in the Block Engine. Roughly forty fit into each Solana slot. See <a href="../../concepts/auction-mechanics/">Auction Mechanics</a>.</dd>
+<dd>One auction round in the Block Engine; several fit into each Solana slot. See <a href="../../concepts/auction-mechanics/">Auction Mechanics</a>.</dd>
 <dt id="block-engine">Block Engine</dt>
 <dd>Flowra&#x27;s central service. It broadcasts the orderflow stream to searchers, validates and simulates bundles, enforces the validator&#x27;s policy, runs the 10 ms auctions, and forwards winning bundles to the leader. See <a href="../../concepts/architecture/">Architecture</a>.</dd>
 <dt id="bundle">Bundle</dt>
@@ -262,7 +262,7 @@
 <dt id="slot">Slot</dt>
 <dd>Solana&#x27;s ~400 ms block production interval.</dd>
 <dt id="state-auction">State auction</dt>
-<dd>The contest among bundles whose account footprints overlap. Each 10 ms tick resolves state auctions and assembles the winning batch from their winners.</dd>
+<dd>The contest among bundles whose account footprints overlap. Each tick resolves state auctions and assembles the winning batch from their winners.</dd>
 <dt id="tip">Tip</dt>
 <dd>The searcher&#x27;s auction bid, paid as lamport transfers to designated tip accounts inside the bundle and measured during simulation. Split 5% protocol / 95% validator and stakers.</dd>
 <dt id="tip-account">Tip account</dt>

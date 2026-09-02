@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841687769978">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841688099053">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -44,11 +44,11 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../static/favicon.png" />
-    <link href="../resources/css/retype.css?v=4.6.0.841687769978" rel="stylesheet">
+    <link href="../resources/css/retype.css?v=4.6.0.841688099053" rel="stylesheet">
 
-    <script data-cfasync="false" src="../resources/js/config.js?v=4.6.0.841687769978" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/config.js?v=4.6.0.841688099053" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=4.6.0.841687769978" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=4.6.0.841688099053" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -218,8 +218,8 @@
 <h2 id="what-you-get">What you get</h2>
 <h3 id="an-open-standardized-stream">An open, standardized stream</h3>
 <p>Pending transactions from all participating validators, deduplicated and delivered over a single gRPC interface. One integration covers the whole Flowra validator set, and you can narrow it server-side to the accounts you care about. See <a href="orderflow-stream/">Orderflow Stream</a>.</p>
-<h3 id="auctions-every-10-ms">Auctions every 10 ms</h3>
-<p>Auction ticks close every 10 ms, roughly forty per Solana slot. Within a tick, the highest tip wins among non-conflicting bundles; you are racing bids, not nanoseconds. Mechanics: <a href="../concepts/auction-mechanics/">Auction Mechanics</a>.</p>
+<h3 id="continuous-auctions">Continuous auctions</h3>
+<p>Auction ticks close many times per slot. Within a tick, the highest tip wins among non-conflicting bundles; you are racing bids, not nanoseconds. Mechanics: <a href="../concepts/auction-mechanics/">Auction Mechanics</a>.</p>
 <h3 id="atomic-all-or-nothing-bundles">Atomic, all-or-nothing bundles</h3>
 <p>Bundles execute in order and in full, or not at all. Failed bundles never land, so multi-leg strategies carry no partial-execution risk and no wasted fees on reverts. See <a href="bundles/">Bundles</a>.</p>
 <h3 id="strategy-confidentiality">Strategy confidentiality</h3>

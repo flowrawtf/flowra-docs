@@ -2,19 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://docs.flowra.wtf/</loc>
-    <lastmod>2026-09-02T18:09:11Z</lastmod>
+    <lastmod>2026-09-02T18:14:31Z</lastmod>
   </url>
   <url>
     <loc>https://docs.flowra.wtf/concepts/</loc>
-    <lastmod>2026-09-02T12:16:08Z</lastmod>
+    <lastmod>2026-09-02T18:14:31Z</lastmod>
   </url>
   <url>
     <loc>https://docs.flowra.wtf/validators/</loc>
-    <lastmod>2026-09-02T18:09:11Z</lastmod>
+    <lastmod>2026-09-02T18:14:31Z</lastmod>
   </url>
   <url>
     <loc>https://docs.flowra.wtf/searchers/</loc>
-    <lastmod>2026-09-02T18:09:11Z</lastmod>
+    <lastmod>2026-09-02T18:14:31Z</lastmod>
   </url>
   <url>
     <loc>https://docs.flowra.wtf/concepts/programmable-block-policy/</loc>
@@ -30,11 +30,11 @@
   </url>
   <url>
     <loc>https://docs.flowra.wtf/concepts/architecture/</loc>
-    <lastmod>2026-09-02T12:16:08Z</lastmod>
+    <lastmod>2026-09-02T18:14:31Z</lastmod>
   </url>
   <url>
     <loc>https://docs.flowra.wtf/concepts/auction-mechanics/</loc>
-    <lastmod>2026-09-02T12:22:11Z</lastmod>
+    <lastmod>2026-09-02T18:14:31Z</lastmod>
   </url>
   <url>
     <loc>https://docs.flowra.wtf/concepts/open-orderflow-auction/</loc>
@@ -70,11 +70,11 @@
   </url>
   <url>
     <loc>https://docs.flowra.wtf/searchers/getting-started/</loc>
-    <lastmod>2026-09-02T18:09:11Z</lastmod>
+    <lastmod>2026-09-02T18:14:42Z</lastmod>
   </url>
   <url>
     <loc>https://docs.flowra.wtf/searchers/orderflow-stream/</loc>
-    <lastmod>2026-09-02T18:09:11Z</lastmod>
+    <lastmod>2026-09-02T18:14:31Z</lastmod>
   </url>
   <url>
     <loc>https://docs.flowra.wtf/resources/faq/</loc>
@@ -82,11 +82,11 @@
   </url>
   <url>
     <loc>https://docs.flowra.wtf/resources/glossary/</loc>
-    <lastmod>2026-09-02T12:16:08Z</lastmod>
+    <lastmod>2026-09-02T18:14:31Z</lastmod>
   </url>
   <url>
     <loc>https://docs.flowra.wtf/searchers/bundles/</loc>
-    <lastmod>2026-09-02T18:06:46Z</lastmod>
+    <lastmod>2026-09-02T18:14:31Z</lastmod>
   </url>
   <url>
     <loc>https://docs.flowra.wtf/searchers/api-reference/</loc>

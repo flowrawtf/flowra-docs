@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841687769978">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841688099053">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -44,11 +44,11 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.6.0.841687769978" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.6.0.841688099053" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841687769978" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841688099053" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841687769978" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841688099053" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -222,7 +222,7 @@
                 <!-- Page content  -->
 <h1 id="getting-started">Getting Started</h1>
 <div id="retype-page-description" class="description-display text-description font-description leading-description mb-description-margin-bottom mt-description-margin-top tracking-description text-transform-description">Register your searcher key, authenticate against the Block Engine, and make your first calls.</div>
-<p>Searcher access is <strong>open</strong>: anyone can sign up, register a key, and start bidding once the key is approved. Registration exists so that the network can hold a key accountable: aggressive MEV strategies such as sandwiching, and bundle spamming, can get a key sanctioned.</p>
+<p>Searcher access is <strong>open</strong>: anyone can sign up, register a key, and start bidding once the key is approved. Registration exists so that the network can hold a key accountable: abusive strategies and bundle spamming can get a key sanctioned.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <ul>
 <li>An <strong>Ed25519 keypair</strong> (a standard Solana keypair works). This one key is your identity: it proves ownership at registration, authenticates you to the Block Engine, and is the fee payer the engine attributes your bundles to.</li>
@@ -250,13 +250,12 @@
    </doc-step>
    <doc-step id="wait-for-approval" step-number="3">
       <template #title>Wait for approval</template>
-<p>Keys are reviewed by the Flowra operators. Until a key is approved, <code translate="no" v-pre>GenerateAuthChallenge</code> answers <code translate="no" v-pre>PERMISSION_DENIED: Searcher key is pending</code>. Approved keys show their status, mempool scope, and bundle limit on the portal.</p>
+<p>Keys are reviewed by the Flowra operators. Until a key is approved, <code translate="no" v-pre>GenerateAuthChallenge</code> answers <code translate="no" v-pre>PERMISSION_DENIED: Searcher key is pending</code>. Approved keys show their status and limits on the portal.</p>
    </doc-step>
 </doc-steps>
-<p>Each key carries two operator-set attributes you can read on the portal:</p>
+<p>Each key carries operator-set limits you can read on the portal:</p>
 <retype-table copy-text="Attribute | Meaning
 --- | ---
-Mempool scope | **Full**: every pending transaction. **Leader scope**: transactions only while one of the validators in your scope is about to lead (within the next 8 slots).
 Bundle limit | Maximum `SendBundle` calls per second for this key (default 20). Exceeding it returns `RESOURCE_EXHAUSTED`.
 Minimum tip | The network floor is 1,000 lamports per bundle; a key can be given its own floor, or exempted.">
 <div class="table-wrapper scrollbar overflow-hidden">
@@ -269,10 +268,6 @@ Minimum tip | The network floor is 1,000 lamports per bundle; a key can be given
 </thead>
 <tbody>
 <tr>
-<td>Mempool scope</td>
-<td><strong>Full</strong>: every pending transaction. <strong>Leader scope</strong>: transactions only while one of the validators in your scope is about to lead (within the next 8 slots).</td>
-</tr>
-<tr>
 <td>Bundle limit</td>
 <td>Maximum <code translate="no" v-pre>SendBundle</code> calls per second for this key (default 20). Exceeding it returns <code translate="no" v-pre>RESOURCE_EXHAUSTED</code>.</td>
 </tr>
@@ -284,7 +279,7 @@ Minimum tip | The network floor is 1,000 lamports per bundle; a key can be given
 </table>
 </div>
 </retype-table>
-<p>Keys are held accountable: aggressive MEV strategies such as sandwiching, and bundle spamming, can get a key restricted or suspended. See <a href="../bundles/#what-gets-you-sanctioned">Bundles</a>.</p>
+<p>Keys are held accountable: abusive strategies and bundle spamming can get a key restricted or suspended. See <a href="../bundles/#what-gets-you-sanctioned">Bundles</a>.</p>
 <h2 id="authentication-flow">Authentication flow</h2>
 <p>Flowra uses challenge-response authentication with JWT tokens. Your private key never leaves your machine.</p>
 <figure class="content-center">
@@ -373,8 +368,8 @@ Minimum tip | The network floor is 1,000 lamports per bundle; a key can be given
 <ul>
 <li><strong>The orderflow stream is part of the product.</strong> You subscribe to pending transactions from the same interface you submit to.</li>
 <li><strong>Keys are registered.</strong> One-time registration on the portal, then the same auth flow you already run.</li>
-<li><strong>Tips are auction bids</strong> settled every 10 ms, with a 5% protocol fee.</li>
-<li><strong>Sandwiching is a policy decision, not a given.</strong> Each validator decides through its <a href="../../concepts/programmable-block-policy/">block policy</a>; where it is disallowed the engine rejects the bundle, and a key that keeps trying can be sanctioned.</li>
+<li><strong>Tips are auction bids</strong> settled in sub-slot ticks, with a 5% protocol fee.</li>
+<li><strong>Validators set block policies.</strong> A bundle that a validator&#x27;s <a href="../../concepts/programmable-block-policy/">block policy</a> disallows is rejected at submission.</li>
 </ul>
 <p>
 <div class="mb-6 px-5 py-4 flex justify-between relative border border-base-border hover:border-base-border-hover rounded transition-colors duration-150">
@@ -401,17 +396,6 @@ Minimum tip | The network floor is 1,000 lamports per bundle; a key can be given
                 <span class="card-compact-title">Architecture</span>
             </div>
             <p class="card-compact-description">The components that make up Flowra and how a transaction flows through them.</p>
-        </div>
-    </a>
-</div>
-<div class="card-compact-container">
-    <a href="/searchers/orderflow-stream/" class="group card-compact no-link">
-        <div class="card-compact-body">
-            <div class="card-compact-header">
-                <span class="card-compact-icon inline-flex shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><!--icon--><path d="M20.485 2.515a.75.75 0 0 0-1.06 1.06A10.465 10.465 0 0 1 22.5 11c0 2.9-1.174 5.523-3.075 7.424a.75.75 0 0 0 1.06 1.061A11.965 11.965 0 0 0 24 11c0-3.314-1.344-6.315-3.515-8.485Zm-15.91 1.06a.75.75 0 0 0-1.06-1.06A11.965 11.965 0 0 0 0 11c0 3.313 1.344 6.314 3.515 8.485a.75.75 0 0 0 1.06-1.06A10.465 10.465 0 0 1 1.5 11c0-2.9 1.174-5.524 3.075-7.425ZM8.11 7.11a.75.75 0 0 0-1.06-1.06A6.98 6.98 0 0 0 5 11a6.98 6.98 0 0 0 2.05 4.95.75.75 0 0 0 1.06-1.061 5.48 5.48 0 0 1-1.61-3.89 5.48 5.48 0 0 1 1.61-3.888Zm8.84-1.06a.75.75 0 1 0-1.06 1.06A5.48 5.48 0 0 1 17.5 11a5.48 5.48 0 0 1-1.61 3.889.75.75 0 1 0 1.06 1.06A6.98 6.98 0 0 0 19 11a6.98 6.98 0 0 0-2.05-4.949ZM14 11a2 2 0 0 1-1.25 1.855v8.395a.75.75 0 0 1-1.5 0v-8.395A2 2 0 1 1 14 11Z"/></svg></span>
-                <span class="card-compact-title">Orderflow Stream</span>
-            </div>
-            <p class="card-compact-description">Subscribing to the pending-transaction stream: filters, scope, message contents, and delivery semantics.</p>
         </div>
     </a>
 </div>

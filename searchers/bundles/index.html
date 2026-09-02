@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841687769978">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841688099053">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -38,11 +38,11 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.6.0.841687769978" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.6.0.841688099053" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841687769978" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841688099053" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841687769978" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841688099053" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -261,7 +261,7 @@ Signing | Every transaction fully signed before submission; each transaction's f
 <h3 id="atomic-execution-means-no-revert-risk">Atomic execution means no revert risk</h3>
 <p>Before a bundle can enter the auction, the Block Engine simulates it against the leader&#x27;s bank. If any leg would fail, the bundle is rejected with a <code translate="no" v-pre>SimulationFailure</code> result carrying the failing transaction&#x27;s error and logs, and nothing lands, so you pay nothing. Tight multi-leg strategies (arbitrage, liquidation plus hedge) are safe to attempt aggressively.</p>
 <h2 id="tipping">Tipping</h2>
-<p>Your tip is your <strong>bid</strong> in the 10 ms auction:</p>
+<p>Your tip is your <strong>bid</strong> in the auction:</p>
 <ul>
 <li>Fetch the current tip accounts with <code translate="no" v-pre>GetTipAccounts</code>, then include a lamport transfer to one of them inside your bundle.</li>
 <li>Your bid equals the <strong>sum of transfers to tip accounts</strong> across the bundle, as measured in simulation. Misreported tips are caught there and the bundle is dropped.</li>
@@ -293,29 +293,12 @@ Signing | Every transaction fully signed before submission; each transaction's f
 </doc-codeblock></div>
 <p>A bundle that loses a tick is not gone: it re-enters the following ticks and keeps competing until it wins or its blockhash expires, so a near-miss can still land in a later tick without resubmission.</p>
 <h3 id="overlapping-bundles">Overlapping bundles</h3>
-<p>The engine remembers every transaction signature it has sent to a leader for the last <strong>2 seconds</strong>. A later bundle that repeats one of those signatures can only land if the earlier bundle fails — a signature executes once — so the engine does not drop it, but it does not let it compete on equal terms either:</p>
-<ul>
-<li>It is forwarded <strong>behind every bundle that carries no repeated signature</strong> in that tick. If the earlier bundle executed, it fails cheaply at the leader; if the earlier bundle died on a leg of its own, it is the one that lands.</li>
-<li>At most <strong>3 bundles per signature</strong> are forwarded within the window, best reward first. Further repeats are dropped with <code translate="no" v-pre>Dropped / PartiallyProcessed</code> and the shared signature named in the result.</li>
-</ul>
-<p>This is what makes hedged variants work — <code translate="no" v-pre>[A, C]</code> and <code translate="no" v-pre>[A, B, C]</code> for the same opportunity both go out, and whichever fits lands — while keeping one hot transaction from filling the leader&#x27;s bundle window with copies. Keep it to a few deliberate variants; a resubmission of the same bundle gains nothing.</p>
+<p>If several of your bundles share a transaction, the engine forwards them in order but puts every bundle that repeats an already-sent signature <strong>behind</strong> the bundles that do not, and forwards at most <strong>three</strong> per shared signature; further repeats are dropped with <code translate="no" v-pre>Dropped / PartiallyProcessed</code>. A repeated transaction executes once, so only one of them can land. Send the variants you mean, not copies.</p>
 <h2 id="timing-your-submissions">Timing your submissions</h2>
 <p>Bundles only land while a Flowra validator is the leader. Use <code translate="no" v-pre>GetNextScheduledLeader</code> for the next connected leader slot and <code translate="no" v-pre>GetConnectedLeaders</code> for every connected validator&#x27;s remaining slots this epoch, and shape your submission timing around those windows. With no connected leader upcoming, a bundle waits in the auction until one is.</p>
 <h2 id="what-gets-you-sanctioned">What gets you sanctioned</h2>
-<p>Flowra keeps the stream open by holding keys accountable rather than by gating access. Two mechanisms act on a key:</p>
-<p><strong>The validator&#x27;s policy (PBP).</strong> Each validator sets its own <a href="../../concepts/programmable-block-policy/">block policy</a>. A bundle that violates it — a blacklisted address or program, a searcher outside a whitelist, or a sandwich pattern where <code translate="no" v-pre>allow_aggressive_mev</code> is off — is rejected at submission with <code translate="no" v-pre>PERMISSION_DENIED: PBP violation: &lt;reason&gt;</code>. The engine classifies a bundle as a sandwich when it has three or more transactions, the first and last share a fee payer, and a middle transaction has a different one.</p>
-<p><strong>Network-level sanctions.</strong> Aggressive MEV strategies such as sandwiching, and bundle spamming (sustained submission far above your key&#x27;s limit), can get a key restricted — from a lower bundle limit to losing the mempool stream or being suspended. Restrictions are applied by the Flowra operators and shown on the portal, with the reason.</p>
-<h2 id="best-practices">Best practices</h2>
-<h3 id="simulate-before-you-submit">Simulate before you submit</h3>
-<p>The engine will catch failing bundles for free, but a submission that was never viable wastes your latency window. Run <code translate="no" v-pre>simulateTransaction</code> against fresh state for each leg first.</p>
-<h3 id="guard-your-assumptions-in-program">Guard your assumptions in-program</h3>
-<p>Where possible, encode pre- and post-checks into the transactions themselves (balance assertions, slippage bounds). Atomicity protects you from partial execution; assertions protect you from <em>successful</em> execution under moved markets.</p>
-<h3 id="keep-the-tip-inside-the-core-transaction">Keep the tip inside the core transaction</h3>
-<p>Attach the tip transfer within a transaction that is essential to the bundle&#x27;s success, not as a detached final transfer. This prevents any path where your tip could land while your strategy legs do not.</p>
-<h3 id="a-few-variants-not-a-spray">A few variants, not a spray</h3>
-<p>Overlapping variants of one opportunity are allowed and go out behind the fresh bundles, up to three per shared signature. Beyond that they are dropped, and none of them can beat a bundle that carries no repeat. Submit the two or three variants you actually mean, with the bids you actually want; a bundle that loses a tick competes again by itself, so there is nothing to resubmit.</p>
-<h3 id="treat-results-as-market-data">Treat results as market data</h3>
-<p><code translate="no" v-pre>Rejected</code> and <code translate="no" v-pre>Dropped</code> results carry structured reasons, the failing signature, and simulation logs; a rejection at <code translate="no" v-pre>SendBundle</code> names the exact number that was short. They are calibration signals, not errors.</p>
+<p><strong>The validator&#x27;s policy.</strong> Each validator sets its own <a href="../../concepts/programmable-block-policy/">block policy</a> — blocked addresses and programs, searcher allowlists, and its stance on aggressive MEV. A bundle the policy disallows is rejected at submission with <code translate="no" v-pre>PERMISSION_DENIED: PBP violation: &lt;reason&gt;</code>.</p>
+<p><strong>Network-level sanctions.</strong> Abusive strategies and bundle spamming (sustained submission far above your key&#x27;s limit) can get a key restricted or suspended. Restrictions are applied by the Flowra operators and shown on the portal, with the reason.</p>
 <p>
 <div class="mb-6 px-5 py-4 flex justify-between relative border border-base-border hover:border-base-border-hover rounded transition-colors duration-150">
     <div class="flex items-center text-base-500">

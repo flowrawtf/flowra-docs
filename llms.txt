@@ -14,7 +14,7 @@
 - [Institutional-Grade Validation](https://docs.flowra.wtf/concepts/institutional-validation.md): What it takes for regulated operators to run Solana validators, and how Flowra provides it.
 - [Programmable Block Policy (PBP)](https://docs.flowra.wtf/concepts/programmable-block-policy.md): Flowra's core feature: validator-defined, hot-reloadable rules for block composition.
 - [Open Orderflow & Accountability](https://docs.flowra.wtf/concepts/open-orderflow-auction.md): Why Flowra opens the orderflow: verifiable policy enforcement first, better markets second.
-- [Auction Mechanics](https://docs.flowra.wtf/concepts/auction-mechanics.md): 10 ms mini-auctions, conflict-aware selection, atomic execution, and why open competition raises tips.
+- [Auction Mechanics](https://docs.flowra.wtf/concepts/auction-mechanics.md): Sub-slot mini-auctions, conflict-aware selection, atomic execution, and why open competition raises tips.
 - [Architecture](https://docs.flowra.wtf/concepts/architecture.md): The components that make up Flowra and how a transaction flows through them.
 - [Orderflow on Solana](https://docs.flowra.wtf/concepts/orderflow-on-solana.md): What orderflow is, how it gets monetized, and why Solana's architecture makes it a dark pool.
 - [The Problem](https://docs.flowra.wtf/concepts/the-problem.md): Unaccountable block production, concentrated infrastructure, and blind fees on Solana.
