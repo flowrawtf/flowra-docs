@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841666585684">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841666948215">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -38,11 +38,11 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.6.0.841666585684" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.6.0.841666948215" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841666585684" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841666948215" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841666585684" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841666948215" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -232,6 +232,7 @@ SubscribePendingTransactions {
 <h3 id="server-side-account-filters">Server-side account filters</h3>
 <p><code translate="no" v-pre>accounts</code> is a list of base58 account addresses. When it is non-empty, the engine only forwards a transaction if at least one of its account keys is in your list; batches with no matching transaction are skipped entirely. An empty list, or a list containing <code translate="no" v-pre>&quot;*&quot;</code>, subscribes to the full firehose.</p>
 <p>Filtering happens before the packet leaves the engine, so a scoped subscription costs you no bandwidth for flow you would discard anyway. Use it: the pool, market, and program accounts your strategy watches make a short list.</p>
+<p>Today the Relayer still forwards the full flow to the engine (accounts-of-interest is wildcard); feeding the Relayer&#x27;s AOI/POI from live subscriptions is on the <a href="../../resources/roadmap/#phase-4-institutional-expansion-q4-2026-and-beyond">roadmap</a>, and at that point concrete filters may become mandatory.</p>
 <h3 id="mempool-scope">Mempool scope</h3>
 <p>Your key&#x27;s <strong>mempool scope</strong> (<a href="../getting-started/#registering-your-key">set at registration</a>) decides which slots you see flow for:</p>
 <ul>

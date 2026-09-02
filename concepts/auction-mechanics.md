@@ -44,7 +44,7 @@ Authenticated API | Every searcher call carries a token tied to an Ed25519 ident
 Pre-auction simulation | Reverting bundles and misreported tips are dropped before they can compete | Live
 Bounded re-queueing | Perennially losing bundles expire after a few seconds, keeping queues small | Live
 Rate limiting | Caps request volume per identity | [Planned](../resources/roadmap.md#phase-4-institutional-expansion-q4-2026-and-beyond)
-Account-filtered subscriptions | Server-side `accounts` filter on the stream; mandatory concrete filters are [planned](../resources/roadmap.md#phase-4-institutional-expansion-q4-2026-and-beyond) | Available
+Interest-driven forwarding (AOI/POI) | The Relayer forwards only accounts and programs of interest, derived from what searchers actually subscribe to, instead of the full flow | [Planned](../resources/roadmap.md#phase-4-institutional-expansion-q4-2026-and-beyond)
 
 ## Why open competition raises tips
 

@@ -30,7 +30,7 @@
   </url>
   <url>
     <loc>https://docs.flowra.wtf/concepts/auction-mechanics/</loc>
-    <lastmod>2026-09-02T12:16:08Z</lastmod>
+    <lastmod>2026-09-02T12:22:11Z</lastmod>
   </url>
   <url>
     <loc>https://docs.flowra.wtf/concepts/open-orderflow-auction/</loc>
@@ -61,12 +61,12 @@
     <lastmod>2026-09-02T12:16:08Z</lastmod>
   </url>
   <url>
-    <loc>https://docs.flowra.wtf/validators/configuration/</loc>
-    <lastmod>2026-09-02T12:16:08Z</lastmod>
+    <loc>https://docs.flowra.wtf/resources/roadmap/</loc>
+    <lastmod>2026-09-02T12:22:11Z</lastmod>
   </url>
   <url>
-    <loc>https://docs.flowra.wtf/resources/roadmap/</loc>
-    <lastmod>2026-07-13T17:56:13Z</lastmod>
+    <loc>https://docs.flowra.wtf/validators/configuration/</loc>
+    <lastmod>2026-09-02T12:16:08Z</lastmod>
   </url>
   <url>
     <loc>https://docs.flowra.wtf/searchers/getting-started/</loc>
@@ -86,7 +86,7 @@
   </url>
   <url>
     <loc>https://docs.flowra.wtf/searchers/orderflow-stream/</loc>
-    <lastmod>2026-09-02T12:16:08Z</lastmod>
+    <lastmod>2026-09-02T12:22:11Z</lastmod>
   </url>
   <url>
     <loc>https://docs.flowra.wtf/searchers/api-reference/</loc>
