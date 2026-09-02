@@ -41,6 +41,7 @@ Attribute | Meaning
 --- | ---
 Mempool scope | **Full**: every pending transaction. **Leader scope**: transactions only while one of the validators in your scope is about to lead (within the next 8 slots).
 Bundle limit | Maximum `SendBundle` calls per second for this key (default 20). Exceeding it returns `RESOURCE_EXHAUSTED`.
+Minimum tip | The network floor is 1,000 lamports per bundle; a key can be given its own floor, or exempted.
 
 Keys are held accountable: aggressive MEV strategies such as sandwiching, and bundle spamming, can get a key restricted or suspended. See [Bundles](bundles.md#what-gets-you-sanctioned).
 

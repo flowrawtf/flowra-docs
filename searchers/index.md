@@ -34,7 +34,7 @@ Requirement | Detail
 --- | ---
 Keypair | An Ed25519 keypair identifying your searcher. It is registered once at [portal.flowra.wtf](https://portal.flowra.wtf) and then used for authentication and bundle signing.
 Connectivity | gRPC over TLS to your nearest Flowra region ([endpoints](../validators/endpoints.md))
-Tips | SOL for auction tips, paid as lamport transfers to tip accounts (`GetTipAccounts`)
+Tips | SOL for auction tips, paid as lamport transfers to tip accounts (`GetTipAccounts`). Minimum **1,000 lamports** per bundle.
 Bundle size | Up to 5 transactions per bundle
 
 ## Guides

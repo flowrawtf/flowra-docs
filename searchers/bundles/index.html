@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841668770529">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841687716019">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -38,11 +38,11 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.6.0.841668770529" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.6.0.841687716019" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841668770529" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841687716019" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841668770529" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841687716019" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -223,7 +223,7 @@
 Size | Up to **5 transactions** per bundle
 Ordering | Executed strictly in the order submitted
 Atomicity | **All-or-nothing**: if any transaction fails, the entire bundle is dropped
-Tip | At least one transaction transfers lamports to a **tip account** (see below)
+Tip | At least one transaction transfers lamports to a **tip account** (see below); **1,000 lamports minimum** per bundle
 Signing | Every transaction fully signed before submission; each transaction's first signature identifies it">
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable">
@@ -248,7 +248,7 @@ Signing | Every transaction fully signed before submission; each transaction's f
 </tr>
 <tr>
 <td>Tip</td>
-<td>At least one transaction transfers lamports to a <strong>tip account</strong> (see below)</td>
+<td>At least one transaction transfers lamports to a <strong>tip account</strong> (see below); <strong>1,000 lamports minimum</strong> per bundle</td>
 </tr>
 <tr>
 <td>Signing</td>
@@ -265,6 +265,7 @@ Signing | Every transaction fully signed before submission; each transaction's f
 <ul>
 <li>Fetch the current tip accounts with <code translate="no" v-pre>GetTipAccounts</code>, then include a lamport transfer to one of them inside your bundle.</li>
 <li>Your bid equals the <strong>sum of transfers to tip accounts</strong> across the bundle, as measured in simulation. Misreported tips are caught there and the bundle is dropped.</li>
+<li><strong>Minimum tip: 1,000 lamports</strong> per bundle (the same floor Jito uses). The engine reads the tip from the transactions at submission and rejects a bundle under the floor with <code translate="no" v-pre>INVALID_ARGUMENT</code> before it costs a simulation. Priority fees do not count toward the floor. Operators can set a different floor for a key, or exempt it.</li>
 <li>Ranking within a tick is by tip, subject to conflict-aware selection and the validator&#x27;s policy.</li>
 <li>After the <strong>5% protocol fee</strong>, tips flow to the validator and its stakers through the on-chain tip distribution mechanism.</li>
 </ul>
@@ -290,9 +291,14 @@ Signing | Every transaction fully signed before submission; each transaction's f
 <pre translate="no" class="language-none"><code v-pre class="language-none">SubscribeBundleResults {}
 --&gt; stream of BundleResult { bundle_id, accepted | rejected | dropped }</code></pre>
 </doc-codeblock></div>
-<p>A bundle that loses a tick is not gone: it re-enters the following ticks and keeps competing until it wins, is superseded, or its blockhash expires, so a near-miss can still land in a later tick without resubmission. Resubmitting the same transactions yourself does the opposite — see <em>superseded</em> below.</p>
-<h3 id="superseded-bundles">Superseded bundles</h3>
-<p>The engine remembers every transaction signature it has emitted to a leader for the last <strong>2 seconds</strong>. A bundle that repeats one of those signatures cannot land atomically (the earlier copy is already on its way), so it is dropped immediately with <code translate="no" v-pre>Dropped / PartiallyProcessed</code> and the conflicting signature named in the result. In practice this is almost always the searcher&#x27;s own overlapping variant arriving second: build one bundle per opportunity and let it compete, rather than firing variants with shared legs.</p>
+<p>A bundle that loses a tick is not gone: it re-enters the following ticks and keeps competing until it wins or its blockhash expires, so a near-miss can still land in a later tick without resubmission.</p>
+<h3 id="overlapping-bundles">Overlapping bundles</h3>
+<p>The engine remembers every transaction signature it has sent to a leader for the last <strong>2 seconds</strong>. A later bundle that repeats one of those signatures can only land if the earlier bundle fails — a signature executes once — so the engine does not drop it, but it does not let it compete on equal terms either:</p>
+<ul>
+<li>It is forwarded <strong>behind every bundle that carries no repeated signature</strong> in that tick. If the earlier bundle executed, it fails cheaply at the leader; if the earlier bundle died on a leg of its own, it is the one that lands.</li>
+<li>At most <strong>3 bundles per signature</strong> are forwarded within the window, best reward first. Further repeats are dropped with <code translate="no" v-pre>Dropped / PartiallyProcessed</code> and the shared signature named in the result.</li>
+</ul>
+<p>This is what makes hedged variants work — <code translate="no" v-pre>[A, C]</code> and <code translate="no" v-pre>[A, B, C]</code> for the same opportunity both go out, and whichever fits lands — while keeping one hot transaction from filling the leader&#x27;s bundle window with copies. Keep it to a few deliberate variants; a resubmission of the same bundle gains nothing.</p>
 <h2 id="timing-your-submissions">Timing your submissions</h2>
 <p>Bundles only land while a Flowra validator is the leader. Use <code translate="no" v-pre>GetNextScheduledLeader</code> for the next connected leader slot and <code translate="no" v-pre>GetConnectedLeaders</code> for every connected validator&#x27;s remaining slots this epoch, and shape your submission timing around those windows. With no connected leader upcoming, a bundle waits in the auction until one is.</p>
 <h2 id="what-gets-you-sanctioned">What gets you sanctioned</h2>
@@ -306,10 +312,10 @@ Signing | Every transaction fully signed before submission; each transaction's f
 <p>Where possible, encode pre- and post-checks into the transactions themselves (balance assertions, slippage bounds). Atomicity protects you from partial execution; assertions protect you from <em>successful</em> execution under moved markets.</p>
 <h3 id="keep-the-tip-inside-the-core-transaction">Keep the tip inside the core transaction</h3>
 <p>Attach the tip transfer within a transaction that is essential to the bundle&#x27;s success, not as a detached final transfer. This prevents any path where your tip could land while your strategy legs do not.</p>
-<h3 id="one-bundle-per-opportunity">One bundle per opportunity</h3>
-<p>Once a bundle has been sent to a leader, the engine remembers its transaction signatures for 2 seconds and drops any later bundle that reuses one of them (<code translate="no" v-pre>Dropped / PartiallyProcessed</code>). So do not submit several bundles that share a transaction — the same swap wrapped with different tips, say — expecting the best one to win: only the first to reach a leader counts, and the rest are dropped. Submit one bundle per opportunity with the bid you actually want; if it loses a tick it competes again in the following ticks by itself, so there is nothing to resubmit.</p>
+<h3 id="a-few-variants-not-a-spray">A few variants, not a spray</h3>
+<p>Overlapping variants of one opportunity are allowed and go out behind the fresh bundles, up to three per shared signature. Beyond that they are dropped, and none of them can beat a bundle that carries no repeat. Submit the two or three variants you actually mean, with the bids you actually want; a bundle that loses a tick competes again by itself, so there is nothing to resubmit.</p>
 <h3 id="treat-results-as-market-data">Treat results as market data</h3>
-<p><code translate="no" v-pre>Rejected</code> and <code translate="no" v-pre>Dropped</code> results carry structured reasons, the failing signature, and simulation logs. They are calibration signals, not errors.</p>
+<p><code translate="no" v-pre>Rejected</code> and <code translate="no" v-pre>Dropped</code> results carry structured reasons, the failing signature, and simulation logs; a rejection at <code translate="no" v-pre>SendBundle</code> names the exact number that was short. They are calibration signals, not errors.</p>
 <p>
 <div class="mb-6 px-5 py-4 flex justify-between relative border border-base-border hover:border-base-border-hover rounded transition-colors duration-150">
     <div class="flex items-center text-base-500">
@@ -327,6 +333,17 @@ Signing | Every transaction fully signed before submission; each transaction's f
 <div id="retype-backlinks">
     <h2>See also</h2>
 <div class="card-compact-group">
+<div class="card-compact-container">
+    <a href="/searchers/api-reference/" class="group card-compact no-link">
+        <div class="card-compact-body">
+            <div class="card-compact-header">
+                <span class="card-compact-icon inline-flex shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><!--icon--><path d="M15.22 4.97a.75.75 0 0 1 1.06 0l6.5 6.5a.75.75 0 0 1 0 1.06l-6.5 6.5a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L21.19 12l-5.97-5.97a.75.75 0 0 1 0-1.06Zm-6.44 0a.75.75 0 0 1 0 1.06L2.81 12l5.97 5.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215l-6.5-6.5a.75.75 0 0 1 0-1.06l6.5-6.5a.75.75 0 0 1 1.06 0Z"/></svg></span>
+                <span class="card-compact-title">API Reference</span>
+            </div>
+            <p class="card-compact-description">gRPC services, messages, result states, and error semantics for the searcher API.</p>
+        </div>
+    </a>
+</div>
 <div class="card-compact-container">
     <a href="/searchers/getting-started/" class="group card-compact no-link">
         <div class="card-compact-body">

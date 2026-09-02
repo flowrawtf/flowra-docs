@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841668770529">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841687716019">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -38,11 +38,11 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.6.0.841668770529" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.6.0.841687716019" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841668770529" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841687716019" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841668770529" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841687716019" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -258,7 +258,7 @@
 <retype-table copy-text="Method | Type | Description
 --- | --- | ---
 `SubscribePendingTransactions` | server-streaming | The open orderflow stream. `accounts` narrows it server-side to transactions touching those accounts; empty or `&quot;*&quot;` is the full stream. See [Orderflow Stream](orderflow-stream.md).
-`SendBundle` | unary | Submits a signed bundle (up to 5 transactions) into the auction and returns the server-assigned `uuid`.
+`SendBundle` | unary | Submits a signed bundle (up to 5 transactions, tip of at least 1,000 lamports) into the auction and returns the server-assigned `uuid`.
 `SubscribeBundleResults` | server-streaming | Pushes `BundleResult` transitions for bundles submitted by the authenticated key.
 `GetTipAccounts` | unary | Returns the tip accounts to transfer lamports to; the transfer sum is your auction bid.
 `GetNextScheduledLeader` | unary | Current slot plus the next connected leader's slot and identity.
@@ -281,7 +281,7 @@
 <tr>
 <td><code translate="no" v-pre>SendBundle</code></td>
 <td>unary</td>
-<td>Submits a signed bundle (up to 5 transactions) into the auction and returns the server-assigned <code translate="no" v-pre>uuid</code>.</td>
+<td>Submits a signed bundle (up to 5 transactions, tip of at least 1,000 lamports) into the auction and returns the server-assigned <code translate="no" v-pre>uuid</code>.</td>
 </tr>
 <tr>
 <td><code translate="no" v-pre>SubscribeBundleResults</code></td>
@@ -313,7 +313,7 @@
 --- | ---
 `Accepted` | Won a tick and was forwarded to a leader. Carries the slot and the validator identity.
 `Rejected / SimulationFailure` | A transaction in the bundle failed simulation. Carries the failing signature and, in `SimulatedTransaction`, the program error, logs, and compute units.
-`Dropped / PartiallyProcessed` | Superseded: a bundle emitted within the last 2 seconds already carried one of this bundle's signatures, so this copy could not land atomically. Carries the conflicting signature.">
+`Dropped / PartiallyProcessed` | Superseded: three bundles emitted within the last 2 seconds already carry one of this bundle's signatures, so this copy was not forwarded. Carries the shared signature. (Up to three bundles per signature *are* forwarded, behind the fresh ones; see [Bundles](bundles.md#overlapping-bundles).)">
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable">
 <thead>
@@ -333,7 +333,7 @@
 </tr>
 <tr>
 <td><code translate="no" v-pre>Dropped / PartiallyProcessed</code></td>
-<td>Superseded: a bundle emitted within the last 2 seconds already carried one of this bundle&#x27;s signatures, so this copy could not land atomically. Carries the conflicting signature.</td>
+<td>Superseded: three bundles emitted within the last 2 seconds already carry one of this bundle&#x27;s signatures, so this copy was not forwarded. Carries the shared signature. (Up to three bundles per signature <em>are</em> forwarded, behind the fresh ones; see <a href="../bundles/#overlapping-bundles">Bundles</a>.)</td>
 </tr>
 </tbody>
 </table>
@@ -347,7 +347,7 @@
 `PERMISSION_DENIED` | The key may not do this | `Searcher key is not registered. Register it at portal.flowra.wtf.` · `Searcher key is pending. Approval is granted by the Flowra admins.` · `Searcher key is suspended.` · `PBP violation: &lt;reason&gt;` · `mempool stream withheld` · `Token has expired.`
 `UNAUTHENTICATED` | Missing or unusable credentials | `Challenge has expired.` · `bundle results require an authenticated searcher`
 `RESOURCE_EXHAUSTED` | Over a limit | `bundle rate limit of &lt;n&gt;/s exceeded` · `System overloaded.` (challenge cache full — back off and retry)
-`INVALID_ARGUMENT` | Request rejected at validation | `Bundle is required.` · `Bundle has too many transactions (&lt;n&gt;), max is 5` · undeserializable packet · `Signature must be 64 bytes.`
+`INVALID_ARGUMENT` | Request rejected at validation | `Bundle is required.` · `Bundle has too many transactions (&lt;n&gt;), max is 5` · `tip of &lt;n&gt; lamports is below the minimum of 1000; transfer at least 1000 lamports to a tip account (GetTipAccounts)` · undeserializable packet · `Signature must be 64 bytes.`
 `UNAVAILABLE` | Transient transport failure | Reconnect with exponential backoff">
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable">
@@ -377,7 +377,7 @@
 <tr>
 <td><code translate="no" v-pre>INVALID_ARGUMENT</code></td>
 <td>Request rejected at validation</td>
-<td><code translate="no" v-pre>Bundle is required.</code> · <code translate="no" v-pre>Bundle has too many transactions (&lt;n&gt;), max is 5</code> · undeserializable packet · <code translate="no" v-pre>Signature must be 64 bytes.</code></td>
+<td><code translate="no" v-pre>Bundle is required.</code> · <code translate="no" v-pre>Bundle has too many transactions (&lt;n&gt;), max is 5</code> · <code translate="no" v-pre>tip of &lt;n&gt; lamports is below the minimum of 1000; transfer at least 1000 lamports to a tip account (GetTipAccounts)</code> · undeserializable packet · <code translate="no" v-pre>Signature must be 64 bytes.</code></td>
 </tr>
 <tr>
 <td><code translate="no" v-pre>UNAVAILABLE</code></td>
@@ -392,9 +392,10 @@
 <retype-table copy-text="Limit | Value
 --- | ---
 Transactions per bundle | 5
+Minimum tip | 1,000 lamports per bundle (per-key floors and exemptions are set by the operators)
 `SendBundle` calls per second | Per key, set at registration (default 20)
 Stream expiry | Each batch carries `expiration_time` = generation time + 30 s
-Supersede window | 2 s: a signature already sent to a leader cannot be re-submitted in another bundle
+Overlapping bundles | A signature already sent to a leader may appear in at most 3 forwarded bundles per 2 s window; those bundles go out behind the fresh ones
 Result subscriptions | One per key is sufficient; results are keyed by bundle uuid">
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable">
@@ -410,6 +411,10 @@ Result subscriptions | One per key is sufficient; results are keyed by bundle uu
 <td>5</td>
 </tr>
 <tr>
+<td>Minimum tip</td>
+<td>1,000 lamports per bundle (per-key floors and exemptions are set by the operators)</td>
+</tr>
+<tr>
 <td><code translate="no" v-pre>SendBundle</code> calls per second</td>
 <td>Per key, set at registration (default 20)</td>
 </tr>
@@ -418,8 +423,8 @@ Result subscriptions | One per key is sufficient; results are keyed by bundle uu
 <td>Each batch carries <code translate="no" v-pre>expiration_time</code> = generation time + 30 s</td>
 </tr>
 <tr>
-<td>Supersede window</td>
-<td>2 s: a signature already sent to a leader cannot be re-submitted in another bundle</td>
+<td>Overlapping bundles</td>
+<td>A signature already sent to a leader may appear in at most 3 forwarded bundles per 2 s window; those bundles go out behind the fresh ones</td>
 </tr>
 <tr>
 <td>Result subscriptions</td>
@@ -430,7 +435,7 @@ Result subscriptions | One per key is sufficient; results are keyed by bundle uu
 </div>
 </retype-table>
 <h3 id="retry-policy">Retry policy</h3>
-<p>On <code translate="no" v-pre>UNAVAILABLE</code>: exponential backoff starting at 100 ms, doubling to a 5 s cap, with jitter. Do not tight-loop resubmit a bundle: losing bundles already re-enter subsequent ticks automatically, and a resubmitted copy is superseded by the original. On <code translate="no" v-pre>RESOURCE_EXHAUSTED</code> from the rate limit, wait out the second; sustained overrun counts as bundle spamming and can get the key sanctioned.</p>
+<p>On <code translate="no" v-pre>UNAVAILABLE</code>: exponential backoff starting at 100 ms, doubling to a 5 s cap, with jitter. Do not tight-loop resubmit a bundle: losing bundles already re-enter subsequent ticks automatically, and a resubmitted copy only queues behind the original. On <code translate="no" v-pre>RESOURCE_EXHAUSTED</code> from the rate limit, wait out the second; sustained overrun counts as bundle spamming and can get the key sanctioned.</p>
 <h2 id="sdks">SDKs</h2>
 <p>No Flowra-specific SDK is required. The protos compile with standard <code translate="no" v-pre>tonic</code>, <code translate="no" v-pre>grpc-js</code>, and <code translate="no" v-pre>grpcio</code> toolchains, and Jito-compatible searcher clients (for example <code translate="no" v-pre>jito-rs</code> / <code translate="no" v-pre>jito-ts</code> searcher examples) work by pointing them at a Flowra endpoint and using the same auth keypair.</p>
 <div id="retype-backlinks">
