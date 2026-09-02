@@ -31,6 +31,8 @@ The stream delivers pending transaction packets from **all** participating valid
 
 Filtering happens before the packet leaves the engine, so a scoped subscription costs you no bandwidth for flow you would discard anyway. Use it: the pool, market, and program accounts your strategy watches make a short list.
 
+Today the Relayer still forwards the full flow to the engine (accounts-of-interest is wildcard); feeding the Relayer's AOI/POI from live subscriptions is on the [roadmap](../resources/roadmap.md#phase-4-institutional-expansion-q4-2026-and-beyond), and at that point concrete filters may become mandatory.
+
 ### Mempool scope
 
 Your key's **mempool scope** ([set at registration](getting-started.md#registering-your-key)) decides which slots you see flow for:

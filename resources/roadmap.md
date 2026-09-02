@@ -35,7 +35,7 @@ Flowra ships in four phases, from core infrastructure to a fully institution-rea
 - Validator network expansion beyond the initial cohort
 - **Policy reporting suite**: packaged enforcement reports for operators, delegators, and reviewers
 - **Auction record publication**: signed selection records so third parties can reconcile stream, auction, and blocks
-- **Filter-enforced subscriptions**: mandatory concrete filters on orderflow subscriptions as an additional anti-spam layer
+- **Interest-driven forwarding (AOI/POI)**: the Relayer forwards only accounts and programs of interest, derived from searcher subscriptions, instead of the full flow — mandatory concrete filters on subscriptions as an additional anti-spam layer
 - Public dashboards for auction stats and tip levels
 - Delegation integrations for funds and staking providers
 
