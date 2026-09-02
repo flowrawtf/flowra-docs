@@ -11,10 +11,10 @@ Atomic execution
 : The guarantee that a bundle's transactions land **in full and in order, or not at all**. A bundle with any failing transaction is dropped entirely.
 
 Auction tick
-: One 50&nbsp;ms auction round in the Block Engine. Roughly eight fit into each Solana slot. See [Auction Mechanics](../concepts/auction-mechanics.md).
+: One 10&nbsp;ms auction round in the Block Engine. Roughly forty fit into each Solana slot. See [Auction Mechanics](../concepts/auction-mechanics.md).
 
 Block Engine
-: Flowra's central service. It broadcasts the orderflow stream to searchers, validates and simulates bundles, enforces the validator's policy, runs the 50&nbsp;ms auctions, and forwards winning bundles to the leader. See [Architecture](../concepts/architecture.md).
+: Flowra's central service. It broadcasts the orderflow stream to searchers, validates and simulates bundles, enforces the validator's policy, runs the 10&nbsp;ms auctions, and forwards winning bundles to the leader. See [Architecture](../concepts/architecture.md).
 
 Bundle
 : An ordered group of up to 5 signed transactions submitted as one atomic unit into the auction, carrying a tip. See [Bundles](../searchers/bundles.md).
@@ -74,7 +74,7 @@ Slot
 : Solana's ~400&nbsp;ms block production interval.
 
 State auction
-: The contest among bundles whose account footprints overlap. Each 50&nbsp;ms tick resolves state auctions and assembles the winning batch from their winners.
+: The contest among bundles whose account footprints overlap. Each 10&nbsp;ms tick resolves state auctions and assembles the winning batch from their winners.
 
 Tip
 : The searcher's auction bid, paid as lamport transfers to designated tip accounts inside the bundle and measured during simulation. Split 5% protocol / 95% validator and stakers.

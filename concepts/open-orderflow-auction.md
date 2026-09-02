@@ -45,9 +45,9 @@ Priority fees on Solana work like a blind auction: users overpay defensively bec
 
 When one searcher has exclusive access to an opportunity, it tips the minimum needed to land. When many compete, tips rise toward the opportunity's value, and the validator and its stakers capture the difference. The mechanics and modeling are in [Auction Mechanics](auction-mechanics.md).
 
-### Permissionless entry for searchers
+### Open entry for searchers
 
-Access is standardized and open: a keypair and a strategy, not a relationship. See [Searchers](../searchers/index.md).
+Access is standardized and open: a keypair registered once at [portal.flowra.wtf](https://portal.flowra.wtf) and a strategy, not a relationship. Registration is what makes accountability possible — a key that sandwiches loses its stream, not the whole network. See [Searchers](../searchers/index.md).
 
 ## Protocol economics
 

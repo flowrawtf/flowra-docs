@@ -22,7 +22,7 @@ The Flowra client is built on the Jito-Solana codebase: operationally familiar, 
 
 ### Revenue from open competition
 
-Open auctions compress searcher margins and push tips up relative to closed channels. Every 50&nbsp;ms, searchers bid for your block space; the highest-tip, non-conflicting set wins and lands first in your block, inside a compute budget you control. Modeling anchored to comparable open-auction transitions puts the MEV-component uplift between +60% and +261%; see [Auction Mechanics](../concepts/auction-mechanics.md).
+Open auctions compress searcher margins and push tips up relative to closed channels. Every 10&nbsp;ms, searchers bid for your block space; the highest-tip, non-conflicting set wins and lands first in your block, inside a compute budget you control. Modeling anchored to comparable open-auction transitions puts the MEV-component uplift between +60% and +261%; see [Auction Mechanics](../concepts/auction-mechanics.md).
 
 ### Built for institutional requirements
 

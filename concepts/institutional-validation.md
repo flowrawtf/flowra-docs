@@ -44,7 +44,7 @@ Institutions cannot build on infrastructure that one provider can change underne
 
 ## Where the auction fits
 
-The Open Orderflow Auction is the accountability mechanism, and it happens to be a well-designed market: open access for searchers, tip-based competition every 50&nbsp;ms, conflict-aware selection, atomic bundles. Competition among searchers raises tips relative to closed, single-searcher channels, so accountable validation ends up *paying better* than opaque validation rather than costing a premium.
+The Open Orderflow Auction is the accountability mechanism, and it happens to be a well-designed market: open access for searchers, tip-based competition every 10&nbsp;ms, conflict-aware selection, atomic bundles. Competition among searchers raises tips relative to closed, single-searcher channels, so accountable validation ends up *paying better* than opaque validation rather than costing a premium.
 
 That ordering matters. Flowra is not a yield product with compliance features bolted on; it is compliance-grade infrastructure whose market design also improves yield. The modeling behind the revenue effect is in [Auction Mechanics](auction-mechanics.md).
 

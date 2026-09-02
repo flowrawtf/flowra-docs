@@ -2,12 +2,12 @@
 label: Auction Mechanics
 icon: law
 order: 85
-description: "50 ms mini-auctions, conflict-aware selection, atomic execution, and why open competition raises tips."
+description: "10 ms mini-auctions, conflict-aware selection, atomic execution, and why open competition raises tips."
 ---
 
 # Auction Mechanics
 
-Flowra runs a continuous sequence of **50&nbsp;ms mini-auctions** aligned with Solana's continuous block production. This page explains the auction lifecycle, the selection rules, and why open competition raises validator revenue.
+Flowra runs a continuous sequence of **10&nbsp;ms mini-auctions** aligned with Solana's continuous block production. This page explains the auction lifecycle, the selection rules, and why open competition raises validator revenue.
 
 ## The auction lifecycle
 
@@ -17,11 +17,11 @@ Flowra runs a continuous sequence of **50&nbsp;ms mini-auctions** aligned with S
 2. The Block Engine broadcasts the flow to all subscribed searchers over gRPC.
 3. Searchers detect opportunities and submit **tip-bearing bundles**.
 4. The Block Engine simulates each bundle against recent state, dropping any that revert or misreport their tip, and applies the validator's [block policy](programmable-block-policy.md).
-5. Every 50&nbsp;ms an auction tick closes: the highest-tip, non-conflicting set wins and is forwarded to the leader, where it lands **first** in the block. Remaining block space fills under standard fee rules.
+5. Every 10&nbsp;ms an auction tick closes: the highest-tip, non-conflicting set wins and is forwarded to the leader, where it lands **first** in the block. Remaining block space fills under standard fee rules.
 
-### Why 50 ms?
+### Why 10 ms?
 
-Solana produces a block every ~400&nbsp;ms, continuously. A 50&nbsp;ms cadence fits multiple competitive cycles inside every slot, up to eight auction rounds per block, so opportunities are contested close to the moment they appear rather than batched into one coarse round. Short windows also blunt pure latency racing: within a window, the *tip* decides, not the microsecond of arrival.
+Solana produces a block every ~400&nbsp;ms, continuously. A 10&nbsp;ms cadence fits multiple competitive cycles inside every slot, roughly forty auction rounds per block, so opportunities are contested close to the moment they appear rather than batched into one coarse round. Short windows also blunt pure latency racing: within a window, the *tip* decides, not the microsecond of arrival.
 
 ## Selection rules
 
@@ -29,7 +29,7 @@ Solana produces a block every ~400&nbsp;ms, continuously. A 50&nbsp;ms cadence f
 
 Bundles are ranked by tip. But two bundles that touch the same accounts in incompatible ways cannot both execute as planned, so the auction runs **conflict-aware selection**: write-write and read-write overlaps conflict, read-read does not, and the auction selects the optimal *combination* of non-conflicting bundles within the tick's compute budget rather than naively taking the single top bid. Non-intersecting bundles win independently and in parallel.
 
-Losing bundles are not discarded immediately: they re-enter the next 50&nbsp;ms tick and keep competing for several seconds before expiring, so contending bundles serialize across ticks instead of being lost.
+Losing bundles are not discarded immediately: they re-enter the next 10&nbsp;ms tick and keep competing for several seconds before expiring, so contending bundles serialize across ticks instead of being lost.
 
 The selection function is deterministic and continuously benchmarked against a brute-force optimum, keeping the winning set close to the true maximum-tip, conflict-free selection.
 
@@ -51,7 +51,7 @@ Authenticated API | Every searcher call carries a token tied to an Ed25519 ident
 Pre-auction simulation | Reverting bundles and misreported tips are dropped before they can compete | Live
 Bounded re-queueing | Perennially losing bundles expire after a few seconds, keeping queues small | Live
 Rate limiting | Caps request volume per identity | [Planned](../resources/roadmap.md#phase-4-institutional-expansion-q4-2026-and-beyond)
-Filter-enforced subscriptions | Requires concrete filters on stream subscriptions | [Planned](../resources/roadmap.md#phase-4-institutional-expansion-q4-2026-and-beyond)
+Account-filtered subscriptions | Server-side `accounts` filter on the stream; mandatory concrete filters are [planned](../resources/roadmap.md#phase-4-institutional-expansion-q4-2026-and-beyond) | Available
 
 ## Why open competition raises tips
 
