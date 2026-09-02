@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://docs.flowra.wtf/</loc>
-    <lastmod>2026-09-02T12:16:08Z</lastmod>
+    <lastmod>2026-09-02T18:09:11Z</lastmod>
   </url>
   <url>
     <loc>https://docs.flowra.wtf/concepts/</loc>
@@ -10,15 +10,19 @@
   </url>
   <url>
     <loc>https://docs.flowra.wtf/validators/</loc>
-    <lastmod>2026-09-02T12:16:08Z</lastmod>
+    <lastmod>2026-09-02T18:09:11Z</lastmod>
   </url>
   <url>
     <loc>https://docs.flowra.wtf/searchers/</loc>
-    <lastmod>2026-09-02T18:06:46Z</lastmod>
+    <lastmod>2026-09-02T18:09:11Z</lastmod>
   </url>
   <url>
     <loc>https://docs.flowra.wtf/concepts/programmable-block-policy/</loc>
     <lastmod>2026-07-13T17:56:13Z</lastmod>
+  </url>
+  <url>
+    <loc>https://docs.flowra.wtf/endpoints/</loc>
+    <lastmod>2026-09-02T18:09:11Z</lastmod>
   </url>
   <url>
     <loc>https://docs.flowra.wtf/concepts/institutional-validation/</loc>
@@ -41,15 +45,7 @@
     <lastmod>2026-07-13T17:56:13Z</lastmod>
   </url>
   <url>
-    <loc>https://docs.flowra.wtf/validators/endpoints/</loc>
-    <lastmod>2026-09-02T12:51:10Z</lastmod>
-  </url>
-  <url>
     <loc>https://docs.flowra.wtf/concepts/orderflow-on-solana/</loc>
-    <lastmod>2026-07-13T17:56:13Z</lastmod>
-  </url>
-  <url>
-    <loc>https://docs.flowra.wtf/validators/faq/</loc>
     <lastmod>2026-07-13T17:56:13Z</lastmod>
   </url>
   <url>
@@ -57,20 +53,28 @@
     <lastmod>2026-07-13T17:56:13Z</lastmod>
   </url>
   <url>
+    <loc>https://docs.flowra.wtf/validators/faq/</loc>
+    <lastmod>2026-07-13T17:56:13Z</lastmod>
+  </url>
+  <url>
     <loc>https://docs.flowra.wtf/validators/getting-started/</loc>
-    <lastmod>2026-09-02T12:36:12Z</lastmod>
+    <lastmod>2026-09-02T18:09:11Z</lastmod>
   </url>
   <url>
     <loc>https://docs.flowra.wtf/resources/roadmap/</loc>
-    <lastmod>2026-09-02T12:22:11Z</lastmod>
+    <lastmod>2026-09-02T18:09:11Z</lastmod>
   </url>
   <url>
     <loc>https://docs.flowra.wtf/validators/configuration/</loc>
-    <lastmod>2026-09-02T12:36:12Z</lastmod>
+    <lastmod>2026-09-02T18:09:11Z</lastmod>
   </url>
   <url>
     <loc>https://docs.flowra.wtf/searchers/getting-started/</loc>
-    <lastmod>2026-09-02T18:06:46Z</lastmod>
+    <lastmod>2026-09-02T18:09:11Z</lastmod>
+  </url>
+  <url>
+    <loc>https://docs.flowra.wtf/searchers/orderflow-stream/</loc>
+    <lastmod>2026-09-02T18:09:11Z</lastmod>
   </url>
   <url>
     <loc>https://docs.flowra.wtf/resources/faq/</loc>
@@ -81,15 +85,11 @@
     <lastmod>2026-09-02T12:16:08Z</lastmod>
   </url>
   <url>
-    <loc>https://docs.flowra.wtf/searchers/orderflow-stream/</loc>
-    <lastmod>2026-09-02T12:36:12Z</lastmod>
-  </url>
-  <url>
     <loc>https://docs.flowra.wtf/searchers/bundles/</loc>
     <lastmod>2026-09-02T18:06:46Z</lastmod>
   </url>
   <url>
     <loc>https://docs.flowra.wtf/searchers/api-reference/</loc>
-    <lastmod>2026-09-02T18:06:46Z</lastmod>
+    <lastmod>2026-09-02T18:09:11Z</lastmod>
   </url>
 </urlset>

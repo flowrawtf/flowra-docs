@@ -21,7 +21,7 @@ Flowra ships in four phases, from core infrastructure to a fully institution-rea
 - Mainnet launch with the initial validator cohort
 - Public searcher API release (auth, stream subscriptions, bundle submission)
 - [Programmable Block Policy](../concepts/programmable-block-policy.md) core policy set live
-- Publication of endpoints and on-chain program addresses, tracked on [Endpoints & addresses](../validators/endpoints.md)
+- Publication of endpoints and on-chain program addresses, tracked on [Endpoints & addresses](../endpoints.md)
 
 ## Phase 4: Institutional Expansion (Q4 2026 and beyond) [!badge text="Planned"]
 

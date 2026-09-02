@@ -35,7 +35,7 @@ Fallback | Automatic: local block production continues if Flowra is unreachable
 
 [!ref icon="rocket" text="Getting started"](getting-started.md)
 [!ref icon="gear" text="Configuration"](configuration.md)
-[!ref icon="globe" text="Endpoints & addresses"](endpoints.md)
+[!ref icon="globe" text="Endpoints & addresses"](../endpoints.md)
 [!ref icon="question" text="Validator FAQ"](faq.md)
 
 !!!info Early access

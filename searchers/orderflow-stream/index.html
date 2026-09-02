@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841687716019">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841687769978">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -38,11 +38,11 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.6.0.841687716019" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.6.0.841687769978" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841687716019" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841687769978" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841687716019" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841687769978" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -285,7 +285,7 @@ SubscribePendingTransactions {
 <li><strong>Keep the receive path fast.</strong> The engine broadcasts to every subscriber from one channel; a subscriber that cannot keep up is lagged and skips batches. Do parsing and strategy work off the receive thread.</li>
 </ul>
 <h2 id="regional-strategy">Regional strategy</h2>
-<p>Subscribe to the region nearest your infrastructure (<a href="../../validators/endpoints/">endpoints</a>). Auctions settle every 10 ms per region, so detection and bidding from the same region minimizes the gap between seeing an opportunity and landing a bid inside the same tick. Use <code translate="no" v-pre>GetConnectedLeaders</code> to see which validators your region serves and <code translate="no" v-pre>GetNextScheduledLeader</code> to time submissions around upcoming Flowra leader slots.</p>
+<p>Subscribe to the region nearest your infrastructure (<a href="../../endpoints/">endpoints</a>). Auctions settle every 10 ms per region, so detection and bidding from the same region minimizes the gap between seeing an opportunity and landing a bid inside the same tick. Use <code translate="no" v-pre>GetConnectedLeaders</code> to see which validators your region serves and <code translate="no" v-pre>GetNextScheduledLeader</code> to time submissions around upcoming Flowra leader slots.</p>
 <h2 id="fair-access-by-design">Fair access by design</h2>
 <p>Every searcher receives the same stream through the same interface. There are no premium feeds, no early-access tiers, and no private forwards inside the Flowra pipeline. The auction is the only way to convert observation into position.</p>
 <p>

@@ -6,6 +6,7 @@
 - [Concepts](https://docs.flowra.wtf/concepts/index.md): The ideas behind Flowra: institutional-grade validation, the Programmable Block Policy, and the open orderflow auction that makes both accountable.
 - [Validators](https://docs.flowra.wtf/validators/index.md): Why run Flowra as a validator, and how to get started.
 - [Searchers](https://docs.flowra.wtf/searchers/index.md): Open access to Solana orderflow: a standardized stream, open auctions, atomic bundles.
+- [Endpoints & Addresses](https://docs.flowra.wtf/endpoints.md): Regional Flowra endpoints, service ports, and on-chain program addresses.
 - [Resources](https://docs.flowra.wtf/resources/index.md): Roadmap, FAQ, and glossary.
 
 ## Concepts
@@ -22,7 +23,6 @@
 
 - [Getting Started](https://docs.flowra.wtf/validators/getting-started.md): Onboard your validator to Flowra: registration, installation, configuration, and verification.
 - [Configuration](https://docs.flowra.wtf/validators/configuration.md): Flowra Validator Client flags and the Programmable Block Policy file.
-- [Endpoints & Addresses](https://docs.flowra.wtf/validators/endpoints.md): Regional Flowra endpoints, service ports, and on-chain program addresses.
 - [Validator FAQ](https://docs.flowra.wtf/validators/faq.md): Common questions from validator operators evaluating Flowra.
 
 ## Searchers
