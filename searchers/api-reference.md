@@ -9,7 +9,7 @@ description: "gRPC services, messages, result states, and error semantics for th
 
 The searcher surface is gRPC, defined in [`flowrawtf/mev-protos`](https://github.com/flowrawtf/mev-protos). The layout is the Jito proto layout with Flowra extensions marked inline, so existing client code ports with minimal changes.
 
-Transport is gRPC over TLS on port 443 (publicly trusted certificates, `https://` URLs without a port). `AuthService` and `SearcherService` share the Block Engine URL; see [endpoints](../validators/endpoints.md) for hosts.
+Transport is gRPC over TLS on port 443 (publicly trusted certificates, `https://` URLs without a port). `AuthService` and `SearcherService` share the Block Engine URL; see [endpoints](../endpoints.md) for hosts.
 
 ## AuthService (`auth.proto`)
 

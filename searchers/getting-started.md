@@ -85,7 +85,7 @@ Renew with `RefreshAccessToken` before the access token expires instead of re-si
 
 >>>
 
-`AuthService` and `SearcherService` are served on the same URL — your region's Block Engine over TLS on port 443 (`https://frankfurt.mainnet.blockengine.flowra.wtf`, no port, no custom root certificate). See [endpoints](../validators/endpoints.md).
+`AuthService` and `SearcherService` are served on the same URL — your region's Block Engine over TLS on port 443 (`https://frankfurt.mainnet.blockengine.flowra.wtf`, no port, no custom root certificate). See [endpoints](../endpoints.md).
 
 ## Proto files
 

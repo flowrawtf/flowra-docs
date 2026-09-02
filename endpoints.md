@@ -1,7 +1,7 @@
 ---
 label: Endpoints & Addresses
 icon: globe
-order: 80
+order: 650
 description: "Regional Flowra endpoints, service ports, and on-chain program addresses."
 ---
 
@@ -22,7 +22,7 @@ London | `https://london.mainnet.blockengine.flowra.wtf` | `https://london.mainn
 A second Frankfurt-region relayer runs in Lithuania (`https://lithuania.mainnet.relayer.flowra.wtf`) and feeds the Frankfurt Block Engine — validators in the Baltics and Poland may see lower latency pointing `--relayer-url` there while keeping the Frankfurt Block Engine.
 !!!
 
-Further regions are added as validator demand clusters; the [roadmap](../resources/roadmap.md) lists what is planned.
+Further regions are added as validator demand clusters; the [roadmap](resources/roadmap.md) lists what is planned.
 
 ## Searcher endpoints
 
@@ -54,7 +54,7 @@ There is currently no separate public testnet: the London and Frankfurt regions 
 
 ## On-chain addresses
 
-Flowra runs its own tip programs on mainnet. Set them on the validator with `--tip-payment-program-pubkey` and `--tip-distribution-program-pubkey` ([configuration](configuration.md)).
+Flowra runs its own tip programs on mainnet. Set them on the validator with `--tip-payment-program-pubkey` and `--tip-distribution-program-pubkey` ([configuration](validators/configuration.md)).
 
 Purpose | Network | Address
 --- | --- | ---
@@ -77,7 +77,7 @@ Gg2VMr5DuuHiaTrbQMaNnY51Ut46HSTCi1U9EriEHqRy
 SH98FYfX3XmEKtNCTvwpcX56Jj3ZtCpYaLwFdQq6Y48
 ```
 
-Pick one at random per bundle to spread write locks, and prefer reading the list from `GetTipAccounts` at startup so a rotation never breaks you. See the [API reference](../searchers/api-reference.md).
+Pick one at random per bundle to spread write locks, and prefer reading the list from `GetTipAccounts` at startup so a rotation never breaks you. See the [API reference](searchers/api-reference.md).
 
 ## Verifying connectivity
 

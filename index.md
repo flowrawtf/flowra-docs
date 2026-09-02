@@ -15,7 +15,7 @@ Flowra is **institutional-grade validator infrastructure for Solana**, built on 
 Open competition also raises tips and validator returns. The product is accountable block production; better economics come with it.
 
 !!!info Network status
-Flowra is live on mainnet in Frankfurt and London. Endpoints and on-chain addresses are on [Endpoints & addresses](validators/endpoints.md); searchers register keys at [portal.flowra.wtf](https://portal.flowra.wtf). The few values still marked [!badge variant="warning" text="TBD"] are not yet final; see the [Roadmap](resources/roadmap.md) for the current phase.
+Flowra is live on mainnet in Frankfurt and London. Endpoints and on-chain addresses are on [Endpoints & addresses](endpoints.md); searchers register keys at [portal.flowra.wtf](https://portal.flowra.wtf). The few values still marked [!badge variant="warning" text="TBD"] are not yet final; see the [Roadmap](resources/roadmap.md) for the current phase.
 !!!
 
 ## Start here

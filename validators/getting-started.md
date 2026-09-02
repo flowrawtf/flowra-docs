@@ -13,14 +13,14 @@ This guide takes a working Solana validator to a Flowra-connected validator. The
 
 - A running mainnet or testnet validator on **Agave or Jito-Solana**. The Flowra client is built on the Jito-Solana codebase, so operators of either will find the setup familiar.
 - Hardware meeting standard Agave validator recommendations. Flowra adds no additional hardware requirements.
-- Outbound connectivity from your validator to your region's Block Engine and Relayer endpoints (gRPC/TLS). See [Endpoints](endpoints.md).
+- Outbound connectivity from your validator to your region's Block Engine and Relayer endpoints (gRPC/TLS). See [Endpoints](../endpoints.md).
 - Your validator **identity pubkey**, for registration.
 
 ## Onboarding steps
 
 >>> Register your validator identity
 
-Send your identity pubkey and preferred region to [info@flowra.wtf](mailto:info@flowra.wtf); validator registration is handled directly by the Flowra team. You will receive confirmation once your identity is on the relayer allowlist, along with the endpoint values for your region — they are also listed on [Endpoints & addresses](endpoints.md).
+Send your identity pubkey and preferred region to [info@flowra.wtf](mailto:info@flowra.wtf); validator registration is handled directly by the Flowra team. You will receive confirmation once your identity is on the relayer allowlist, along with the endpoint values for your region — they are also listed on [Endpoints & addresses](../endpoints.md).
 
 >>> Install the Flowra Validator Client
 
@@ -52,7 +52,7 @@ agave-validator \
     --bundle-cu-reserve-pct 15
 ```
 
-Endpoint and program values are listed in [Endpoints & addresses](endpoints.md). All regional values must point at the **same region**.
+Endpoint and program values are listed in [Endpoints & addresses](../endpoints.md). All regional values must point at the **same region**.
 
 >>> Restart and verify
 
@@ -83,4 +83,4 @@ Your validator remains a fully standard Solana validator throughout. If the Bloc
 ## Next
 
 [!ref Full flag & PBP reference](configuration.md)
-[!ref Regional endpoints](endpoints.md)
+[!ref Regional endpoints](../endpoints.md)

@@ -63,7 +63,7 @@ Parse `data` with any standard Solana transaction decoder to inspect accounts, p
 
 ## Regional strategy
 
-Subscribe to the region nearest your infrastructure ([endpoints](../validators/endpoints.md)). Auctions settle every 10&nbsp;ms per region, so detection and bidding from the same region minimizes the gap between seeing an opportunity and landing a bid inside the same tick. Use `GetConnectedLeaders` to see which validators your region serves and `GetNextScheduledLeader` to time submissions around upcoming Flowra leader slots.
+Subscribe to the region nearest your infrastructure ([endpoints](../endpoints.md)). Auctions settle every 10&nbsp;ms per region, so detection and bidding from the same region minimizes the gap between seeing an opportunity and landing a bid inside the same tick. Use `GetConnectedLeaders` to see which validators your region serves and `GetNextScheduledLeader` to time submissions around upcoming Flowra leader slots.
 
 ## Fair access by design
 
