@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.837250748122">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841666585684">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -12,7 +12,7 @@
     <!-- Primary Meta Tags -->
     <title>Endpoints &amp; Addresses | Flowra Docs</title>
     <meta name="title" content="Endpoints & Addresses | Flowra Docs">
-    <meta name="description" content="Regional Flowra endpoints and on-chain program addresses.">
+    <meta name="description" content="Regional Flowra endpoints, service ports, and on-chain program addresses.">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.flowra.wtf/validators/endpoints/">
@@ -22,7 +22,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.flowra.wtf/validators/endpoints/">
     <meta property="og:title" content="Endpoints & Addresses | Flowra Docs">
-    <meta property="og:description" content="Regional Flowra endpoints and on-chain program addresses.">
+    <meta property="og:description" content="Regional Flowra endpoints, service ports, and on-chain program addresses.">
     <meta property="og:site_name" content="Flowra">
     <meta property="og:locale" content="en_US">
 
@@ -30,7 +30,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://docs.flowra.wtf/validators/endpoints/">
     <meta name="twitter:title" content="Endpoints & Addresses | Flowra Docs">
-    <meta name="twitter:description" content="Regional Flowra endpoints and on-chain program addresses.">
+    <meta name="twitter:description" content="Regional Flowra endpoints, service ports, and on-chain program addresses.">
 
     <!-- Alternate Markdown -->
     <link rel="alternate" type="text/markdown" href="https://docs.flowra.wtf/validators/endpoints.md">
@@ -38,12 +38,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.6.0.837250748122" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.6.0.841666585684" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.837250748122" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841666585684" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.837250748122" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.6.0.837250748122" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841666585684" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.6.0.841666585684" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -216,36 +216,14 @@
 
                 <!-- Page content  -->
 <h1 id="endpoints--addresses">Endpoints &amp; Addresses</h1>
-<div id="retype-page-description" class="description-display text-description font-description leading-description mb-description-margin-bottom mt-description-margin-top tracking-description text-transform-description">Regional Flowra endpoints and on-chain program addresses.</div>
-<p>This page is the canonical reference for Flowra&#x27;s network endpoints and on-chain addresses. Values are published here as infrastructure goes live.</p>
-<div class="flex mb-6">
-    <div class="shrink-0 w-1.5 rounded-tl-lg rounded-bl-lg bg-callout-warning"></div>
-    <div class="flex w-full py-4 border border-l-0 rounded-tr-lg rounded-br-lg doc-callout bg-callout-base-bg border-callout-base-border" role="alert">
-        <div class="flex items-center ml-4 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" class="block text-callout-warning" width="22" height="22" viewBox="0 0 24 24" role="presentation">
-                <g fill="currentColor"><g>
-                    <path d="M22.48 15.59L14.01 1.45A2.968 2.968 0 0012.16.09c-.78-.19-1.58-.07-2.27.35-.41.25-.76.6-1.01 1.01v.01L.4 15.6c-.83 1.43-.33 3.27 1.1 4.1.45.26.95.4 1.48.4h16.95c.8-.01 1.55-.33 2.11-.9.56-.57.87-1.33.86-2.13a3.04 3.04 0 00-.42-1.48zm-1.87 2.21c-.19.19-.44.3-.69.3H2.99c-.17 0-.34-.05-.49-.13a.992.992 0 01-.37-1.35L10.6 2.48c.08-.14.2-.25.34-.33a.992.992 0 011.37.33l8.46 14.13c.09.15.13.32.13.49 0 .26-.1.51-.29.7z"></path>
-                    <path d="M11.45 12.1c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1s-1 .45-1 1v4c0 .56.45 1 1 1zM11.46 14.1c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
-                </g></g>
-            </svg>
-        </div>
-        <div class="pr-5 ml-3 w-full">
-            <h5>Not yet published</h5>
-<p>Flowra is finalizing its regional rollout. All values on this page are <span class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-badge-warning-text bg-badge-warning border border-badge-warning-border h-6 px-2 text-xs rounded-md">
-    <span>TBD</span>
-</span> until announced. Registered validators and searchers are notified directly when values go live, and this page is updated at the same time.</p>
-        </div>
-    </div>
-</div>
+<div id="retype-page-description" class="description-display text-description font-description leading-description mb-description-margin-bottom mt-description-margin-top tracking-description text-transform-description">Regional Flowra endpoints, service ports, and on-chain program addresses.</div>
+<p>This page is the canonical reference for Flowra&#x27;s network endpoints and on-chain addresses. It is updated the moment a value changes; registered validators and searchers are also notified directly.</p>
 <h2 id="mainnet-regions">Mainnet regions</h2>
 <p>All of a validator&#x27;s regional settings must point at the <strong>same region</strong>. Choose the region closest to your validator.</p>
 <retype-table copy-text="Region | Block Engine (`--block-engine-url`) | Relayer (`--relayer-url`)
 --- | --- | ---
-Amsterdam | `TBD` | `TBD`
-Frankfurt | `TBD` | `TBD`
-New York | `TBD` | `TBD`
-Singapore | `TBD` | `TBD`
-Tokyo | `TBD` | `TBD`">
+Frankfurt | `http://frankfurt.mainnet.blockengine.flowra.wtf:8003` | `http://frankfurt.mainnet.relayer.flowra.wtf:11226`
+London | `http://london.testnet.blockengine.flowra.wtf:8003` | `http://london.testnet.relayer.flowra.wtf:11226`">
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable">
 <thead>
@@ -257,42 +235,75 @@ Tokyo | `TBD` | `TBD`">
 </thead>
 <tbody>
 <tr>
-<td>Amsterdam</td>
-<td><code translate="no" v-pre>TBD</code></td>
-<td><code translate="no" v-pre>TBD</code></td>
-</tr>
-<tr>
 <td>Frankfurt</td>
-<td><code translate="no" v-pre>TBD</code></td>
-<td><code translate="no" v-pre>TBD</code></td>
+<td><code translate="no" v-pre>http://frankfurt.mainnet.blockengine.flowra.wtf:8003</code></td>
+<td><code translate="no" v-pre>http://frankfurt.mainnet.relayer.flowra.wtf:11226</code></td>
 </tr>
 <tr>
-<td>New York</td>
-<td><code translate="no" v-pre>TBD</code></td>
-<td><code translate="no" v-pre>TBD</code></td>
-</tr>
-<tr>
-<td>Singapore</td>
-<td><code translate="no" v-pre>TBD</code></td>
-<td><code translate="no" v-pre>TBD</code></td>
-</tr>
-<tr>
-<td>Tokyo</td>
-<td><code translate="no" v-pre>TBD</code></td>
-<td><code translate="no" v-pre>TBD</code></td>
+<td>London</td>
+<td><code translate="no" v-pre>http://london.testnet.blockengine.flowra.wtf:8003</code></td>
+<td><code translate="no" v-pre>http://london.testnet.relayer.flowra.wtf:11226</code></td>
 </tr>
 </tbody>
 </table>
 </div>
 </retype-table>
-<p>The final region list will be announced with mainnet launch; the table reflects planned coverage.</p>
+<div class="flex mb-6">
+    <div class="shrink-0 w-1.5 rounded-tl-lg rounded-bl-lg bg-callout-primary"></div>
+    <div class="flex w-full py-4 border border-l-0 rounded-tr-lg rounded-br-lg doc-callout bg-callout-base-bg border-callout-base-border" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="block text-callout-primary" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3 w-full">
+<p>The London hostnames carry <code translate="no" v-pre>testnet</code> for historical reasons; both regions serve <strong>mainnet</strong>. A second Frankfurt-region relayer runs in Lithuania (<code translate="no" v-pre>lithuania.mainnet.relayer.flowra.wtf:11226</code>) and feeds the Frankfurt Block Engine — validators in the Baltics and Poland may see lower latency pointing <code translate="no" v-pre>--relayer-url</code> there while keeping the Frankfurt Block Engine.</p>
+        </div>
+    </div>
+</div>
+<p>Further regions are added as validator demand clusters; the <a href="../../resources/roadmap/">roadmap</a> lists what is planned.</p>
+<h2 id="searcher-endpoints">Searcher endpoints</h2>
+<p>Searchers connect to the same Block Engine hosts on the searcher ports:</p>
+<retype-table copy-text="Region | AuthService | SearcherService
+--- | --- | ---
+Frankfurt | `http://frankfurt.mainnet.blockengine.flowra.wtf:8005` | `http://frankfurt.mainnet.blockengine.flowra.wtf:8234`
+London | `http://london.testnet.blockengine.flowra.wtf:8005` | `http://london.testnet.blockengine.flowra.wtf:8234`">
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Region</th>
+<th>AuthService</th>
+<th>SearcherService</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Frankfurt</td>
+<td><code translate="no" v-pre>http://frankfurt.mainnet.blockengine.flowra.wtf:8005</code></td>
+<td><code translate="no" v-pre>http://frankfurt.mainnet.blockengine.flowra.wtf:8234</code></td>
+</tr>
+<tr>
+<td>London</td>
+<td><code translate="no" v-pre>http://london.testnet.blockengine.flowra.wtf:8005</code></td>
+<td><code translate="no" v-pre>http://london.testnet.blockengine.flowra.wtf:8234</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</retype-table>
+<p>Keys are registered once at <a href="https://portal.flowra.wtf" class="outbound" target="_blank"><span>portal.flowra.wtf</span><svg xmlns="http://www.w3.org/2000/svg" class="retype-outbound-trigger docs-icon ml-1" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="currentColor"><path d="M15.5 2.25a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V4.06l-6.22 6.22a.75.75 0 1 1-1.06-1.06L19.94 3h-3.69a.75.75 0 0 1-.75-.75Z"/><path d="M2.5 4.25c0-.966.784-1.75 1.75-1.75h8.5a.75.75 0 0 1 0 1.5h-8.5a.25.25 0 0 0-.25.25v15.5c0 .138.112.25.25.25h15.5a.25.25 0 0 0 .25-.25v-8.5a.75.75 0 0 1 1.5 0v8.5a1.75 1.75 0 0 1-1.75 1.75H4.25a1.75 1.75 0 0 1-1.75-1.75V4.25Z"/></g></svg></a> and work in every region.</p>
 <h2 id="service-ports">Service ports</h2>
-<p>The Block Engine exposes separate gRPC services per audience:</p>
-<retype-table copy-text="Service | Consumer | Reference port
+<p>The Block Engine exposes separate gRPC services per audience. All are plain gRPC over HTTP/2 without TLS: use <code translate="no" v-pre>http://</code> URLs.</p>
+<retype-table copy-text="Service | Consumer | Port
 --- | --- | ---
 BlockEngineValidator + AuthService | Validator clients | 8003
+AuthService (standalone) | Searchers and external tooling | 8005
 SearcherService | Searchers | 8234
-AuthService (standalone) | External tooling | 8005
 BlockEngineRelayer | Flowra Relayer (internal) | 11228">
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable">
@@ -300,7 +311,7 @@ BlockEngineRelayer | Flowra Relayer (internal) | 11228">
 <tr>
 <th>Service</th>
 <th>Consumer</th>
-<th>Reference port</th>
+<th>Port</th>
 </tr>
 </thead>
 <tbody>
@@ -310,14 +321,14 @@ BlockEngineRelayer | Flowra Relayer (internal) | 11228">
 <td>8003</td>
 </tr>
 <tr>
+<td>AuthService (standalone)</td>
+<td>Searchers and external tooling</td>
+<td>8005</td>
+</tr>
+<tr>
 <td>SearcherService</td>
 <td>Searchers</td>
 <td>8234</td>
-</tr>
-<tr>
-<td>AuthService (standalone)</td>
-<td>External tooling</td>
-<td>8005</td>
 </tr>
 <tr>
 <td>BlockEngineRelayer</td>
@@ -328,41 +339,16 @@ BlockEngineRelayer | Flowra Relayer (internal) | 11228">
 </table>
 </div>
 </retype-table>
-<p>Reference ports are from the current deployment configuration; production endpoints will publish exact host:port pairs.</p>
+<p>The Relayer serves validators on <code translate="no" v-pre>11226</code> (its gRPC port; the validator fetches the relayer&#x27;s TPU sockets from it). Relayer TPU ports are advertised to the validator over that connection and do not need to be configured by hand.</p>
 <h2 id="testnet">Testnet</h2>
-<retype-table copy-text="Environment | Block Engine | Relayer | Searcher endpoint
---- | --- | --- | ---
-Testnet | `TBD` | `TBD` | `TBD`">
-<div class="table-wrapper scrollbar overflow-hidden">
-<table class="comfortable">
-<thead>
-<tr>
-<th>Environment</th>
-<th>Block Engine</th>
-<th>Relayer</th>
-<th>Searcher endpoint</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Testnet</td>
-<td><code translate="no" v-pre>TBD</code></td>
-<td><code translate="no" v-pre>TBD</code></td>
-<td><code translate="no" v-pre>TBD</code></td>
-</tr>
-</tbody>
-</table>
-</div>
-</retype-table>
-<p>Testnet access is granted during validator and searcher onboarding: contact <a href="mailto:info@flowra.wtf">info@flowra.wtf</a>.</p>
+<p>There is currently no separate public testnet: the London and Frankfurt regions above are mainnet. For searchers, the <a href="../../searchers/bundles/#dry-run">dry run</a> (<code translate="no" v-pre>SendBundle</code> with <code translate="no" v-pre>simulate_only</code>) simulates a bundle against live mainnet state without spending anything or entering the auction, which covers most integration testing. Validators wanting a staging environment before pointing a mainnet node at Flowra can request one at <a href="mailto:info@flowra.wtf">info@flowra.wtf</a>.</p>
 <h2 id="on-chain-addresses">On-chain addresses</h2>
+<p>Flowra uses the canonical tip programs that Jito-lineage validators already ship with, so a validator&#x27;s <code translate="no" v-pre>--tip-payment-program-pubkey</code> and <code translate="no" v-pre>--tip-distribution-program-pubkey</code> do not change when it joins Flowra.</p>
 <retype-table copy-text="Purpose | Network | Address
 --- | --- | ---
-Tip payment program | Mainnet | `TBD`
-Tip distribution program | Mainnet | `TBD`
-Merkle root upload authority | Mainnet | `TBD`
-Tip payment program | Testnet | `TBD`
-Tip distribution program | Testnet | `TBD`">
+Tip payment program | Mainnet | `T1pyyaTNZsKv2WcRAB8oVnk93mLJw2XzjtVYqCsaHqt`
+Tip distribution program | Mainnet | `4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7`
+Merkle root upload authority | Mainnet | [!badge variant=&quot;warning&quot; text=&quot;TBD&quot;] — published before the first tip distribution epoch">
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable">
 <thead>
@@ -376,42 +362,38 @@ Tip distribution program | Testnet | `TBD`">
 <tr>
 <td>Tip payment program</td>
 <td>Mainnet</td>
-<td><code translate="no" v-pre>TBD</code></td>
+<td><code translate="no" v-pre>T1pyyaTNZsKv2WcRAB8oVnk93mLJw2XzjtVYqCsaHqt</code></td>
 </tr>
 <tr>
 <td>Tip distribution program</td>
 <td>Mainnet</td>
-<td><code translate="no" v-pre>TBD</code></td>
+<td><code translate="no" v-pre>4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7</code></td>
 </tr>
 <tr>
 <td>Merkle root upload authority</td>
 <td>Mainnet</td>
-<td><code translate="no" v-pre>TBD</code></td>
-</tr>
-<tr>
-<td>Tip payment program</td>
-<td>Testnet</td>
-<td><code translate="no" v-pre>TBD</code></td>
-</tr>
-<tr>
-<td>Tip distribution program</td>
-<td>Testnet</td>
-<td><code translate="no" v-pre>TBD</code></td>
+<td><span class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-badge-warning-text bg-badge-warning border border-badge-warning-border h-6 px-2 text-xs rounded-md">
+    <span>TBD</span>
+</span> — published before the first tip distribution epoch</td>
 </tr>
 </tbody>
 </table>
 </div>
 </retype-table>
-<p>Tip accounts for searchers are served dynamically by the <code translate="no" v-pre>GetTipAccounts</code> RPC; see the <a href="../../searchers/api-reference/">API reference</a>.</p>
+<p>Tip <strong>accounts</strong> for searchers are served dynamically by the <code translate="no" v-pre>GetTipAccounts</code> RPC and may rotate; never hard-code them. See the <a href="../../searchers/api-reference/">API reference</a>.</p>
 <h2 id="verifying-connectivity">Verifying connectivity</h2>
-<p>Once endpoints are published, verify reachability before restarting your validator:</p>
+<p>Verify reachability before restarting your validator. The endpoints are plain HTTP/2, so use <code translate="no" v-pre>-plaintext</code>:</p>
 <div id="verifying-connectivity-code-1" class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-bash"><code v-pre class="language-bash"># TLS handshake / reachability check against your region's Block Engine
-grpcurl -v &lt;REGION_BLOCK_ENGINE_HOST&gt;:&lt;PORT&gt; list 2&gt;&amp;1 | head
+<pre translate="no" class="language-bash"><code v-pre class="language-bash"># Block Engine: list services on the validator port
+grpcurl -plaintext frankfurt.mainnet.blockengine.flowra.wtf:8003 list
+
+# Relayer
+grpcurl -plaintext frankfurt.mainnet.relayer.flowra.wtf:11226 list
 
 # Round-trip latency matters for auction competitiveness
-ping -c 10 &lt;REGION_BLOCK_ENGINE_HOST&gt;</code></pre>
+ping -c 10 frankfurt.mainnet.blockengine.flowra.wtf</code></pre>
 </doc-codeblock></div>
+<p>Searchers can do the same against <code translate="no" v-pre>:8005</code> and <code translate="no" v-pre>:8234</code>.</p>
 <div class="flex mb-6">
     <div class="shrink-0 w-1.5 rounded-tl-lg rounded-bl-lg bg-callout-success"></div>
     <div class="flex w-full py-4 border border-l-0 rounded-tr-lg rounded-br-lg doc-callout bg-callout-base-bg border-callout-base-border" role="alert">
@@ -433,6 +415,17 @@ ping -c 10 &lt;REGION_BLOCK_ENGINE_HOST&gt;</code></pre>
     <h2>See also</h2>
 <div class="card-compact-group">
 <div class="card-compact-container">
+    <a href="/searchers/api-reference/" class="group card-compact no-link">
+        <div class="card-compact-body">
+            <div class="card-compact-header">
+                <span class="card-compact-icon inline-flex shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><!--icon--><path d="M15.22 4.97a.75.75 0 0 1 1.06 0l6.5 6.5a.75.75 0 0 1 0 1.06l-6.5 6.5a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L21.19 12l-5.97-5.97a.75.75 0 0 1 0-1.06Zm-6.44 0a.75.75 0 0 1 0 1.06L2.81 12l5.97 5.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215l-6.5-6.5a.75.75 0 0 1 0-1.06l6.5-6.5a.75.75 0 0 1 1.06 0Z"/></svg></span>
+                <span class="card-compact-title">API Reference</span>
+            </div>
+            <p class="card-compact-description">gRPC services, messages, result states, and error semantics for the searcher API.</p>
+        </div>
+    </a>
+</div>
+<div class="card-compact-container">
     <a href="/validators/configuration/" class="group card-compact no-link">
         <div class="card-compact-body">
             <div class="card-compact-header">
@@ -444,13 +437,24 @@ ping -c 10 &lt;REGION_BLOCK_ENGINE_HOST&gt;</code></pre>
     </a>
 </div>
 <div class="card-compact-container">
+    <a href="/" class="group card-compact no-link">
+        <div class="card-compact-body">
+            <div class="card-compact-header">
+                <span class="card-compact-icon inline-flex shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><!--icon--><path d="M11.03 2.59a1.501 1.501 0 0 1 1.94 0l7.5 6.363a1.5 1.5 0 0 1 .53 1.144V19.5a1.5 1.5 0 0 1-1.5 1.5h-5.75a.75.75 0 0 1-.75-.75V14h-2v6.25a.75.75 0 0 1-.75.75H4.5A1.5 1.5 0 0 1 3 19.5v-9.403c0-.44.194-.859.53-1.144ZM12 3.734l-7.5 6.363V19.5h5v-6.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v6.25h5v-9.403Z"/></svg></span>
+                <span class="card-compact-title">Flowra Documentation</span>
+            </div>
+            <p class="card-compact-description">Flowra is institutional-grade validator infrastructure for Solana: policy-controlled block production, made accountable by an open orderflow auction.</p>
+        </div>
+    </a>
+</div>
+<div class="card-compact-container">
     <a href="/searchers/getting-started/" class="group card-compact no-link">
         <div class="card-compact-body">
             <div class="card-compact-header">
                 <span class="card-compact-icon inline-flex shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><!--icon--><path d="M20.322.75h1.176a1.75 1.75 0 0 1 1.75 1.749v1.177a10.75 10.75 0 0 1-2.925 7.374l-1.228 1.304a23.699 23.699 0 0 1-1.596 1.542v5.038c0 .615-.323 1.184-.85 1.5l-4.514 2.709a.75.75 0 0 1-1.12-.488l-.963-4.572a1.305 1.305 0 0 1-.14-.129L8.04 15.96l-1.994-1.873a1.305 1.305 0 0 1-.129-.14l-4.571-.963a.75.75 0 0 1-.49-1.12l2.71-4.514c.316-.527.885-.85 1.5-.85h5.037a23.668 23.668 0 0 1 1.542-1.594l1.304-1.23A10.753 10.753 0 0 1 20.321.75Zm-6.344 4.018v-.001l-1.304 1.23a22.275 22.275 0 0 0-3.255 3.851l-2.193 3.29 1.859 1.744a.545.545 0 0 1 .034.034l1.743 1.858 3.288-2.192a22.263 22.263 0 0 0 3.854-3.257l1.228-1.303a9.251 9.251 0 0 0 2.517-6.346V2.5a.25.25 0 0 0-.25-.25h-1.177a9.252 9.252 0 0 0-6.344 2.518ZM6.5 21c-1.209 1.209-3.901 1.445-4.743 1.49a.236.236 0 0 1-.18-.067.236.236 0 0 1-.067-.18c.045-.842.281-3.534 1.49-4.743.9-.9 2.6-.9 3.5 0 .9.9.9 2.6 0 3.5Zm-.592-8.588L8.17 9.017c.23-.346.47-.685.717-1.017H5.066a.25.25 0 0 0-.214.121l-2.167 3.612ZM16 15.112c-.333.248-.672.487-1.018.718l-3.393 2.262.678 3.223 3.612-2.167a.25.25 0 0 0 .121-.214ZM17.5 8a1.5 1.5 0 1 1-3.001-.001A1.5 1.5 0 0 1 17.5 8Z"/></svg></span>
                 <span class="card-compact-title">Getting Started</span>
             </div>
-            <p class="card-compact-description">Authenticate against the Block Engine and make your first calls.</p>
+            <p class="card-compact-description">Register your searcher key, authenticate against the Block Engine, and make your first calls.</p>
         </div>
     </a>
 </div>
@@ -472,7 +476,7 @@ ping -c 10 &lt;REGION_BLOCK_ENGINE_HOST&gt;</code></pre>
                 <span class="card-compact-icon inline-flex shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><!--icon--><path d="M20.485 2.515a.75.75 0 0 0-1.06 1.06A10.465 10.465 0 0 1 22.5 11c0 2.9-1.174 5.523-3.075 7.424a.75.75 0 0 0 1.06 1.061A11.965 11.965 0 0 0 24 11c0-3.314-1.344-6.315-3.515-8.485Zm-15.91 1.06a.75.75 0 0 0-1.06-1.06A11.965 11.965 0 0 0 0 11c0 3.313 1.344 6.314 3.515 8.485a.75.75 0 0 0 1.06-1.06A10.465 10.465 0 0 1 1.5 11c0-2.9 1.174-5.524 3.075-7.425ZM8.11 7.11a.75.75 0 0 0-1.06-1.06A6.98 6.98 0 0 0 5 11a6.98 6.98 0 0 0 2.05 4.95.75.75 0 0 0 1.06-1.061 5.48 5.48 0 0 1-1.61-3.89 5.48 5.48 0 0 1 1.61-3.888Zm8.84-1.06a.75.75 0 1 0-1.06 1.06A5.48 5.48 0 0 1 17.5 11a5.48 5.48 0 0 1-1.61 3.889.75.75 0 1 0 1.06 1.06A6.98 6.98 0 0 0 19 11a6.98 6.98 0 0 0-2.05-4.949ZM14 11a2 2 0 0 1-1.25 1.855v8.395a.75.75 0 0 1-1.5 0v-8.395A2 2 0 1 1 14 11Z"/></svg></span>
                 <span class="card-compact-title">Orderflow Stream</span>
             </div>
-            <p class="card-compact-description">Subscribing to the pending-transaction stream: message contents and delivery semantics.</p>
+            <p class="card-compact-description">Subscribing to the pending-transaction stream: filters, scope, message contents, and delivery semantics.</p>
         </div>
     </a>
 </div>
@@ -494,7 +498,7 @@ ping -c 10 &lt;REGION_BLOCK_ENGINE_HOST&gt;</code></pre>
                 <span class="card-compact-icon inline-flex shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><!--icon--><path d="M15.716 1.329a1.341 1.341 0 0 1 2.109 1.55L15.147 9h4.161c1.623 0 2.372 2.016 1.143 3.075L8.102 22.721a1.148 1.148 0 0 1-1.81-1.317L8.996 15H4.674c-1.619 0-2.37-2.008-1.148-3.07l12.19-10.6Zm.452 1.595L4.51 13.061a.25.25 0 0 0 .164.439h5.45a.749.749 0 0 1 .692 1.041l-2.559 6.066 11.215-9.668a.25.25 0 0 0-.164-.439H14a.75.75 0 0 1-.687-1.05Z"/></svg></span>
                 <span class="card-compact-title">Searchers</span>
             </div>
-            <p class="card-compact-description">Permissionless access to Solana orderflow: standardized streams, open auctions, atomic bundles.</p>
+            <p class="card-compact-description">Open access to Solana orderflow: a standardized stream, open auctions, atomic bundles.</p>
         </div>
     </a>
 </div>

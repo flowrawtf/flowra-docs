@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.837250748122">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841666585684">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -12,7 +12,7 @@
     <!-- Primary Meta Tags -->
     <title>Bundles | Flowra Docs</title>
     <meta name="title" content="Bundles | Flowra Docs">
-    <meta name="description" content="Bundle structure, tipping, auction submission, and best practices.">
+    <meta name="description" content="Bundle structure, tipping, dry runs, auction submission, and what gets a key throttled.">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.flowra.wtf/searchers/bundles/">
@@ -22,7 +22,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.flowra.wtf/searchers/bundles/">
     <meta property="og:title" content="Bundles | Flowra Docs">
-    <meta property="og:description" content="Bundle structure, tipping, auction submission, and best practices.">
+    <meta property="og:description" content="Bundle structure, tipping, dry runs, auction submission, and what gets a key throttled.">
     <meta property="og:site_name" content="Flowra">
     <meta property="og:locale" content="en_US">
 
@@ -30,7 +30,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://docs.flowra.wtf/searchers/bundles/">
     <meta name="twitter:title" content="Bundles | Flowra Docs">
-    <meta name="twitter:description" content="Bundle structure, tipping, auction submission, and best practices.">
+    <meta name="twitter:description" content="Bundle structure, tipping, dry runs, auction submission, and what gets a key throttled.">
 
     <!-- Alternate Markdown -->
     <link rel="alternate" type="text/markdown" href="https://docs.flowra.wtf/searchers/bundles.md">
@@ -38,11 +38,11 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.6.0.837250748122" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.6.0.841666585684" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.837250748122" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841666585684" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.837250748122" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841666585684" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -215,7 +215,7 @@
 
                 <!-- Page content  -->
 <h1 id="bundles">Bundles</h1>
-<div id="retype-page-description" class="description-display text-description font-description leading-description mb-description-margin-bottom mt-description-margin-top tracking-description text-transform-description">Bundle structure, tipping, auction submission, and best practices.</div>
+<div id="retype-page-description" class="description-display text-description font-description leading-description mb-description-margin-bottom mt-description-margin-top tracking-description text-transform-description">Bundle structure, tipping, dry runs, auction submission, and what gets a key throttled.</div>
 <p>A <strong>bundle</strong> is an ordered group of signed transactions submitted as one atomic unit into the auction. Bundles are how searchers convert an observed opportunity into a bid.</p>
 <h2 id="bundle-rules">Bundle rules</h2>
 <retype-table copy-text="Property | Rule
@@ -224,7 +224,7 @@ Size | Up to **5 transactions** per bundle
 Ordering | Executed strictly in the order submitted
 Atomicity | **All-or-nothing**: if any transaction fails, the entire bundle is dropped
 Tip | At least one transaction transfers lamports to a **tip account** (see below)
-Signing | Every transaction fully signed before submission">
+Signing | Every transaction fully signed before submission; each transaction's first signature identifies it">
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable">
 <thead>
@@ -252,16 +252,16 @@ Signing | Every transaction fully signed before submission">
 </tr>
 <tr>
 <td>Signing</td>
-<td>Every transaction fully signed before submission</td>
+<td>Every transaction fully signed before submission; each transaction&#x27;s first signature identifies it</td>
 </tr>
 </tbody>
 </table>
 </div>
 </retype-table>
 <h3 id="atomic-execution-means-no-revert-risk">Atomic execution means no revert risk</h3>
-<p>Before a bundle can enter the auction, the Block Engine simulates it against recent state. If any leg would fail, the bundle is rejected with a <code translate="no" v-pre>SimulationFailure</code> result and nothing lands, so you pay nothing. Tight multi-leg strategies (arbitrage, liquidation plus hedge) are safe to attempt aggressively.</p>
+<p>Before a bundle can enter the auction, the Block Engine simulates it against the leader&#x27;s bank. If any leg would fail, the bundle is rejected with a <code translate="no" v-pre>SimulationFailure</code> result carrying the failing transaction&#x27;s error and logs, and nothing lands, so you pay nothing. Tight multi-leg strategies (arbitrage, liquidation plus hedge) are safe to attempt aggressively.</p>
 <h2 id="tipping">Tipping</h2>
-<p>Your tip is your <strong>bid</strong> in the 50 ms auction:</p>
+<p>Your tip is your <strong>bid</strong> in the 10 ms auction:</p>
 <ul>
 <li>Fetch the current tip accounts with <code translate="no" v-pre>GetTipAccounts</code>, then include a lamport transfer to one of them inside your bundle.</li>
 <li>Your bid equals the <strong>sum of transfers to tip accounts</strong> across the bundle, as measured in simulation. Misreported tips are caught there and the bundle is dropped.</li>
@@ -272,9 +272,24 @@ Signing | Every transaction fully signed before submission">
 <p>There is no universal answer; the auction discovers it. Practical guidance:</p>
 <ol>
 <li><strong>Start from opportunity value, not from fee floors.</strong> Bid a fraction of your expected profit. As competition on an opportunity type matures, margins compress, and your bid has to reflect what the opportunity is worth.</li>
-<li><strong>Read your rejections.</strong> <code translate="no" v-pre>StateAuctionBidRejected</code> and <code translate="no" v-pre>WinningBatchBidRejected</code> results include your simulated bid, telling you exactly how the market priced you out.</li>
 <li><strong>Remember conflict-awareness.</strong> You are only bidding against bundles that touch <em>your</em> accounts. A modest tip can win an uncontested opportunity; a hot pool during volatility is a different auction entirely.</li>
+<li><strong>Use the dry run to price.</strong> <code translate="no" v-pre>simulate_only</code> shows you exactly what your bundle does against live state, including the tip the engine will measure, before you commit it.</li>
 </ol>
+<h2 id="dry-run">Dry run</h2>
+<p><code translate="no" v-pre>SendBundle</code> accepts a Flowra-only flag, <code translate="no" v-pre>simulate_only</code>. The bundle is simulated against the leader&#x27;s bank exactly as a real submission would be, and the full report comes back inline — but it never enters the auction and is never broadcast. Nothing is spent and nothing can land.</p>
+<div id="dry-run-code-1" class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-none"><code v-pre class="language-none">SendBundle { bundle: {...}, simulate_only: true }
+--&gt; {
+  uuid,
+  simulated_ok: true | false,
+  simulation_err: &quot;&lt;bundle-level failure, JSON&gt;&quot;,   // empty when ok
+  simulation: [                                   // one per transaction, in order
+    { logs, units_consumed, pre/post token balances, pre/post write-locked accounts }
+  ],
+  simulation_skipped: true | false                // set when simulation could not run at all
+}</code></pre>
+</doc-codeblock></div>
+<p>Dry runs count against your key&#x27;s bundle rate limit like any other <code translate="no" v-pre>SendBundle</code>.</p>
 <h2 id="submitting">Submitting</h2>
 <p>Submit through <code translate="no" v-pre>SearcherService</code> with your access token:</p>
 <div id="submitting-code-1" class="codeblock-wrapper"><doc-codeblock>
@@ -285,23 +300,72 @@ Signing | Every transaction fully signed before submission">
 }
 --&gt; { uuid: &quot;&lt;server-assigned bundle id&gt;&quot; }</code></pre>
 </doc-codeblock></div>
-<p>Track outcomes on the results stream:</p>
+<p><code translate="no" v-pre>SendBundle</code> returns as soon as the bundle is accepted for simulation; the simulation and auction run asynchronously. Track outcomes on the results stream:</p>
 <div id="submitting-code-2" class="codeblock-wrapper"><doc-codeblock>
 <pre translate="no" class="language-none"><code v-pre class="language-none">SubscribeBundleResults {}
---&gt; stream of BundleResult { bundle_id, accepted | rejected | processed | finalized | dropped }</code></pre>
+--&gt; stream of BundleResult { bundle_id, accepted | rejected | dropped }</code></pre>
 </doc-codeblock></div>
-<p>A losing bundle is not gone immediately: it re-enters subsequent 50 ms ticks and keeps competing for a few seconds before expiring, so a near-miss can still land in the next window without resubmission.</p>
+<p>A bundle that loses a tick is not gone: it re-enters the following ticks and keeps competing until it wins, is superseded, or its blockhash expires, so a near-miss can still land in a later tick without resubmission. Resubmitting the same transactions yourself does the opposite — see <em>superseded</em> below.</p>
+<h3 id="superseded-bundles">Superseded bundles</h3>
+<p>The engine remembers every transaction signature it has emitted to a leader for the last <strong>2 seconds</strong>. A bundle that repeats one of those signatures cannot land atomically (the earlier copy is already on its way), so it is dropped immediately with <code translate="no" v-pre>Dropped / PartiallyProcessed</code> and the conflicting signature named in the result. In practice this is almost always the searcher&#x27;s own overlapping variant arriving second: build one bundle per opportunity and let it compete, rather than firing variants with shared legs.</p>
 <h2 id="timing-your-submissions">Timing your submissions</h2>
-<p>Bundles only land while a Flowra validator is the leader. Use <code translate="no" v-pre>GetNextScheduledLeader</code> for the next connected leader slot and <code translate="no" v-pre>GetConnectedLeaders</code> for the epoch&#x27;s full schedule, and shape your submission timing around those windows. Bundles submitted with no upcoming leader are rejected with a <code translate="no" v-pre>DroppedBundle</code> reason.</p>
+<p>Bundles only land while a Flowra validator is the leader. Use <code translate="no" v-pre>GetNextScheduledLeader</code> for the next connected leader slot and <code translate="no" v-pre>GetConnectedLeaders</code> for every connected validator&#x27;s remaining slots this epoch, and shape your submission timing around those windows. With no connected leader upcoming, a bundle waits in the auction until one is.</p>
+<h2 id="what-gets-you-throttled">What gets you throttled</h2>
+<p>Flowra keeps the stream open by holding keys accountable rather than by gating access. Two mechanisms act on a key:</p>
+<p><strong>The validator&#x27;s policy (PBP).</strong> Each validator sets its own <a href="../../concepts/programmable-block-policy/">block policy</a>. A bundle that violates it — a blacklisted address or program, a searcher outside a whitelist, or a sandwich pattern where <code translate="no" v-pre>allow_aggressive_mev</code> is off — is rejected at submission with <code translate="no" v-pre>PERMISSION_DENIED: PBP violation: &lt;reason&gt;</code>. The engine classifies a bundle as a sandwich when it has three or more transactions, the first and last share a fee payer, and a middle transaction has a different one.</p>
+<p><strong>Network enforcement levels.</strong> The control plane raises a key&#x27;s level when network rules trip, and an operator lowers it:</p>
+<retype-table copy-text="Level | Effect
+--- | ---
+L0 | Normal
+L1 | Warning; no change in service
+L2 | Bundle submission limited
+L3 | Mempool stream withheld (subscriptions end with `PERMISSION_DENIED`)
+L4 | Suspended; authentication fails">
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Level</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L0</td>
+<td>Normal</td>
+</tr>
+<tr>
+<td>L1</td>
+<td>Warning; no change in service</td>
+</tr>
+<tr>
+<td>L2</td>
+<td>Bundle submission limited</td>
+</tr>
+<tr>
+<td>L3</td>
+<td>Mempool stream withheld (subscriptions end with <code translate="no" v-pre>PERMISSION_DENIED</code>)</td>
+</tr>
+<tr>
+<td>L4</td>
+<td>Suspended; authentication fails</td>
+</tr>
+</tbody>
+</table>
+</div>
+</retype-table>
+<p>A single detected sandwich sets a key to <strong>L3</strong>. Sustained request-rate abuse raises the level one step per window. Your current level and its reason are shown on the portal.</p>
 <h2 id="best-practices">Best practices</h2>
-<h3 id="simulate-before-you-submit">Simulate before you submit</h3>
-<p>The engine will catch failing bundles for free, but a submission that was never viable wastes your latency window. Run <code translate="no" v-pre>simulateTransaction</code> against fresh state for each leg first.</p>
+<h3 id="dry-run-before-you-submit">Dry-run before you submit</h3>
+<p>The engine will catch failing bundles for free, but a submission that was never viable wastes your latency window. <code translate="no" v-pre>simulate_only</code> against the leader&#x27;s live state is cheaper than a wasted tick.</p>
 <h3 id="guard-your-assumptions-in-program">Guard your assumptions in-program</h3>
 <p>Where possible, encode pre- and post-checks into the transactions themselves (balance assertions, slippage bounds). Atomicity protects you from partial execution; assertions protect you from <em>successful</em> execution under moved markets.</p>
 <h3 id="keep-the-tip-inside-the-core-transaction">Keep the tip inside the core transaction</h3>
 <p>Attach the tip transfer within a transaction that is essential to the bundle&#x27;s success, not as a detached final transfer. This prevents any path where your tip could land while your strategy legs do not.</p>
-<h3 id="treat-rejections-as-market-data">Treat rejections as market data</h3>
-<p><code translate="no" v-pre>Rejected</code> results carry structured reasons and your simulated bid. They are bid-calibration signals, not errors.</p>
+<h3 id="one-bundle-per-opportunity">One bundle per opportunity</h3>
+<p>Overlapping variants supersede each other within the 2-second window. Pick your bid and let the bundle re-enter ticks on its own.</p>
+<h3 id="treat-results-as-market-data">Treat results as market data</h3>
+<p><code translate="no" v-pre>Rejected</code> and <code translate="no" v-pre>Dropped</code> results carry structured reasons, the failing signature, and simulation logs. They are calibration signals, not errors.</p>
 <p>
 <div class="mb-6 px-5 py-4 flex justify-between relative border border-base-border hover:border-base-border-hover rounded transition-colors duration-150">
     <div class="flex items-center text-base-500">
@@ -326,7 +390,18 @@ Signing | Every transaction fully signed before submission">
                 <span class="card-compact-icon inline-flex shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><!--icon--><path d="M15.22 4.97a.75.75 0 0 1 1.06 0l6.5 6.5a.75.75 0 0 1 0 1.06l-6.5 6.5a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L21.19 12l-5.97-5.97a.75.75 0 0 1 0-1.06Zm-6.44 0a.75.75 0 0 1 0 1.06L2.81 12l5.97 5.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215l-6.5-6.5a.75.75 0 0 1 0-1.06l6.5-6.5a.75.75 0 0 1 1.06 0Z"/></svg></span>
                 <span class="card-compact-title">API Reference</span>
             </div>
-            <p class="card-compact-description">gRPC services, messages, and result states for the searcher API.</p>
+            <p class="card-compact-description">gRPC services, messages, result states, and error semantics for the searcher API.</p>
+        </div>
+    </a>
+</div>
+<div class="card-compact-container">
+    <a href="/validators/endpoints/" class="group card-compact no-link">
+        <div class="card-compact-body">
+            <div class="card-compact-header">
+                <span class="card-compact-icon inline-flex shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><!--icon--><path d="M12 1c6.075 0 11 4.925 11 11s-4.925 11-11 11S1 18.075 1 12 5.925 1 12 1Zm3.241 10.5v-.001c-.1-2.708-.992-4.904-1.89-6.452a13.919 13.919 0 0 0-1.304-1.88L12 3.11l-.047.059c-.354.425-.828 1.06-1.304 1.88-.898 1.547-1.79 3.743-1.89 6.451Zm-12.728 0h4.745c.1-3.037 1.1-5.49 2.093-7.204.39-.672.78-1.233 1.119-1.673C6.11 3.329 2.746 7 2.513 11.5Zm18.974 0C21.254 7 17.89 3.329 13.53 2.623c.339.44.729 1.001 1.119 1.673.993 1.714 1.993 4.167 2.093 7.204ZM8.787 13c.182 2.478 1.02 4.5 1.862 5.953.382.661.818 1.29 1.304 1.88l.047.057.047-.059c.354-.425.828-1.06 1.304-1.88.842-1.451 1.679-3.471 1.862-5.951Zm-1.504 0H2.552a9.505 9.505 0 0 0 7.918 8.377 15.773 15.773 0 0 1-1.119-1.673C8.413 18.085 7.47 15.807 7.283 13Zm9.434 0c-.186 2.807-1.13 5.085-2.068 6.704-.39.672-.78 1.233-1.118 1.673A9.506 9.506 0 0 0 21.447 13Z"/></svg></span>
+                <span class="card-compact-title">Endpoints & Addresses</span>
+            </div>
+            <p class="card-compact-description">Regional Flowra endpoints, service ports, and on-chain program addresses.</p>
         </div>
     </a>
 </div>
@@ -337,7 +412,7 @@ Signing | Every transaction fully signed before submission">
                 <span class="card-compact-icon inline-flex shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><!--icon--><path d="M20.322.75h1.176a1.75 1.75 0 0 1 1.75 1.749v1.177a10.75 10.75 0 0 1-2.925 7.374l-1.228 1.304a23.699 23.699 0 0 1-1.596 1.542v5.038c0 .615-.323 1.184-.85 1.5l-4.514 2.709a.75.75 0 0 1-1.12-.488l-.963-4.572a1.305 1.305 0 0 1-.14-.129L8.04 15.96l-1.994-1.873a1.305 1.305 0 0 1-.129-.14l-4.571-.963a.75.75 0 0 1-.49-1.12l2.71-4.514c.316-.527.885-.85 1.5-.85h5.037a23.668 23.668 0 0 1 1.542-1.594l1.304-1.23A10.753 10.753 0 0 1 20.321.75Zm-6.344 4.018v-.001l-1.304 1.23a22.275 22.275 0 0 0-3.255 3.851l-2.193 3.29 1.859 1.744a.545.545 0 0 1 .034.034l1.743 1.858 3.288-2.192a22.263 22.263 0 0 0 3.854-3.257l1.228-1.303a9.251 9.251 0 0 0 2.517-6.346V2.5a.25.25 0 0 0-.25-.25h-1.177a9.252 9.252 0 0 0-6.344 2.518ZM6.5 21c-1.209 1.209-3.901 1.445-4.743 1.49a.236.236 0 0 1-.18-.067.236.236 0 0 1-.067-.18c.045-.842.281-3.534 1.49-4.743.9-.9 2.6-.9 3.5 0 .9.9.9 2.6 0 3.5Zm-.592-8.588L8.17 9.017c.23-.346.47-.685.717-1.017H5.066a.25.25 0 0 0-.214.121l-2.167 3.612ZM16 15.112c-.333.248-.672.487-1.018.718l-3.393 2.262.678 3.223 3.612-2.167a.25.25 0 0 0 .121-.214ZM17.5 8a1.5 1.5 0 1 1-3.001-.001A1.5 1.5 0 0 1 17.5 8Z"/></svg></span>
                 <span class="card-compact-title">Getting Started</span>
             </div>
-            <p class="card-compact-description">Authenticate against the Block Engine and make your first calls.</p>
+            <p class="card-compact-description">Register your searcher key, authenticate against the Block Engine, and make your first calls.</p>
         </div>
     </a>
 </div>
@@ -359,7 +434,7 @@ Signing | Every transaction fully signed before submission">
                 <span class="card-compact-icon inline-flex shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><!--icon--><path d="M20.485 2.515a.75.75 0 0 0-1.06 1.06A10.465 10.465 0 0 1 22.5 11c0 2.9-1.174 5.523-3.075 7.424a.75.75 0 0 0 1.06 1.061A11.965 11.965 0 0 0 24 11c0-3.314-1.344-6.315-3.515-8.485Zm-15.91 1.06a.75.75 0 0 0-1.06-1.06A11.965 11.965 0 0 0 0 11c0 3.313 1.344 6.314 3.515 8.485a.75.75 0 0 0 1.06-1.06A10.465 10.465 0 0 1 1.5 11c0-2.9 1.174-5.524 3.075-7.425ZM8.11 7.11a.75.75 0 0 0-1.06-1.06A6.98 6.98 0 0 0 5 11a6.98 6.98 0 0 0 2.05 4.95.75.75 0 0 0 1.06-1.061 5.48 5.48 0 0 1-1.61-3.89 5.48 5.48 0 0 1 1.61-3.888Zm8.84-1.06a.75.75 0 1 0-1.06 1.06A5.48 5.48 0 0 1 17.5 11a5.48 5.48 0 0 1-1.61 3.889.75.75 0 1 0 1.06 1.06A6.98 6.98 0 0 0 19 11a6.98 6.98 0 0 0-2.05-4.949ZM14 11a2 2 0 0 1-1.25 1.855v8.395a.75.75 0 0 1-1.5 0v-8.395A2 2 0 1 1 14 11Z"/></svg></span>
                 <span class="card-compact-title">Orderflow Stream</span>
             </div>
-            <p class="card-compact-description">Subscribing to the pending-transaction stream: message contents and delivery semantics.</p>
+            <p class="card-compact-description">Subscribing to the pending-transaction stream: filters, scope, message contents, and delivery semantics.</p>
         </div>
     </a>
 </div>
@@ -370,7 +445,7 @@ Signing | Every transaction fully signed before submission">
                 <span class="card-compact-icon inline-flex shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><!--icon--><path d="M15.716 1.329a1.341 1.341 0 0 1 2.109 1.55L15.147 9h4.161c1.623 0 2.372 2.016 1.143 3.075L8.102 22.721a1.148 1.148 0 0 1-1.81-1.317L8.996 15H4.674c-1.619 0-2.37-2.008-1.148-3.07l12.19-10.6Zm.452 1.595L4.51 13.061a.25.25 0 0 0 .164.439h5.45a.749.749 0 0 1 .692 1.041l-2.559 6.066 11.215-9.668a.25.25 0 0 0-.164-.439H14a.75.75 0 0 1-.687-1.05Z"/></svg></span>
                 <span class="card-compact-title">Searchers</span>
             </div>
-            <p class="card-compact-description">Permissionless access to Solana orderflow: standardized streams, open auctions, atomic bundles.</p>
+            <p class="card-compact-description">Open access to Solana orderflow: a standardized stream, open auctions, atomic bundles.</p>
         </div>
     </a>
 </div>

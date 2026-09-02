@@ -12,7 +12,7 @@ Component | Role
 --- | ---
 **Flowra Validator Client** | A validator client built on the Jito-Solana codebase. It delegates its TPU ports to the Relayer, receives winning bundles from the Block Engine, runs the local policy check, and always retains full local block production.
 **Flowra Relayer** | A TPU proxy that receives transactions on the validator's behalf. It authenticates the validator, deduplicates and batches incoming packets, and forwards them to the Block Engine and the validator.
-**Flowra Block Engine** | The heart of the system. It broadcasts the orderflow stream to subscribed searchers, accepts and validates bundle submissions, runs the 50&nbsp;ms conflict-aware auctions, and forwards winning bundles to the leader.
+**Flowra Block Engine** | The heart of the system. It broadcasts the orderflow stream to subscribed searchers, accepts and validates bundle submissions, runs the 10&nbsp;ms conflict-aware auctions, and forwards winning bundles to the leader.
 
 Searchers connect to the Block Engine from the outside: they subscribe to the orderflow stream and submit tip-bearing bundles through the same service. See [Searchers](../searchers/index.md).
 
@@ -22,7 +22,7 @@ Searchers connect to the Block Engine from the outside: they subscribe to the or
 2. **Forwarding.** The Relayer deduplicates the flow and forwards packets to the Block Engine and the validator.
 3. **Broadcast.** The Block Engine streams the flow to all subscribed searchers over gRPC.
 4. **Bidding.** Searchers detect opportunities and submit tip-bearing bundles back to the Block Engine.
-5. **Auction and delivery.** Every 50&nbsp;ms the Block Engine simulates candidate bundles, drops any that revert, closes the auction round, and selects the optimal non-conflicting, highest-tip set within the policy constraints the validator pushed.
+5. **Auction and delivery.** Every 10&nbsp;ms the Block Engine simulates candidate bundles, drops any that revert, closes the auction round, and selects the optimal non-conflicting, highest-tip set within the policy constraints the validator pushed.
 6. **Inclusion.** The validator's BundleStage executes winning bundles atomically and places them first in the block, within a reserved compute budget. Remaining space fills under standard fee rules.
 
 ## Failure behavior: the validator never depends on Flowra

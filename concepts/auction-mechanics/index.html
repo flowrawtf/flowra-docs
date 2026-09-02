@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.837250748122">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841666585684">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -12,7 +12,7 @@
     <!-- Primary Meta Tags -->
     <title>Auction Mechanics | Flowra Docs</title>
     <meta name="title" content="Auction Mechanics | Flowra Docs">
-    <meta name="description" content="50 ms mini-auctions, conflict-aware selection, atomic execution, and why open competition raises tips.">
+    <meta name="description" content="10 ms mini-auctions, conflict-aware selection, atomic execution, and why open competition raises tips.">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.flowra.wtf/concepts/auction-mechanics/">
@@ -22,7 +22,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.flowra.wtf/concepts/auction-mechanics/">
     <meta property="og:title" content="Auction Mechanics | Flowra Docs">
-    <meta property="og:description" content="50 ms mini-auctions, conflict-aware selection, atomic execution, and why open competition raises tips.">
+    <meta property="og:description" content="10 ms mini-auctions, conflict-aware selection, atomic execution, and why open competition raises tips.">
     <meta property="og:image" content="https://docs.flowra.wtf/static/diagrams/auction-sequence.svg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -34,7 +34,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://docs.flowra.wtf/concepts/auction-mechanics/">
     <meta name="twitter:title" content="Auction Mechanics | Flowra Docs">
-    <meta name="twitter:description" content="50 ms mini-auctions, conflict-aware selection, atomic execution, and why open competition raises tips.">
+    <meta name="twitter:description" content="10 ms mini-auctions, conflict-aware selection, atomic execution, and why open competition raises tips.">
     <meta name="twitter:image" content="https://docs.flowra.wtf/static/diagrams/auction-sequence.svg">
     <meta name="twitter:image:alt" content="Auction Mechanics | Flowra Docs">
 
@@ -44,11 +44,11 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.6.0.837250748122" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.6.0.841666585684" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.837250748122" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841666585684" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.837250748122" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841666585684" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -221,8 +221,8 @@
 
                 <!-- Page content  -->
 <h1 id="auction-mechanics">Auction Mechanics</h1>
-<div id="retype-page-description" class="description-display text-description font-description leading-description mb-description-margin-bottom mt-description-margin-top tracking-description text-transform-description">50 ms mini-auctions, conflict-aware selection, atomic execution, and why open competition raises tips.</div>
-<p>Flowra runs a continuous sequence of <strong>50 ms mini-auctions</strong> aligned with Solana&#x27;s continuous block production. This page explains the auction lifecycle, the selection rules, and why open competition raises validator revenue.</p>
+<div id="retype-page-description" class="description-display text-description font-description leading-description mb-description-margin-bottom mt-description-margin-top tracking-description text-transform-description">10 ms mini-auctions, conflict-aware selection, atomic execution, and why open competition raises tips.</div>
+<p>Flowra runs a continuous sequence of <strong>10 ms mini-auctions</strong> aligned with Solana&#x27;s continuous block production. This page explains the auction lifecycle, the selection rules, and why open competition raises validator revenue.</p>
 <h2 id="the-auction-lifecycle">The auction lifecycle</h2>
 <figure class="content-center">
     <img src="../../static/diagrams/auction-sequence.svg" alt="One pass through the auction pipeline" class="max-w-full h-auto rounded-image-rounded border-image-border border-image-border-width" width="960" height="424" />
@@ -233,14 +233,14 @@
 <li>The Block Engine broadcasts the flow to all subscribed searchers over gRPC.</li>
 <li>Searchers detect opportunities and submit <strong>tip-bearing bundles</strong>.</li>
 <li>The Block Engine simulates each bundle against recent state, dropping any that revert or misreport their tip, and applies the validator&#x27;s <a href="../programmable-block-policy/">block policy</a>.</li>
-<li>Every 50 ms an auction tick closes: the highest-tip, non-conflicting set wins and is forwarded to the leader, where it lands <strong>first</strong> in the block. Remaining block space fills under standard fee rules.</li>
+<li>Every 10 ms an auction tick closes: the highest-tip, non-conflicting set wins and is forwarded to the leader, where it lands <strong>first</strong> in the block. Remaining block space fills under standard fee rules.</li>
 </ol>
-<h3 id="why-50-ms">Why 50 ms?</h3>
-<p>Solana produces a block every ~400 ms, continuously. A 50 ms cadence fits multiple competitive cycles inside every slot, up to eight auction rounds per block, so opportunities are contested close to the moment they appear rather than batched into one coarse round. Short windows also blunt pure latency racing: within a window, the <em>tip</em> decides, not the microsecond of arrival.</p>
+<h3 id="why-10-ms">Why 10 ms?</h3>
+<p>Solana produces a block every ~400 ms, continuously. A 10 ms cadence fits multiple competitive cycles inside every slot, roughly forty auction rounds per block, so opportunities are contested close to the moment they appear rather than batched into one coarse round. Short windows also blunt pure latency racing: within a window, the <em>tip</em> decides, not the microsecond of arrival.</p>
 <h2 id="selection-rules">Selection rules</h2>
 <h3 id="highest-tip-wins-among-non-conflicting-bundles">Highest tip wins, among non-conflicting bundles</h3>
 <p>Bundles are ranked by tip. But two bundles that touch the same accounts in incompatible ways cannot both execute as planned, so the auction runs <strong>conflict-aware selection</strong>: write-write and read-write overlaps conflict, read-read does not, and the auction selects the optimal <em>combination</em> of non-conflicting bundles within the tick&#x27;s compute budget rather than naively taking the single top bid. Non-intersecting bundles win independently and in parallel.</p>
-<p>Losing bundles are not discarded immediately: they re-enter the next 50 ms tick and keep competing for several seconds before expiring, so contending bundles serialize across ticks instead of being lost.</p>
+<p>Losing bundles are not discarded immediately: they re-enter the next 10 ms tick and keep competing for several seconds before expiring, so contending bundles serialize across ticks instead of being lost.</p>
 <p>The selection function is deterministic and continuously benchmarked against a brute-force optimum, keeping the winning set close to the true maximum-tip, conflict-free selection.</p>
 <h3 id="atomic-all-or-nothing-execution">Atomic, all-or-nothing execution</h3>
 <p>A bundle either lands in its entirety, in order, or not at all. If any transaction in the bundle would fail, the whole bundle is dropped. This is what makes multi-leg strategies (such as atomic arbitrage) safe to attempt: there is no partial-execution risk.</p>
@@ -254,7 +254,7 @@ Authenticated API | Every searcher call carries a token tied to an Ed25519 ident
 Pre-auction simulation | Reverting bundles and misreported tips are dropped before they can compete | Live
 Bounded re-queueing | Perennially losing bundles expire after a few seconds, keeping queues small | Live
 Rate limiting | Caps request volume per identity | [Planned](../resources/roadmap.md#phase-4-institutional-expansion-q4-2026-and-beyond)
-Filter-enforced subscriptions | Requires concrete filters on stream subscriptions | [Planned](../resources/roadmap.md#phase-4-institutional-expansion-q4-2026-and-beyond)">
+Account-filtered subscriptions | Server-side `accounts` filter on the stream; mandatory concrete filters are [planned](../resources/roadmap.md#phase-4-institutional-expansion-q4-2026-and-beyond) | Available">
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable">
 <thead>
@@ -286,9 +286,9 @@ Filter-enforced subscriptions | Requires concrete filters on stream subscription
 <td><a href="../../resources/roadmap/#phase-4-institutional-expansion-q4-2026-and-beyond">Planned</a></td>
 </tr>
 <tr>
-<td>Filter-enforced subscriptions</td>
-<td>Requires concrete filters on stream subscriptions</td>
-<td><a href="../../resources/roadmap/#phase-4-institutional-expansion-q4-2026-and-beyond">Planned</a></td>
+<td>Account-filtered subscriptions</td>
+<td>Server-side <code translate="no" v-pre>accounts</code> filter on the stream; mandatory concrete filters are <a href="../../resources/roadmap/#phase-4-institutional-expansion-q4-2026-and-beyond">planned</a></td>
+<td>Available</td>
 </tr>
 </tbody>
 </table>
@@ -444,7 +444,7 @@ Strong (+261%) | $43.3M | ~1.44%">
                 <span class="card-compact-icon inline-flex shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><!--icon--><path d="M15.716 1.329a1.341 1.341 0 0 1 2.109 1.55L15.147 9h4.161c1.623 0 2.372 2.016 1.143 3.075L8.102 22.721a1.148 1.148 0 0 1-1.81-1.317L8.996 15H4.674c-1.619 0-2.37-2.008-1.148-3.07l12.19-10.6Zm.452 1.595L4.51 13.061a.25.25 0 0 0 .164.439h5.45a.749.749 0 0 1 .692 1.041l-2.559 6.066 11.215-9.668a.25.25 0 0 0-.164-.439H14a.75.75 0 0 1-.687-1.05Z"/></svg></span>
                 <span class="card-compact-title">Searchers</span>
             </div>
-            <p class="card-compact-description">Permissionless access to Solana orderflow: standardized streams, open auctions, atomic bundles.</p>
+            <p class="card-compact-description">Open access to Solana orderflow: a standardized stream, open auctions, atomic bundles.</p>
         </div>
     </a>
 </div>

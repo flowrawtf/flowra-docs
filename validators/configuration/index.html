@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.837250748122">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841666585684">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -38,12 +38,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.6.0.837250748122" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.6.0.841666585684" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.837250748122" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841666585684" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.837250748122" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.6.0.837250748122" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841666585684" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.6.0.841666585684" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -223,8 +223,8 @@
 --- | --- | ---
 `--block-engine-url` | Yes | Your regional Block Engine endpoint. See [Endpoints](endpoints.md).
 `--relayer-url` | Yes | Your regional Relayer endpoint. The validator fetches the relayer's TPU sockets and advertises them in gossip.
-`--tip-payment-program-pubkey` | Yes | On-chain tip payment program address [!badge variant=&quot;warning&quot; text=&quot;Mainnet address TBD&quot;]
-`--tip-distribution-program-pubkey` | Yes | On-chain tip distribution program address [!badge variant=&quot;warning&quot; text=&quot;Mainnet address TBD&quot;]
+`--tip-payment-program-pubkey` | Yes | `T1pyyaTNZsKv2WcRAB8oVnk93mLJw2XzjtVYqCsaHqt` — the canonical tip payment program; unchanged from a Jito setup. See [Endpoints](endpoints.md#on-chain-addresses).
+`--tip-distribution-program-pubkey` | Yes | `4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7` — the canonical tip distribution program; unchanged from a Jito setup.
 `--merkle-root-upload-authority` | Yes | Authority for tip distribution merkle root uploads
 `--commission-bps` | Yes | Your MEV commission in basis points (0 to 10000), applied to tips before staker distribution
 `--bundle-cu-reserve-pct` | No | Share of block compute units reserved for bundles. Default `15`
@@ -254,16 +254,12 @@
 <tr>
 <td><code translate="no" v-pre>--tip-payment-program-pubkey</code></td>
 <td>Yes</td>
-<td>On-chain tip payment program address <span class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-badge-warning-text bg-badge-warning border border-badge-warning-border h-6 px-2 text-xs rounded-md">
-    <span>Mainnet address TBD</span>
-</span></td>
+<td><code translate="no" v-pre>T1pyyaTNZsKv2WcRAB8oVnk93mLJw2XzjtVYqCsaHqt</code> — the canonical tip payment program; unchanged from a Jito setup. See <a href="../endpoints/#on-chain-addresses">Endpoints</a>.</td>
 </tr>
 <tr>
 <td><code translate="no" v-pre>--tip-distribution-program-pubkey</code></td>
 <td>Yes</td>
-<td>On-chain tip distribution program address <span class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-badge-warning-text bg-badge-warning border border-badge-warning-border h-6 px-2 text-xs rounded-md">
-    <span>Mainnet address TBD</span>
-</span></td>
+<td><code translate="no" v-pre>4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7</code> — the canonical tip distribution program; unchanged from a Jito setup.</td>
 </tr>
 <tr>
 <td><code translate="no" v-pre>--merkle-root-upload-authority</code></td>

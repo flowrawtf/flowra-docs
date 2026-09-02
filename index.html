@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.837250748122">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841666585684">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -44,11 +44,11 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="static/favicon.png" />
-    <link href="resources/css/retype.css?v=4.6.0.837250748122" rel="stylesheet">
+    <link href="resources/css/retype.css?v=4.6.0.841666585684" rel="stylesheet">
 
-    <script data-cfasync="false" src="resources/js/config.js?v=4.6.0.837250748122" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="resources/js/config.js?v=4.6.0.841666585684" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="resources/js/lunr.js?v=4.6.0.837250748122" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="resources/js/lunr.js?v=4.6.0.841666585684" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -199,7 +199,7 @@
 <p>Flowra is <strong>institutional-grade validator infrastructure for Solana</strong>, built on two commitments:</p>
 <ol>
 <li><strong>Control.</strong> Validators define exactly what is allowed into their blocks through the <a href="concepts/programmable-block-policy/">Programmable Block Policy (PBP)</a>: sanctions screening, denylists, MEV posture, priority rules.</li>
-<li><strong>Accountability.</strong> Those policies are enforceable and checkable, not promised. Flowra runs an <strong>Open Orderflow Auction (OOA)</strong>: pending transactions are streamed openly and bundle competition happens in transparent 50 ms auctions, so enforcement can be verified rather than taken on faith.</li>
+<li><strong>Accountability.</strong> Those policies are enforceable and checkable, not promised. Flowra runs an <strong>Open Orderflow Auction (OOA)</strong>: pending transactions are streamed openly and bundle competition happens in transparent 10 ms auctions, so enforcement can be verified rather than taken on faith.</li>
 </ol>
 <p>Open competition also raises tips and validator returns. The product is accountable block production; better economics come with it.</p>
 <div class="flex mb-6">
@@ -216,7 +216,7 @@
         </div>
         <div class="pr-5 ml-3 w-full">
             <h5>Network status</h5>
-<p>Flowra is currently rolling out toward mainnet. Endpoints, on-chain program addresses, and client releases are published on this site as they go live. Values marked <span class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-badge-warning-text bg-badge-warning border border-badge-warning-border h-6 px-2 text-xs rounded-md">
+<p>Flowra is live on mainnet in Frankfurt and London. Endpoints and on-chain addresses are on <a href="validators/endpoints/">Endpoints &amp; addresses</a>; searchers register keys at <a href="https://portal.flowra.wtf" class="outbound" target="_blank"><span>portal.flowra.wtf</span><svg xmlns="http://www.w3.org/2000/svg" class="retype-outbound-trigger docs-icon ml-1" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="currentColor"><path d="M15.5 2.25a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V4.06l-6.22 6.22a.75.75 0 1 1-1.06-1.06L19.94 3h-3.69a.75.75 0 0 1-.75-.75Z"/><path d="M2.5 4.25c0-.966.784-1.75 1.75-1.75h8.5a.75.75 0 0 1 0 1.5h-8.5a.25.25 0 0 0-.25.25v15.5c0 .138.112.25.25.25h15.5a.25.25 0 0 0 .25-.25v-8.5a.75.75 0 0 1 1.5 0v8.5a1.75 1.75 0 0 1-1.75 1.75H4.25a1.75 1.75 0 0 1-1.75-1.75V4.25Z"/></g></svg></a>. The few values still marked <span class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-badge-warning-text bg-badge-warning border border-badge-warning-border h-6 px-2 text-xs rounded-md">
     <span>TBD</span>
 </span> are not yet final; see the <a href="resources/roadmap/">Roadmap</a> for the current phase.</p>
         </div>
@@ -278,7 +278,7 @@
 --- | --- | ---
 **Institutions** | Compliance-grade block composition: sanctions and denylist screening, program filters, and custom restrictions enforced at the infrastructure layer | [Institutional-Grade Validation →](concepts/institutional-validation.md)
 **Validators** | Policy-level control over your blocks via [PBP](concepts/programmable-block-policy.md), operational independence, and additional revenue from open bundle competition | [Validators →](validators/index.md)
-**Searchers** | Permissionless access to a standardized orderflow stream and open, tip-based auctions every 50&amp;nbsp;ms | [Searchers →](searchers/index.md)
+**Searchers** | Open access to a standardized orderflow stream and open, tip-based auctions every 10&amp;nbsp;ms | [Searchers →](searchers/index.md)
 **Users &amp; traders** | Real-time fee visibility, competitive pressure that pushes fees toward fair levels, and enforceable validator policies against sandwiching | [FAQ →](resources/faq.md)">
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable">
@@ -302,7 +302,7 @@
 </tr>
 <tr>
 <td><strong>Searchers</strong></td>
-<td>Permissionless access to a standardized orderflow stream and open, tip-based auctions every 50 ms</td>
+<td>Open access to a standardized orderflow stream and open, tip-based auctions every 10 ms</td>
 <td><a href="searchers/">Searchers →</a></td>
 </tr>
 <tr>
@@ -322,7 +322,7 @@
 <ol>
 <li>User transactions arrive at the <strong>Flowra Relayer</strong>, which fronts the validator&#x27;s TPU and deduplicates the flow.</li>
 <li>The <strong>Block Engine</strong> broadcasts the flow to searchers over a standardized gRPC stream.</li>
-<li>Searchers submit tip-bearing bundles into 50 ms auction cycles.</li>
+<li>Searchers submit tip-bearing bundles into 10 ms auction cycles.</li>
 <li>The Block Engine simulates the bundles, drops any that revert, and selects the highest-tipping, non-conflicting set, subject to the validator&#x27;s <a href="concepts/programmable-block-policy/">block policy</a>.</li>
 <li>Winning bundles are forwarded to the leader and included first in the block.</li>
 </ol>

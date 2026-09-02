@@ -1,20 +1,24 @@
 # Searchers
 
-Flowra gives searchers what Solana has never had: **permissionless, standardized access to orderflow**. No privileged relationships, no private deals. Subscribe to the stream, find your edge, and win by bidding.
+Flowra gives searchers what Solana has never had: **open, standardized access to orderflow**. No privileged relationships, no private deals. Register a key, subscribe to the stream, find your edge, and win by bidding.
 
 ## What you get
 
 ### An open, standardized stream
 
-Pending transactions from all participating validators, deduplicated and delivered over a single gRPC interface. One integration covers the whole Flowra validator set. See [Orderflow Stream](orderflow-stream.md).
+Pending transactions from all participating validators, deduplicated and delivered over a single gRPC interface. One integration covers the whole Flowra validator set, and you can narrow it server-side to the accounts you care about. See [Orderflow Stream](orderflow-stream.md).
 
-### Auctions every 50 ms
+### Auctions every 10 ms
 
-Mini-auctions close every 50&nbsp;ms, up to eight rounds per Solana slot. Within a window, the highest tip wins among non-conflicting bundles; you are racing bids, not nanoseconds. Mechanics: [Auction Mechanics](../concepts/auction-mechanics.md).
+Auction ticks close every 10&nbsp;ms, roughly forty per Solana slot. Within a tick, the highest tip wins among non-conflicting bundles; you are racing bids, not nanoseconds. Mechanics: [Auction Mechanics](../concepts/auction-mechanics.md).
 
 ### Atomic, all-or-nothing bundles
 
 Bundles execute in order and in full, or not at all. Failed bundles never land, so multi-leg strategies carry no partial-execution risk and no wasted fees on reverts. See [Bundles](bundles.md).
+
+### A free dry run
+
+`SendBundle` with `simulate_only` simulates your bundle against the leader's live state and returns the full report (logs, compute units, token balances, pre/post account state) without entering the auction. Nothing is spent and nothing can land, so you can verify a pricing formula as often as you like.
 
 ### Strategy confidentiality
 
@@ -32,14 +36,14 @@ The protocol fee is **5% of tips**. No subscriptions, no per-seat access fees, n
 
 Requirement | Detail
 --- | ---
-Keypair | An Ed25519 keypair identifying your searcher (used in authentication)
-Connectivity | gRPC/TLS to your nearest Flowra region ([endpoints](../validators/endpoints.md))
+Keypair | An Ed25519 keypair identifying your searcher. It is registered once at [portal.flowra.wtf](https://portal.flowra.wtf) and then used for authentication and bundle signing.
+Connectivity | Plain gRPC (HTTP/2, no TLS) to your nearest Flowra region ([endpoints](../validators/endpoints.md))
 Tips | SOL for auction tips, paid as lamport transfers to tip accounts (`GetTipAccounts`)
 Bundle size | Up to 5 transactions per bundle
 
 ## Guides
 
-[!ref icon="rocket" text="Getting started & authentication"](getting-started.md)
+[!ref icon="rocket" text="Getting started: registration & authentication"](getting-started.md)
 [!ref icon="broadcast" text="Subscribing to the orderflow stream"](orderflow-stream.md)
 [!ref icon="package" text="Building and submitting bundles"](bundles.md)
 [!ref icon="code" text="API reference"](api-reference.md)

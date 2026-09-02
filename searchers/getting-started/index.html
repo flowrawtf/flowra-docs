@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.837250748122">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841666585684">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -12,7 +12,7 @@
     <!-- Primary Meta Tags -->
     <title>Getting Started | Flowra Docs</title>
     <meta name="title" content="Getting Started | Flowra Docs">
-    <meta name="description" content="Authenticate against the Block Engine and make your first calls.">
+    <meta name="description" content="Register your searcher key, authenticate against the Block Engine, and make your first calls.">
 
     <!-- Canonical -->
     <link rel="canonical" href="https://docs.flowra.wtf/searchers/getting-started/">
@@ -22,7 +22,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://docs.flowra.wtf/searchers/getting-started/">
     <meta property="og:title" content="Getting Started | Flowra Docs">
-    <meta property="og:description" content="Authenticate against the Block Engine and make your first calls.">
+    <meta property="og:description" content="Register your searcher key, authenticate against the Block Engine, and make your first calls.">
     <meta property="og:image" content="https://docs.flowra.wtf/static/diagrams/auth-sequence.svg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -34,7 +34,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://docs.flowra.wtf/searchers/getting-started/">
     <meta name="twitter:title" content="Getting Started | Flowra Docs">
-    <meta name="twitter:description" content="Authenticate against the Block Engine and make your first calls.">
+    <meta name="twitter:description" content="Register your searcher key, authenticate against the Block Engine, and make your first calls.">
     <meta name="twitter:image" content="https://docs.flowra.wtf/static/diagrams/auth-sequence.svg">
     <meta name="twitter:image:alt" content="Getting Started | Flowra Docs">
 
@@ -44,11 +44,11 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.6.0.837250748122" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.6.0.841666585684" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.837250748122" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841666585684" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.837250748122" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841666585684" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -221,14 +221,69 @@
 
                 <!-- Page content  -->
 <h1 id="getting-started">Getting Started</h1>
-<div id="retype-page-description" class="description-display text-description font-description leading-description mb-description-margin-bottom mt-description-margin-top tracking-description text-transform-description">Authenticate against the Block Engine and make your first calls.</div>
-<p>Searcher access is <strong>permissionless</strong>: there is no application review or allowlist by default. You authenticate with a keypair, subscribe to the stream, and start bidding.</p>
+<div id="retype-page-description" class="description-display text-description font-description leading-description mb-description-margin-bottom mt-description-margin-top tracking-description text-transform-description">Register your searcher key, authenticate against the Block Engine, and make your first calls.</div>
+<p>Searcher access is <strong>open</strong>: anyone can sign up, register a key, and start bidding once the key is approved. Registration exists so that the network can hold a key accountable — a key that sandwiches users loses its mempool access, not the whole network.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <ul>
-<li>An <strong>Ed25519 keypair</strong> (a standard Solana keypair works) to identify your searcher.</li>
+<li>An <strong>Ed25519 keypair</strong> (a standard Solana keypair works). This one key is your identity: it proves ownership at registration, authenticates you to the Block Engine, and is the fee payer the engine attributes your bundles to.</li>
 <li>A gRPC client stack in your language of choice.</li>
-<li>SOL for tips on the network you target (testnet first; see <a href="../../validators/endpoints/#testnet">endpoints</a>).</li>
+<li>SOL for tips on mainnet. There is no separate public testnet; use the <a href="../bundles/#dry-run">dry run</a> to test without spending.</li>
 </ul>
+<h2 id="registering-your-key">Registering your key</h2>
+<doc-steps>
+   <doc-step id="create-an-account" step-number="1">
+      <template #title>Create an account</template>
+<p>Sign up at <a href="https://portal.flowra.wtf" class="outbound" target="_blank"><span>portal.flowra.wtf</span><svg xmlns="http://www.w3.org/2000/svg" class="retype-outbound-trigger docs-icon ml-1" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="currentColor"><path d="M15.5 2.25a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V4.06l-6.22 6.22a.75.75 0 1 1-1.06-1.06L19.94 3h-3.69a.75.75 0 0 1-.75-.75Z"/><path d="M2.5 4.25c0-.966.784-1.75 1.75-1.75h8.5a.75.75 0 0 1 0 1.5h-8.5a.25.25 0 0 0-.25.25v15.5c0 .138.112.25.25.25h15.5a.25.25 0 0 0 .25-.25v-8.5a.75.75 0 0 1 1.5 0v8.5a1.75 1.75 0 0 1-1.75 1.75H4.25a1.75 1.75 0 0 1-1.75-1.75V4.25Z"/></g></svg></a> with an email and password (12+ characters), or continue with Google or GitHub. Email sign-ups receive a verification link.</p>
+   </doc-step>
+   <doc-step id="prove-you-own-the-key" step-number="2">
+      <template #title>Prove you own the key</template>
+<p>The portal never sees your private key. It shows you the message</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-none"><code v-pre class="language-none">flowra-register:{your email}:{your pubkey}</code></pre>
+</doc-codeblock></div>
+<p>and asks for an Ed25519 signature of exactly that string (base58). Two ways to produce it:</p>
+<ul>
+<li><strong>With a wallet</strong>: Phantom, Solflare, Backpack, or MetaMask with a Solana account — the portal detects the wallet, connects, and asks it to sign. The wallet&#x27;s key becomes your searcher key, so this only makes sense if your bot signs with that same key.</li>
+<li><strong>With a keypair file</strong>: the portal shows Rust, JavaScript, and Python snippets that sign the message with your <code translate="no" v-pre>searcher.json</code>.</li>
+</ul>
+<p>Paste the signature, add a name and a one-line purpose, and submit.</p>
+   </doc-step>
+   <doc-step id="wait-for-approval" step-number="3">
+      <template #title>Wait for approval</template>
+<p>Keys are reviewed by the Flowra operators. Until a key is approved, <code translate="no" v-pre>GenerateAuthChallenge</code> answers <code translate="no" v-pre>PERMISSION_DENIED: Searcher key is pending</code>. Approved keys show their status, mempool scope, and bundle limit on the portal.</p>
+   </doc-step>
+</doc-steps>
+<p>Each key carries three operator-set attributes you can read on the portal:</p>
+<retype-table copy-text="Attribute | Meaning
+--- | ---
+Mempool scope | **Full**: every pending transaction. **Leader scope**: transactions only while one of the validators in your scope is about to lead (within the next 8 slots).
+Bundle limit | Maximum `SendBundle` calls per second for this key (default 20). Exceeding it returns `RESOURCE_EXHAUSTED`.
+Enforcement level | L0 normal · L1 warning · L2 submission limited · L3 mempool stream withheld · L4 suspended. Levels are raised automatically by network rules (a detected sandwich goes straight to L3) and lowered by an operator. See [Bundles](bundles.md#what-gets-you-throttled).">
+<div class="table-wrapper scrollbar overflow-hidden">
+<table class="comfortable">
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mempool scope</td>
+<td><strong>Full</strong>: every pending transaction. <strong>Leader scope</strong>: transactions only while one of the validators in your scope is about to lead (within the next 8 slots).</td>
+</tr>
+<tr>
+<td>Bundle limit</td>
+<td>Maximum <code translate="no" v-pre>SendBundle</code> calls per second for this key (default 20). Exceeding it returns <code translate="no" v-pre>RESOURCE_EXHAUSTED</code>.</td>
+</tr>
+<tr>
+<td>Enforcement level</td>
+<td>L0 normal · L1 warning · L2 submission limited · L3 mempool stream withheld · L4 suspended. Levels are raised automatically by network rules (a detected sandwich goes straight to L3) and lowered by an operator. See <a href="../bundles/#what-gets-you-throttled">Bundles</a>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</retype-table>
 <h2 id="authentication-flow">Authentication flow</h2>
 <p>Flowra uses challenge-response authentication with JWT tokens. Your private key never leaves your machine.</p>
 <figure class="content-center">
@@ -252,18 +307,21 @@
    </doc-step>
    <doc-step id="exchange-for-tokens" step-number="3">
       <template #title>Exchange for tokens</template>
-<p>Call <code translate="no" v-pre>GenerateAuthTokens</code> with the challenge, your pubkey, and the 64-byte signature. You receive an <strong>access token</strong> (short TTL, attach as gRPC bearer metadata on every call) and a <strong>refresh token</strong> (longer TTL). Renew access tokens with <code translate="no" v-pre>RefreshAccessToken</code> instead of re-signing.</p>
+<p>Call <code translate="no" v-pre>GenerateAuthTokens</code> with the challenge, your pubkey, and the 64-byte signature. You receive an <strong>access token</strong> (valid 1 hour) and a <strong>refresh token</strong> (valid 24 hours). Attach the access token as gRPC metadata on every call:</p>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-none"><code v-pre class="language-none">authorization: Bearer &lt;access token&gt;</code></pre>
+</doc-codeblock></div>
+<p>Renew with <code translate="no" v-pre>RefreshAccessToken</code> before the access token expires instead of re-signing. Tokens survive engine restarts.</p>
    </doc-step>
 </doc-steps>
+<p><code translate="no" v-pre>AuthService</code> is served on the standalone auth port of your region (<code translate="no" v-pre>8005</code>); <code translate="no" v-pre>SearcherService</code> is on <code translate="no" v-pre>8234</code>. Both are plain gRPC over HTTP/2 without TLS — use <code translate="no" v-pre>http://</code>, not <code translate="no" v-pre>https://</code>, in your channel URL. See <a href="../../validators/endpoints/">endpoints</a>.</p>
 <h2 id="proto-files">Proto files</h2>
-<p>The gRPC surface is defined in Flowra&#x27;s <code translate="no" v-pre>mev-protos</code> <span class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-badge-warning-text bg-badge-warning border border-badge-warning-border h-6 px-2 text-xs rounded-md">
-    <span>Public repo TBD</span>
-</span>, compatible with the widely used Jito proto layout:</p>
+<p>The gRPC surface is defined in <a href="https://github.com/flowrawtf/mev-protos" class="outbound" target="_blank"><span><code translate="no" v-pre>flowrawtf/mev-protos</code></span><svg xmlns="http://www.w3.org/2000/svg" class="retype-outbound-trigger docs-icon ml-1" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="currentColor"><path d="M15.5 2.25a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V4.06l-6.22 6.22a.75.75 0 1 1-1.06-1.06L19.94 3h-3.69a.75.75 0 0 1-.75-.75Z"/><path d="M2.5 4.25c0-.966.784-1.75 1.75-1.75h8.5a.75.75 0 0 1 0 1.5h-8.5a.25.25 0 0 0-.25.25v15.5c0 .138.112.25.25.25h15.5a.25.25 0 0 0 .25-.25v-8.5a.75.75 0 0 1 1.5 0v8.5a1.75 1.75 0 0 1-1.75 1.75H4.25a1.75 1.75 0 0 1-1.75-1.75V4.25Z"/></g></svg></a>, a fork of the Jito proto layout with Flowra extensions marked <code translate="no" v-pre>FLOWRA EXTENSION</code> inline:</p>
 <retype-table copy-text="File | Contents
 --- | ---
 `auth.proto` | Challenge and token authentication (`AuthService`)
-`searcher.proto` | `SearcherService`: bundle submission, results, leaders, regions, tip accounts
-`bundle.proto` | Bundle structure and the full `BundleResult` state machine
+`searcher.proto` | `SearcherService`: stream subscription, bundle submission (+ dry run), results, leaders, tip accounts
+`bundle.proto` | Bundle structure, `BundleResult` states, and the simulation report types
 `block_engine.proto` | Validator- and relayer-facing services, including the PBP policy RPC
 `packet.proto` / `shared.proto` | Transaction packet format and common types">
 <div class="table-wrapper scrollbar overflow-hidden">
@@ -281,11 +339,11 @@
 </tr>
 <tr>
 <td><code translate="no" v-pre>searcher.proto</code></td>
-<td><code translate="no" v-pre>SearcherService</code>: bundle submission, results, leaders, regions, tip accounts</td>
+<td><code translate="no" v-pre>SearcherService</code>: stream subscription, bundle submission (+ dry run), results, leaders, tip accounts</td>
 </tr>
 <tr>
 <td><code translate="no" v-pre>bundle.proto</code></td>
-<td>Bundle structure and the full <code translate="no" v-pre>BundleResult</code> state machine</td>
+<td>Bundle structure, <code translate="no" v-pre>BundleResult</code> states, and the simulation report types</td>
 </tr>
 <tr>
 <td><code translate="no" v-pre>block_engine.proto</code></td>
@@ -299,22 +357,24 @@
 </table>
 </div>
 </retype-table>
-<p>The protos compile cleanly with standard <code translate="no" v-pre>tonic</code>, <code translate="no" v-pre>grpc-js</code>, and <code translate="no" v-pre>grpcio</code> toolchains.</p>
+<p>The protos compile cleanly with standard <code translate="no" v-pre>tonic</code>, <code translate="no" v-pre>grpc-js</code>, and <code translate="no" v-pre>grpcio</code> toolchains, and existing Jito searcher clients work against Flowra after pointing them at a Flowra endpoint.</p>
 <h2 id="first-session">First session</h2>
 <p>With an access token in hand, a minimal loop looks like:</p>
 <ol>
 <li><code translate="no" v-pre>GetTipAccounts</code> to learn where tips go.</li>
-<li><code translate="no" v-pre>SubscribePendingTransactions</code> to open the orderflow stream (<a href="../orderflow-stream/">details</a>).</li>
+<li><code translate="no" v-pre>SubscribePendingTransactions</code> to open the orderflow stream, optionally with the accounts you trade (<a href="../orderflow-stream/">details</a>).</li>
 <li><code translate="no" v-pre>GetNextScheduledLeader</code> to see when a Flowra validator is next on rotation.</li>
-<li>Build a bundle around an opportunity and <code translate="no" v-pre>SendBundle</code> (<a href="../bundles/">details</a>).</li>
+<li>Build a bundle around an opportunity, check it with <code translate="no" v-pre>simulate_only</code>, then <code translate="no" v-pre>SendBundle</code> for real (<a href="../bundles/">details</a>).</li>
 <li>Watch <code translate="no" v-pre>SubscribeBundleResults</code> for the outcome, and calibrate your next bid.</li>
 </ol>
-<h2 id="if-you-have-integrated-bundle-pipelines-before">If you have integrated bundle pipelines before</h2>
-<p>The concepts map directly: bundles, tips, atomic execution, auth via challenge-response, results streaming. Differences worth noting:</p>
+<h2 id="if-you-have-integrated-jito-before">If you have integrated Jito before</h2>
+<p>The concepts map directly: bundles, tips, atomic execution, auth via challenge-response, results streaming, the same proto shapes. Differences worth noting:</p>
 <ul>
-<li><strong>The orderflow stream is part of the product.</strong> You subscribe to pending transactions rather than relying on your own flow sources.</li>
-<li><strong>Tips are auction bids</strong> settled every 50 ms, with a 5% protocol fee.</li>
-<li><strong>Access is open by default</strong>: a validator can restrict its auction via policy, but the network-level default is permissionless.</li>
+<li><strong>The orderflow stream is part of the product.</strong> You subscribe to pending transactions from the same interface you submit to.</li>
+<li><strong>Keys are registered.</strong> One-time registration on the portal, then the same auth flow you already run.</li>
+<li><strong>Tips are auction bids</strong> settled every 10 ms, with a 5% protocol fee.</li>
+<li><strong>Dry runs are free.</strong> <code translate="no" v-pre>simulate_only</code> returns the full simulation report without entering the auction.</li>
+<li><strong>Sandwiching is a policy decision, not a given.</strong> Each validator decides through its <a href="../../concepts/programmable-block-policy/">block policy</a>; where it is disallowed the engine rejects the bundle and the network raises your key&#x27;s enforcement level.</li>
 </ul>
 <p>
 <div class="mb-6 px-5 py-4 flex justify-between relative border border-base-border hover:border-base-border-hover rounded transition-colors duration-150">
@@ -345,13 +405,24 @@
     </a>
 </div>
 <div class="card-compact-container">
+    <a href="/searchers/orderflow-stream/" class="group card-compact no-link">
+        <div class="card-compact-body">
+            <div class="card-compact-header">
+                <span class="card-compact-icon inline-flex shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><!--icon--><path d="M20.485 2.515a.75.75 0 0 0-1.06 1.06A10.465 10.465 0 0 1 22.5 11c0 2.9-1.174 5.523-3.075 7.424a.75.75 0 0 0 1.06 1.061A11.965 11.965 0 0 0 24 11c0-3.314-1.344-6.315-3.515-8.485Zm-15.91 1.06a.75.75 0 0 0-1.06-1.06A11.965 11.965 0 0 0 0 11c0 3.313 1.344 6.314 3.515 8.485a.75.75 0 0 0 1.06-1.06A10.465 10.465 0 0 1 1.5 11c0-2.9 1.174-5.524 3.075-7.425ZM8.11 7.11a.75.75 0 0 0-1.06-1.06A6.98 6.98 0 0 0 5 11a6.98 6.98 0 0 0 2.05 4.95.75.75 0 0 0 1.06-1.061 5.48 5.48 0 0 1-1.61-3.89 5.48 5.48 0 0 1 1.61-3.888Zm8.84-1.06a.75.75 0 1 0-1.06 1.06A5.48 5.48 0 0 1 17.5 11a5.48 5.48 0 0 1-1.61 3.889.75.75 0 1 0 1.06 1.06A6.98 6.98 0 0 0 19 11a6.98 6.98 0 0 0-2.05-4.949ZM14 11a2 2 0 0 1-1.25 1.855v8.395a.75.75 0 0 1-1.5 0v-8.395A2 2 0 1 1 14 11Z"/></svg></span>
+                <span class="card-compact-title">Orderflow Stream</span>
+            </div>
+            <p class="card-compact-description">Subscribing to the pending-transaction stream: filters, scope, message contents, and delivery semantics.</p>
+        </div>
+    </a>
+</div>
+<div class="card-compact-container">
     <a href="/searchers/" class="group card-compact no-link">
         <div class="card-compact-body">
             <div class="card-compact-header">
                 <span class="card-compact-icon inline-flex shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><!--icon--><path d="M15.716 1.329a1.341 1.341 0 0 1 2.109 1.55L15.147 9h4.161c1.623 0 2.372 2.016 1.143 3.075L8.102 22.721a1.148 1.148 0 0 1-1.81-1.317L8.996 15H4.674c-1.619 0-2.37-2.008-1.148-3.07l12.19-10.6Zm.452 1.595L4.51 13.061a.25.25 0 0 0 .164.439h5.45a.749.749 0 0 1 .692 1.041l-2.559 6.066 11.215-9.668a.25.25 0 0 0-.164-.439H14a.75.75 0 0 1-.687-1.05Z"/></svg></span>
                 <span class="card-compact-title">Searchers</span>
             </div>
-            <p class="card-compact-description">Permissionless access to Solana orderflow: standardized streams, open auctions, atomic bundles.</p>
+            <p class="card-compact-description">Open access to Solana orderflow: a standardized stream, open auctions, atomic bundles.</p>
         </div>
     </a>
 </div>
