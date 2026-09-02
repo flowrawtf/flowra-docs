@@ -10,7 +10,7 @@ description: "Flowra is institutional-grade validator infrastructure for Solana:
 Flowra is **institutional-grade validator infrastructure for Solana**, built on two commitments:
 
 1. **Control.** Validators define exactly what is allowed into their blocks through the [Programmable Block Policy (PBP)](concepts/programmable-block-policy.md): sanctions screening, denylists, MEV posture, priority rules.
-2. **Accountability.** Those policies are enforceable and checkable, not promised. Flowra runs an **Open Orderflow Auction (OOA)**: pending transactions are streamed openly and bundle competition happens in transparent 10&nbsp;ms auctions, so enforcement can be verified rather than taken on faith.
+2. **Accountability.** Those policies are enforceable and checkable, not promised. Flowra runs an **Open Orderflow Auction (OOA)**: pending transactions are streamed openly and bundle competition happens in transparent sub-slot auctions, so enforcement can be verified rather than taken on faith.
 
 Open competition also raises tips and validator returns. The product is accountable block production; better economics come with it.
 
@@ -31,7 +31,7 @@ Participant | What Flowra offers | Where to start
 --- | --- | ---
 **Institutions** | Compliance-grade block composition: sanctions and denylist screening, program filters, and custom restrictions enforced at the infrastructure layer | [Institutional-Grade Validation →](concepts/institutional-validation.md)
 **Validators** | Policy-level control over your blocks via [PBP](concepts/programmable-block-policy.md), operational independence, and additional revenue from open bundle competition | [Validators →](validators/index.md)
-**Searchers** | Open access to a standardized orderflow stream and open, tip-based auctions every 10&nbsp;ms | [Searchers →](searchers/index.md)
+**Searchers** | Open access to a standardized orderflow stream and open, tip-based auctions several times a slot | [Searchers →](searchers/index.md)
 **Users & traders** | Real-time fee visibility, competitive pressure that pushes fees toward fair levels, and enforceable validator policies against sandwiching | [FAQ →](resources/faq.md)
 
 ## How it works, in one minute
@@ -40,7 +40,7 @@ Participant | What Flowra offers | Where to start
 
 1. User transactions arrive at the **Flowra Relayer**, which fronts the validator's TPU and deduplicates the flow.
 2. The **Block Engine** broadcasts the flow to searchers over a standardized gRPC stream.
-3. Searchers submit tip-bearing bundles into 10&nbsp;ms auction cycles.
+3. Searchers submit tip-bearing bundles into sub-slot auction cycles.
 4. The Block Engine simulates the bundles, drops any that revert, and selects the highest-tipping, non-conflicting set, subject to the validator's [block policy](concepts/programmable-block-policy.md).
 5. Winning bundles are forwarded to the leader and included first in the block.
 
