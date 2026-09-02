@@ -77,7 +77,7 @@ Renew with `RefreshAccessToken` before the access token expires instead of re-si
 
 >>>
 
-`AuthService` is served on the standalone auth port of your region (`8005`); `SearcherService` is on `8234`. Both are gRPC over TLS with publicly trusted certificates — use `https://` channel URLs; no custom root certificate is needed. See [endpoints](../validators/endpoints.md).
+`AuthService` and `SearcherService` are served on the same URL — your region's Block Engine over TLS on port 443 (`https://frankfurt.mainnet.blockengine.flowra.wtf`, no port, no custom root certificate). See [endpoints](../validators/endpoints.md).
 
 ## Proto files
 

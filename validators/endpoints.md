@@ -8,38 +8,38 @@ All of a validator's regional settings must point at the **same region**. Choose
 
 Region | Block Engine (`--block-engine-url`) | Relayer (`--relayer-url`)
 --- | --- | ---
-Frankfurt | `https://frankfurt.mainnet.blockengine.flowra.wtf:8003` | `https://frankfurt.mainnet.relayer.flowra.wtf:11226`
-London | `https://london.mainnet.blockengine.flowra.wtf:8003` | `https://london.mainnet.relayer.flowra.wtf:11226`
+Frankfurt | `https://frankfurt.mainnet.blockengine.flowra.wtf` | `https://frankfurt.mainnet.relayer.flowra.wtf`
+London | `https://london.mainnet.blockengine.flowra.wtf` | `https://london.mainnet.relayer.flowra.wtf`
 
 !!!
-A second Frankfurt-region relayer runs in Lithuania (`https://lithuania.mainnet.relayer.flowra.wtf:11226`) and feeds the Frankfurt Block Engine — validators in the Baltics and Poland may see lower latency pointing `--relayer-url` there while keeping the Frankfurt Block Engine.
+A second Frankfurt-region relayer runs in Lithuania (`https://lithuania.mainnet.relayer.flowra.wtf`) and feeds the Frankfurt Block Engine — validators in the Baltics and Poland may see lower latency pointing `--relayer-url` there while keeping the Frankfurt Block Engine.
 !!!
 
 Further regions are added as validator demand clusters; the [roadmap](../resources/roadmap.md) lists what is planned.
 
 ## Searcher endpoints
 
-Searchers connect to the same Block Engine hosts on the searcher ports:
+Searchers use the same Block Engine URL for `AuthService` and `SearcherService`:
 
-Region | AuthService | SearcherService
---- | --- | ---
-Frankfurt | `https://frankfurt.mainnet.blockengine.flowra.wtf:8005` | `https://frankfurt.mainnet.blockengine.flowra.wtf:8234`
-London | `https://london.mainnet.blockengine.flowra.wtf:8005` | `https://london.mainnet.blockengine.flowra.wtf:8234`
+Region | Endpoint
+--- | ---
+Frankfurt | `https://frankfurt.mainnet.blockengine.flowra.wtf`
+London | `https://london.mainnet.blockengine.flowra.wtf`
 
 Keys are registered once at [portal.flowra.wtf](https://portal.flowra.wtf) and work in every region.
 
-## Service ports
+## Services
 
-The Block Engine exposes separate gRPC services per audience. All are gRPC over TLS with publicly trusted certificates: use `https://` URLs, no custom root certificate required.
+Every endpoint is gRPC over TLS on the standard port `443`, with publicly trusted certificates — use `https://` URLs with no port and no custom root certificate. One hostname serves all of a component's gRPC services; the service name in the request path selects the service, so a client library needs nothing beyond the URL.
 
-Service | Consumer | Port
+Host | gRPC services | Consumer
 --- | --- | ---
-BlockEngineValidator + AuthService | Validator clients | 8003
-AuthService (standalone) | Searchers and external tooling | 8005
-SearcherService | Searchers | 8234
-BlockEngineRelayer | Flowra Relayer (internal) | 11228
+`*.blockengine.flowra.wtf` | `auth.AuthService`, `block_engine.BlockEngineValidator` | Validator clients
+ | `auth.AuthService`, `searcher.SearcherService` | Searchers
+ | `block_engine.BlockEngineRelayer` | Flowra Relayer (internal)
+`*.relayer.flowra.wtf` | `auth.AuthService`, `relayer.Relayer` | Validator clients
 
-The Relayer serves validators on `11226` (its gRPC port; the validator fetches the relayer's TPU sockets from it). Relayer TPU ports are advertised to the validator over that connection and do not need to be configured by hand.
+The numbered per-service ports of earlier deployments (8003, 8005, 8234, 11226, 11228) are no longer reachable from outside; they exist only on the hosts' loopback behind the TLS front. Relayer TPU ports are advertised to the validator over the `Relayer` connection and do not need to be configured by hand.
 
 ## Testnet
 
@@ -77,17 +77,17 @@ Pick one at random per bundle to spread write locks, and prefer reading the list
 Verify reachability before restarting your validator:
 
 ```bash
-# Block Engine: TLS handshake + service list on the validator port
-grpcurl frankfurt.mainnet.blockengine.flowra.wtf:8003 list
+# Block Engine: TLS handshake + a gRPC round-trip (expects a gRPC error, which proves routing)
+grpcurl frankfurt.mainnet.blockengine.flowra.wtf:443 block_engine.BlockEngineValidator/GetBlockEngineEndpoints
 
 # Relayer
-grpcurl frankfurt.mainnet.relayer.flowra.wtf:11226 list
+grpcurl frankfurt.mainnet.relayer.flowra.wtf:443 relayer.Relayer/GetTpuConfigs
 
 # Round-trip latency matters for auction competitiveness
 ping -c 10 frankfurt.mainnet.blockengine.flowra.wtf
 ```
 
-Searchers can do the same against `:8005` and `:8234`.
+Searchers can do the same with `searcher.SearcherService/GetTipAccounts` (it answers with an auth error until you hold a token, which is enough to prove connectivity). The engines do not expose gRPC reflection, so `list` will not work; pass the proto files with `-proto` if you want to call methods with payloads.
 
 !!!success Staying current
 Watch [flowra.wtf/blog](https://flowra.wtf/blog) or the registered-participant channel for endpoint announcements. This page is the source of truth once values are live.

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841667993146">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841668691016">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -38,12 +38,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.6.0.841667993146" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.6.0.841668691016" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841667993146" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841668691016" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841667993146" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.6.0.841667993146" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841668691016" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.6.0.841668691016" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -222,8 +222,8 @@
 <p>All of a validator&#x27;s regional settings must point at the <strong>same region</strong>. Choose the region closest to your validator.</p>
 <retype-table copy-text="Region | Block Engine (`--block-engine-url`) | Relayer (`--relayer-url`)
 --- | --- | ---
-Frankfurt | `https://frankfurt.mainnet.blockengine.flowra.wtf:8003` | `https://frankfurt.mainnet.relayer.flowra.wtf:11226`
-London | `https://london.mainnet.blockengine.flowra.wtf:8003` | `https://london.mainnet.relayer.flowra.wtf:11226`">
+Frankfurt | `https://frankfurt.mainnet.blockengine.flowra.wtf` | `https://frankfurt.mainnet.relayer.flowra.wtf`
+London | `https://london.mainnet.blockengine.flowra.wtf` | `https://london.mainnet.relayer.flowra.wtf`">
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable">
 <thead>
@@ -236,13 +236,13 @@ London | `https://london.mainnet.blockengine.flowra.wtf:8003` | `https://london.
 <tbody>
 <tr>
 <td>Frankfurt</td>
-<td><code translate="no" v-pre>https://frankfurt.mainnet.blockengine.flowra.wtf:8003</code></td>
-<td><code translate="no" v-pre>https://frankfurt.mainnet.relayer.flowra.wtf:11226</code></td>
+<td><code translate="no" v-pre>https://frankfurt.mainnet.blockengine.flowra.wtf</code></td>
+<td><code translate="no" v-pre>https://frankfurt.mainnet.relayer.flowra.wtf</code></td>
 </tr>
 <tr>
 <td>London</td>
-<td><code translate="no" v-pre>https://london.mainnet.blockengine.flowra.wtf:8003</code></td>
-<td><code translate="no" v-pre>https://london.mainnet.relayer.flowra.wtf:11226</code></td>
+<td><code translate="no" v-pre>https://london.mainnet.blockengine.flowra.wtf</code></td>
+<td><code translate="no" v-pre>https://london.mainnet.relayer.flowra.wtf</code></td>
 </tr>
 </tbody>
 </table>
@@ -261,85 +261,82 @@ London | `https://london.mainnet.blockengine.flowra.wtf:8003` | `https://london.
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>A second Frankfurt-region relayer runs in Lithuania (<code translate="no" v-pre>https://lithuania.mainnet.relayer.flowra.wtf:11226</code>) and feeds the Frankfurt Block Engine — validators in the Baltics and Poland may see lower latency pointing <code translate="no" v-pre>--relayer-url</code> there while keeping the Frankfurt Block Engine.</p>
+<p>A second Frankfurt-region relayer runs in Lithuania (<code translate="no" v-pre>https://lithuania.mainnet.relayer.flowra.wtf</code>) and feeds the Frankfurt Block Engine — validators in the Baltics and Poland may see lower latency pointing <code translate="no" v-pre>--relayer-url</code> there while keeping the Frankfurt Block Engine.</p>
         </div>
     </div>
 </div>
 <p>Further regions are added as validator demand clusters; the <a href="../../resources/roadmap/">roadmap</a> lists what is planned.</p>
 <h2 id="searcher-endpoints">Searcher endpoints</h2>
-<p>Searchers connect to the same Block Engine hosts on the searcher ports:</p>
-<retype-table copy-text="Region | AuthService | SearcherService
---- | --- | ---
-Frankfurt | `https://frankfurt.mainnet.blockengine.flowra.wtf:8005` | `https://frankfurt.mainnet.blockengine.flowra.wtf:8234`
-London | `https://london.mainnet.blockengine.flowra.wtf:8005` | `https://london.mainnet.blockengine.flowra.wtf:8234`">
+<p>Searchers use the same Block Engine URL for <code translate="no" v-pre>AuthService</code> and <code translate="no" v-pre>SearcherService</code>:</p>
+<retype-table copy-text="Region | Endpoint
+--- | ---
+Frankfurt | `https://frankfurt.mainnet.blockengine.flowra.wtf`
+London | `https://london.mainnet.blockengine.flowra.wtf`">
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable">
 <thead>
 <tr>
 <th>Region</th>
-<th>AuthService</th>
-<th>SearcherService</th>
+<th>Endpoint</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Frankfurt</td>
-<td><code translate="no" v-pre>https://frankfurt.mainnet.blockengine.flowra.wtf:8005</code></td>
-<td><code translate="no" v-pre>https://frankfurt.mainnet.blockengine.flowra.wtf:8234</code></td>
+<td><code translate="no" v-pre>https://frankfurt.mainnet.blockengine.flowra.wtf</code></td>
 </tr>
 <tr>
 <td>London</td>
-<td><code translate="no" v-pre>https://london.mainnet.blockengine.flowra.wtf:8005</code></td>
-<td><code translate="no" v-pre>https://london.mainnet.blockengine.flowra.wtf:8234</code></td>
+<td><code translate="no" v-pre>https://london.mainnet.blockengine.flowra.wtf</code></td>
 </tr>
 </tbody>
 </table>
 </div>
 </retype-table>
 <p>Keys are registered once at <a href="https://portal.flowra.wtf" class="outbound" target="_blank"><span>portal.flowra.wtf</span><svg xmlns="http://www.w3.org/2000/svg" class="retype-outbound-trigger docs-icon ml-1" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="currentColor"><path d="M15.5 2.25a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V4.06l-6.22 6.22a.75.75 0 1 1-1.06-1.06L19.94 3h-3.69a.75.75 0 0 1-.75-.75Z"/><path d="M2.5 4.25c0-.966.784-1.75 1.75-1.75h8.5a.75.75 0 0 1 0 1.5h-8.5a.25.25 0 0 0-.25.25v15.5c0 .138.112.25.25.25h15.5a.25.25 0 0 0 .25-.25v-8.5a.75.75 0 0 1 1.5 0v8.5a1.75 1.75 0 0 1-1.75 1.75H4.25a1.75 1.75 0 0 1-1.75-1.75V4.25Z"/></g></svg></a> and work in every region.</p>
-<h2 id="service-ports">Service ports</h2>
-<p>The Block Engine exposes separate gRPC services per audience. All are gRPC over TLS with publicly trusted certificates: use <code translate="no" v-pre>https://</code> URLs, no custom root certificate required.</p>
-<retype-table copy-text="Service | Consumer | Port
+<h2 id="services">Services</h2>
+<p>Every endpoint is gRPC over TLS on the standard port <code translate="no" v-pre>443</code>, with publicly trusted certificates — use <code translate="no" v-pre>https://</code> URLs with no port and no custom root certificate. One hostname serves all of a component&#x27;s gRPC services; the service name in the request path selects the service, so a client library needs nothing beyond the URL.</p>
+<retype-table copy-text="Host | gRPC services | Consumer
 --- | --- | ---
-BlockEngineValidator + AuthService | Validator clients | 8003
-AuthService (standalone) | Searchers and external tooling | 8005
-SearcherService | Searchers | 8234
-BlockEngineRelayer | Flowra Relayer (internal) | 11228">
+`*.blockengine.flowra.wtf` | `auth.AuthService`, `block_engine.BlockEngineValidator` | Validator clients
+ | `auth.AuthService`, `searcher.SearcherService` | Searchers
+ | `block_engine.BlockEngineRelayer` | Flowra Relayer (internal)
+`*.relayer.flowra.wtf` | `auth.AuthService`, `relayer.Relayer` | Validator clients">
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable">
 <thead>
 <tr>
-<th>Service</th>
+<th>Host</th>
+<th>gRPC services</th>
 <th>Consumer</th>
-<th>Port</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>BlockEngineValidator + AuthService</td>
+<td><code translate="no" v-pre>*.blockengine.flowra.wtf</code></td>
+<td><code translate="no" v-pre>auth.AuthService</code>, <code translate="no" v-pre>block_engine.BlockEngineValidator</code></td>
 <td>Validator clients</td>
-<td>8003</td>
 </tr>
 <tr>
-<td>AuthService (standalone)</td>
-<td>Searchers and external tooling</td>
-<td>8005</td>
-</tr>
-<tr>
-<td>SearcherService</td>
+<td><code translate="no" v-pre>auth.AuthService</code>, <code translate="no" v-pre>searcher.SearcherService</code></td>
 <td>Searchers</td>
-<td>8234</td>
+<td> </td>
 </tr>
 <tr>
-<td>BlockEngineRelayer</td>
+<td><code translate="no" v-pre>block_engine.BlockEngineRelayer</code></td>
 <td>Flowra Relayer (internal)</td>
-<td>11228</td>
+<td> </td>
+</tr>
+<tr>
+<td><code translate="no" v-pre>*.relayer.flowra.wtf</code></td>
+<td><code translate="no" v-pre>auth.AuthService</code>, <code translate="no" v-pre>relayer.Relayer</code></td>
+<td>Validator clients</td>
 </tr>
 </tbody>
 </table>
 </div>
 </retype-table>
-<p>The Relayer serves validators on <code translate="no" v-pre>11226</code> (its gRPC port; the validator fetches the relayer&#x27;s TPU sockets from it). Relayer TPU ports are advertised to the validator over that connection and do not need to be configured by hand.</p>
+<p>The numbered per-service ports of earlier deployments (8003, 8005, 8234, 11226, 11228) are no longer reachable from outside; they exist only on the hosts&#x27; loopback behind the TLS front. Relayer TPU ports are advertised to the validator over the <code translate="no" v-pre>Relayer</code> connection and do not need to be configured by hand.</p>
 <h2 id="testnet">Testnet</h2>
 <p>There is currently no separate public testnet: the London and Frankfurt regions above are mainnet. Validators wanting a staging environment before pointing a mainnet node at Flowra, and searchers wanting to integrate without tipping, can request one at <a href="mailto:info@flowra.wtf">info@flowra.wtf</a>.</p>
 <h2 id="on-chain-addresses">On-chain addresses</h2>
@@ -394,16 +391,16 @@ SH98FYfX3XmEKtNCTvwpcX56Jj3ZtCpYaLwFdQq6Y48</code></pre>
 <h2 id="verifying-connectivity">Verifying connectivity</h2>
 <p>Verify reachability before restarting your validator:</p>
 <div id="verifying-connectivity-code-1" class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-bash"><code v-pre class="language-bash"># Block Engine: TLS handshake + service list on the validator port
-grpcurl frankfurt.mainnet.blockengine.flowra.wtf:8003 list
+<pre translate="no" class="language-bash"><code v-pre class="language-bash"># Block Engine: TLS handshake + a gRPC round-trip (expects a gRPC error, which proves routing)
+grpcurl frankfurt.mainnet.blockengine.flowra.wtf:443 block_engine.BlockEngineValidator/GetBlockEngineEndpoints
 
 # Relayer
-grpcurl frankfurt.mainnet.relayer.flowra.wtf:11226 list
+grpcurl frankfurt.mainnet.relayer.flowra.wtf:443 relayer.Relayer/GetTpuConfigs
 
 # Round-trip latency matters for auction competitiveness
 ping -c 10 frankfurt.mainnet.blockengine.flowra.wtf</code></pre>
 </doc-codeblock></div>
-<p>Searchers can do the same against <code translate="no" v-pre>:8005</code> and <code translate="no" v-pre>:8234</code>.</p>
+<p>Searchers can do the same with <code translate="no" v-pre>searcher.SearcherService/GetTipAccounts</code> (it answers with an auth error until you hold a token, which is enough to prove connectivity). The engines do not expose gRPC reflection, so <code translate="no" v-pre>list</code> will not work; pass the proto files with <code translate="no" v-pre>-proto</code> if you want to call methods with payloads.</p>
 <div class="flex mb-6">
     <div class="shrink-0 w-1.5 rounded-tl-lg rounded-bl-lg bg-callout-success"></div>
     <div class="flex w-full py-4 border border-l-0 rounded-tr-lg rounded-br-lg doc-callout bg-callout-base-bg border-callout-base-border" role="alert">
