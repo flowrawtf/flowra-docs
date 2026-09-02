@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841666948215">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841667791206">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -38,12 +38,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.6.0.841666948215" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.6.0.841667791206" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841666948215" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841667791206" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841666948215" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.6.0.841666948215" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841667791206" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.6.0.841667791206" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -223,8 +223,8 @@
 --- | --- | ---
 `--block-engine-url` | Yes | Your regional Block Engine endpoint. See [Endpoints](endpoints.md).
 `--relayer-url` | Yes | Your regional Relayer endpoint. The validator fetches the relayer's TPU sockets and advertises them in gossip.
-`--tip-payment-program-pubkey` | Yes | `T1pyyaTNZsKv2WcRAB8oVnk93mLJw2XzjtVYqCsaHqt` — the canonical tip payment program; unchanged from a Jito setup. See [Endpoints](endpoints.md#on-chain-addresses).
-`--tip-distribution-program-pubkey` | Yes | `4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7` — the canonical tip distribution program; unchanged from a Jito setup.
+`--tip-payment-program-pubkey` | Yes | `2viWvGRQaQuTiLDVWqm6R1EtXNTQXP8pkhs44a8JYXqh` — Flowra's tip payment program. See [Endpoints](endpoints.md#on-chain-addresses).
+`--tip-distribution-program-pubkey` | Yes | `AAuXLgmQDUHKTDovmKStkG9yciYjoe1YcRmgmYLkPy3R` — Flowra's tip distribution program.
 `--merkle-root-upload-authority` | Yes | Authority for tip distribution merkle root uploads
 `--commission-bps` | Yes | Your MEV commission in basis points (0 to 10000), applied to tips before staker distribution
 `--bundle-cu-reserve-pct` | No | Share of block compute units reserved for bundles. Default `15`
@@ -254,12 +254,12 @@
 <tr>
 <td><code translate="no" v-pre>--tip-payment-program-pubkey</code></td>
 <td>Yes</td>
-<td><code translate="no" v-pre>T1pyyaTNZsKv2WcRAB8oVnk93mLJw2XzjtVYqCsaHqt</code> — the canonical tip payment program; unchanged from a Jito setup. See <a href="../endpoints/#on-chain-addresses">Endpoints</a>.</td>
+<td><code translate="no" v-pre>2viWvGRQaQuTiLDVWqm6R1EtXNTQXP8pkhs44a8JYXqh</code> — Flowra&#x27;s tip payment program. See <a href="../endpoints/#on-chain-addresses">Endpoints</a>.</td>
 </tr>
 <tr>
 <td><code translate="no" v-pre>--tip-distribution-program-pubkey</code></td>
 <td>Yes</td>
-<td><code translate="no" v-pre>4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7</code> — the canonical tip distribution program; unchanged from a Jito setup.</td>
+<td><code translate="no" v-pre>AAuXLgmQDUHKTDovmKStkG9yciYjoe1YcRmgmYLkPy3R</code> — Flowra&#x27;s tip distribution program.</td>
 </tr>
 <tr>
 <td><code translate="no" v-pre>--merkle-root-upload-authority</code></td>
@@ -351,6 +351,17 @@ addresses = []</code></pre>
 <div id="retype-backlinks">
     <h2>See also</h2>
 <div class="card-compact-group">
+<div class="card-compact-container">
+    <a href="/validators/endpoints/" class="group card-compact no-link">
+        <div class="card-compact-body">
+            <div class="card-compact-header">
+                <span class="card-compact-icon inline-flex shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" role="presentation" fill="currentColor"><!--icon--><path d="M12 1c6.075 0 11 4.925 11 11s-4.925 11-11 11S1 18.075 1 12 5.925 1 12 1Zm3.241 10.5v-.001c-.1-2.708-.992-4.904-1.89-6.452a13.919 13.919 0 0 0-1.304-1.88L12 3.11l-.047.059c-.354.425-.828 1.06-1.304 1.88-.898 1.547-1.79 3.743-1.89 6.451Zm-12.728 0h4.745c.1-3.037 1.1-5.49 2.093-7.204.39-.672.78-1.233 1.119-1.673C6.11 3.329 2.746 7 2.513 11.5Zm18.974 0C21.254 7 17.89 3.329 13.53 2.623c.339.44.729 1.001 1.119 1.673.993 1.714 1.993 4.167 2.093 7.204ZM8.787 13c.182 2.478 1.02 4.5 1.862 5.953.382.661.818 1.29 1.304 1.88l.047.057.047-.059c.354-.425.828-1.06 1.304-1.88.842-1.451 1.679-3.471 1.862-5.951Zm-1.504 0H2.552a9.505 9.505 0 0 0 7.918 8.377 15.773 15.773 0 0 1-1.119-1.673C8.413 18.085 7.47 15.807 7.283 13Zm9.434 0c-.186 2.807-1.13 5.085-2.068 6.704-.39.672-.78 1.233-1.118 1.673A9.506 9.506 0 0 0 21.447 13Z"/></svg></span>
+                <span class="card-compact-title">Endpoints & Addresses</span>
+            </div>
+            <p class="card-compact-description">Regional Flowra endpoints, service ports, and on-chain program addresses.</p>
+        </div>
+    </a>
+</div>
 <div class="card-compact-container">
     <a href="/validators/getting-started/" class="group card-compact no-link">
         <div class="card-compact-body">

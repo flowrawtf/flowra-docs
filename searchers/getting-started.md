@@ -1,12 +1,12 @@
 # Getting Started
 
-Searcher access is **open**: anyone can sign up, register a key, and start bidding once the key is approved. Registration exists so that the network can hold a key accountable — a key that sandwiches users loses its mempool access, not the whole network.
+Searcher access is **open**: anyone can sign up, register a key, and start bidding once the key is approved. Registration exists so that the network can hold a key accountable: aggressive MEV strategies such as sandwiching, and bundle spamming, can get a key sanctioned.
 
 ## Prerequisites
 
 - An **Ed25519 keypair** (a standard Solana keypair works). This one key is your identity: it proves ownership at registration, authenticates you to the Block Engine, and is the fee payer the engine attributes your bundles to.
 - A gRPC client stack in your language of choice.
-- SOL for tips on mainnet. There is no separate public testnet; use the [dry run](bundles.md#dry-run) to test without spending.
+- SOL for tips on mainnet. There is no separate public testnet at the moment.
 
 ## Registering your key
 
@@ -35,13 +35,14 @@ Keys are reviewed by the Flowra operators. Until a key is approved, `GenerateAut
 
 >>>
 
-Each key carries three operator-set attributes you can read on the portal:
+Each key carries two operator-set attributes you can read on the portal:
 
 Attribute | Meaning
 --- | ---
 Mempool scope | **Full**: every pending transaction. **Leader scope**: transactions only while one of the validators in your scope is about to lead (within the next 8 slots).
 Bundle limit | Maximum `SendBundle` calls per second for this key (default 20). Exceeding it returns `RESOURCE_EXHAUSTED`.
-Enforcement level | L0 normal · L1 warning · L2 submission limited · L3 mempool stream withheld · L4 suspended. Levels are raised automatically by network rules (a detected sandwich goes straight to L3) and lowered by an operator. See [Bundles](bundles.md#what-gets-you-throttled).
+
+Keys are held accountable: aggressive MEV strategies such as sandwiching, and bundle spamming, can get a key restricted or suspended. See [Bundles](bundles.md#what-gets-you-sanctioned).
 
 ## Authentication flow
 
@@ -76,7 +77,7 @@ Renew with `RefreshAccessToken` before the access token expires instead of re-si
 
 >>>
 
-`AuthService` is served on the standalone auth port of your region (`8005`); `SearcherService` is on `8234`. Both are plain gRPC over HTTP/2 without TLS — use `http://`, not `https://`, in your channel URL. See [endpoints](../validators/endpoints.md).
+`AuthService` is served on the standalone auth port of your region (`8005`); `SearcherService` is on `8234`. Both are gRPC over TLS with publicly trusted certificates — use `https://` channel URLs; no custom root certificate is needed. See [endpoints](../validators/endpoints.md).
 
 ## Proto files
 
@@ -85,8 +86,8 @@ The gRPC surface is defined in [`flowrawtf/mev-protos`](https://github.com/flowr
 File | Contents
 --- | ---
 `auth.proto` | Challenge and token authentication (`AuthService`)
-`searcher.proto` | `SearcherService`: stream subscription, bundle submission (+ dry run), results, leaders, tip accounts
-`bundle.proto` | Bundle structure, `BundleResult` states, and the simulation report types
+`searcher.proto` | `SearcherService`: stream subscription, bundle submission, results, leaders, tip accounts
+`bundle.proto` | Bundle structure and `BundleResult` states
 `block_engine.proto` | Validator- and relayer-facing services, including the PBP policy RPC
 `packet.proto` / `shared.proto` | Transaction packet format and common types
 
@@ -99,7 +100,7 @@ With an access token in hand, a minimal loop looks like:
 1. `GetTipAccounts` to learn where tips go.
 2. `SubscribePendingTransactions` to open the orderflow stream, optionally with the accounts you trade ([details](orderflow-stream.md)).
 3. `GetNextScheduledLeader` to see when a Flowra validator is next on rotation.
-4. Build a bundle around an opportunity, check it with `simulate_only`, then `SendBundle` for real ([details](bundles.md)).
+4. Build a bundle around an opportunity and `SendBundle` ([details](bundles.md)).
 5. Watch `SubscribeBundleResults` for the outcome, and calibrate your next bid.
 
 ## If you have integrated Jito before
@@ -109,7 +110,6 @@ The concepts map directly: bundles, tips, atomic execution, auth via challenge-r
 - **The orderflow stream is part of the product.** You subscribe to pending transactions from the same interface you submit to.
 - **Keys are registered.** One-time registration on the portal, then the same auth flow you already run.
 - **Tips are auction bids** settled every 10&nbsp;ms, with a 5% protocol fee.
-- **Dry runs are free.** `simulate_only` returns the full simulation report without entering the auction.
-- **Sandwiching is a policy decision, not a given.** Each validator decides through its [block policy](../concepts/programmable-block-policy.md); where it is disallowed the engine rejects the bundle and the network raises your key's enforcement level.
+- **Sandwiching is a policy decision, not a given.** Each validator decides through its [block policy](../concepts/programmable-block-policy.md); where it is disallowed the engine rejects the bundle, and a key that keeps trying can be sanctioned.
 
 [!ref Next: subscribing to the stream](orderflow-stream.md)

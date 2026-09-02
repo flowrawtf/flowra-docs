@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841666948215">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841667791206">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -44,11 +44,11 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../static/favicon.png" />
-    <link href="../resources/css/retype.css?v=4.6.0.841666948215" rel="stylesheet">
+    <link href="../resources/css/retype.css?v=4.6.0.841667791206" rel="stylesheet">
 
-    <script data-cfasync="false" src="../resources/js/config.js?v=4.6.0.841666948215" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/config.js?v=4.6.0.841667791206" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=4.6.0.841666948215" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=4.6.0.841667791206" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -222,8 +222,6 @@
 <p>Auction ticks close every 10 ms, roughly forty per Solana slot. Within a tick, the highest tip wins among non-conflicting bundles; you are racing bids, not nanoseconds. Mechanics: <a href="../concepts/auction-mechanics/">Auction Mechanics</a>.</p>
 <h3 id="atomic-all-or-nothing-bundles">Atomic, all-or-nothing bundles</h3>
 <p>Bundles execute in order and in full, or not at all. Failed bundles never land, so multi-leg strategies carry no partial-execution risk and no wasted fees on reverts. See <a href="bundles/">Bundles</a>.</p>
-<h3 id="a-free-dry-run">A free dry run</h3>
-<p><code translate="no" v-pre>SendBundle</code> with <code translate="no" v-pre>simulate_only</code> simulates your bundle against the leader&#x27;s live state and returns the full report (logs, compute units, token balances, pre/post account state) without entering the auction. Nothing is spent and nothing can land, so you can verify a pricing formula as often as you like.</p>
 <h3 id="strategy-confidentiality">Strategy confidentiality</h3>
 <p>The <em>orderflow</em> is open; your <em>bundles</em> are not. Submissions go point-to-point to the Block Engine and are never exposed to other searchers or a public mempool.</p>
 <h3 id="simple-economics">Simple economics</h3>
@@ -237,7 +235,7 @@
 <retype-table copy-text="Requirement | Detail
 --- | ---
 Keypair | An Ed25519 keypair identifying your searcher. It is registered once at [portal.flowra.wtf](https://portal.flowra.wtf) and then used for authentication and bundle signing.
-Connectivity | Plain gRPC (HTTP/2, no TLS) to your nearest Flowra region ([endpoints](../validators/endpoints.md))
+Connectivity | gRPC over TLS to your nearest Flowra region ([endpoints](../validators/endpoints.md))
 Tips | SOL for auction tips, paid as lamport transfers to tip accounts (`GetTipAccounts`)
 Bundle size | Up to 5 transactions per bundle">
 <div class="table-wrapper scrollbar overflow-hidden">
@@ -255,7 +253,7 @@ Bundle size | Up to 5 transactions per bundle">
 </tr>
 <tr>
 <td>Connectivity</td>
-<td>Plain gRPC (HTTP/2, no TLS) to your nearest Flowra region (<a href="../validators/endpoints/">endpoints</a>)</td>
+<td>gRPC over TLS to your nearest Flowra region (<a href="../validators/endpoints/">endpoints</a>)</td>
 </tr>
 <tr>
 <td>Tips</td>

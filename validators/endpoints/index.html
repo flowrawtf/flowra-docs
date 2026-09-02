@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841666948215">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841667791206">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -38,12 +38,12 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.6.0.841666948215" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.6.0.841667791206" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841666948215" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841667791206" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841666948215" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.6.0.841666948215" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841667791206" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.6.0.841667791206" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -222,8 +222,8 @@
 <p>All of a validator&#x27;s regional settings must point at the <strong>same region</strong>. Choose the region closest to your validator.</p>
 <retype-table copy-text="Region | Block Engine (`--block-engine-url`) | Relayer (`--relayer-url`)
 --- | --- | ---
-Frankfurt | `http://frankfurt.mainnet.blockengine.flowra.wtf:8003` | `http://frankfurt.mainnet.relayer.flowra.wtf:11226`
-London | `http://london.testnet.blockengine.flowra.wtf:8003` | `http://london.testnet.relayer.flowra.wtf:11226`">
+Frankfurt | `https://frankfurt.mainnet.blockengine.flowra.wtf:8003` | `https://frankfurt.mainnet.relayer.flowra.wtf:11226`
+London | `https://london.mainnet.blockengine.flowra.wtf:8003` | `https://london.mainnet.relayer.flowra.wtf:11226`">
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable">
 <thead>
@@ -236,13 +236,13 @@ London | `http://london.testnet.blockengine.flowra.wtf:8003` | `http://london.te
 <tbody>
 <tr>
 <td>Frankfurt</td>
-<td><code translate="no" v-pre>http://frankfurt.mainnet.blockengine.flowra.wtf:8003</code></td>
-<td><code translate="no" v-pre>http://frankfurt.mainnet.relayer.flowra.wtf:11226</code></td>
+<td><code translate="no" v-pre>https://frankfurt.mainnet.blockengine.flowra.wtf:8003</code></td>
+<td><code translate="no" v-pre>https://frankfurt.mainnet.relayer.flowra.wtf:11226</code></td>
 </tr>
 <tr>
 <td>London</td>
-<td><code translate="no" v-pre>http://london.testnet.blockengine.flowra.wtf:8003</code></td>
-<td><code translate="no" v-pre>http://london.testnet.relayer.flowra.wtf:11226</code></td>
+<td><code translate="no" v-pre>https://london.mainnet.blockengine.flowra.wtf:8003</code></td>
+<td><code translate="no" v-pre>https://london.mainnet.relayer.flowra.wtf:11226</code></td>
 </tr>
 </tbody>
 </table>
@@ -261,7 +261,7 @@ London | `http://london.testnet.blockengine.flowra.wtf:8003` | `http://london.te
             </svg>
         </div>
         <div class="pr-5 ml-3 w-full">
-<p>The London hostnames carry <code translate="no" v-pre>testnet</code> for historical reasons; both regions serve <strong>mainnet</strong>. A second Frankfurt-region relayer runs in Lithuania (<code translate="no" v-pre>lithuania.mainnet.relayer.flowra.wtf:11226</code>) and feeds the Frankfurt Block Engine — validators in the Baltics and Poland may see lower latency pointing <code translate="no" v-pre>--relayer-url</code> there while keeping the Frankfurt Block Engine.</p>
+<p>A second Frankfurt-region relayer runs in Lithuania (<code translate="no" v-pre>https://lithuania.mainnet.relayer.flowra.wtf:11226</code>) and feeds the Frankfurt Block Engine — validators in the Baltics and Poland may see lower latency pointing <code translate="no" v-pre>--relayer-url</code> there while keeping the Frankfurt Block Engine.</p>
         </div>
     </div>
 </div>
@@ -270,8 +270,8 @@ London | `http://london.testnet.blockengine.flowra.wtf:8003` | `http://london.te
 <p>Searchers connect to the same Block Engine hosts on the searcher ports:</p>
 <retype-table copy-text="Region | AuthService | SearcherService
 --- | --- | ---
-Frankfurt | `http://frankfurt.mainnet.blockengine.flowra.wtf:8005` | `http://frankfurt.mainnet.blockengine.flowra.wtf:8234`
-London | `http://london.testnet.blockengine.flowra.wtf:8005` | `http://london.testnet.blockengine.flowra.wtf:8234`">
+Frankfurt | `https://frankfurt.mainnet.blockengine.flowra.wtf:8005` | `https://frankfurt.mainnet.blockengine.flowra.wtf:8234`
+London | `https://london.mainnet.blockengine.flowra.wtf:8005` | `https://london.mainnet.blockengine.flowra.wtf:8234`">
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable">
 <thead>
@@ -284,13 +284,13 @@ London | `http://london.testnet.blockengine.flowra.wtf:8005` | `http://london.te
 <tbody>
 <tr>
 <td>Frankfurt</td>
-<td><code translate="no" v-pre>http://frankfurt.mainnet.blockengine.flowra.wtf:8005</code></td>
-<td><code translate="no" v-pre>http://frankfurt.mainnet.blockengine.flowra.wtf:8234</code></td>
+<td><code translate="no" v-pre>https://frankfurt.mainnet.blockengine.flowra.wtf:8005</code></td>
+<td><code translate="no" v-pre>https://frankfurt.mainnet.blockengine.flowra.wtf:8234</code></td>
 </tr>
 <tr>
 <td>London</td>
-<td><code translate="no" v-pre>http://london.testnet.blockengine.flowra.wtf:8005</code></td>
-<td><code translate="no" v-pre>http://london.testnet.blockengine.flowra.wtf:8234</code></td>
+<td><code translate="no" v-pre>https://london.mainnet.blockengine.flowra.wtf:8005</code></td>
+<td><code translate="no" v-pre>https://london.mainnet.blockengine.flowra.wtf:8234</code></td>
 </tr>
 </tbody>
 </table>
@@ -298,7 +298,7 @@ London | `http://london.testnet.blockengine.flowra.wtf:8005` | `http://london.te
 </retype-table>
 <p>Keys are registered once at <a href="https://portal.flowra.wtf" class="outbound" target="_blank"><span>portal.flowra.wtf</span><svg xmlns="http://www.w3.org/2000/svg" class="retype-outbound-trigger docs-icon ml-1" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="currentColor"><path d="M15.5 2.25a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V4.06l-6.22 6.22a.75.75 0 1 1-1.06-1.06L19.94 3h-3.69a.75.75 0 0 1-.75-.75Z"/><path d="M2.5 4.25c0-.966.784-1.75 1.75-1.75h8.5a.75.75 0 0 1 0 1.5h-8.5a.25.25 0 0 0-.25.25v15.5c0 .138.112.25.25.25h15.5a.25.25 0 0 0 .25-.25v-8.5a.75.75 0 0 1 1.5 0v8.5a1.75 1.75 0 0 1-1.75 1.75H4.25a1.75 1.75 0 0 1-1.75-1.75V4.25Z"/></g></svg></a> and work in every region.</p>
 <h2 id="service-ports">Service ports</h2>
-<p>The Block Engine exposes separate gRPC services per audience. All are plain gRPC over HTTP/2 without TLS: use <code translate="no" v-pre>http://</code> URLs.</p>
+<p>The Block Engine exposes separate gRPC services per audience. All are gRPC over TLS with publicly trusted certificates: use <code translate="no" v-pre>https://</code> URLs, no custom root certificate required.</p>
 <retype-table copy-text="Service | Consumer | Port
 --- | --- | ---
 BlockEngineValidator + AuthService | Validator clients | 8003
@@ -341,14 +341,14 @@ BlockEngineRelayer | Flowra Relayer (internal) | 11228">
 </retype-table>
 <p>The Relayer serves validators on <code translate="no" v-pre>11226</code> (its gRPC port; the validator fetches the relayer&#x27;s TPU sockets from it). Relayer TPU ports are advertised to the validator over that connection and do not need to be configured by hand.</p>
 <h2 id="testnet">Testnet</h2>
-<p>There is currently no separate public testnet: the London and Frankfurt regions above are mainnet. For searchers, the <a href="../../searchers/bundles/#dry-run">dry run</a> (<code translate="no" v-pre>SendBundle</code> with <code translate="no" v-pre>simulate_only</code>) simulates a bundle against live mainnet state without spending anything or entering the auction, which covers most integration testing. Validators wanting a staging environment before pointing a mainnet node at Flowra can request one at <a href="mailto:info@flowra.wtf">info@flowra.wtf</a>.</p>
+<p>There is currently no separate public testnet: the London and Frankfurt regions above are mainnet. Validators wanting a staging environment before pointing a mainnet node at Flowra, and searchers wanting to integrate without tipping, can request one at <a href="mailto:info@flowra.wtf">info@flowra.wtf</a>.</p>
 <h2 id="on-chain-addresses">On-chain addresses</h2>
-<p>Flowra uses the canonical tip programs that Jito-lineage validators already ship with, so a validator&#x27;s <code translate="no" v-pre>--tip-payment-program-pubkey</code> and <code translate="no" v-pre>--tip-distribution-program-pubkey</code> do not change when it joins Flowra.</p>
+<p>Flowra runs its own tip programs on mainnet. Set them on the validator with <code translate="no" v-pre>--tip-payment-program-pubkey</code> and <code translate="no" v-pre>--tip-distribution-program-pubkey</code> (<a href="../configuration/">configuration</a>).</p>
 <retype-table copy-text="Purpose | Network | Address
 --- | --- | ---
-Tip payment program | Mainnet | `T1pyyaTNZsKv2WcRAB8oVnk93mLJw2XzjtVYqCsaHqt`
-Tip distribution program | Mainnet | `4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7`
-Merkle root upload authority | Mainnet | [!badge variant=&quot;warning&quot; text=&quot;TBD&quot;] — published before the first tip distribution epoch">
+Tip payment program | Mainnet | `2viWvGRQaQuTiLDVWqm6R1EtXNTQXP8pkhs44a8JYXqh`
+Tip distribution program | Mainnet | `AAuXLgmQDUHKTDovmKStkG9yciYjoe1YcRmgmYLkPy3R`
+Merkle root upload authority | Mainnet | `5LTodMSRDDKBDvvgUtSxo17gk8dv6cdnAcKFYnMnybV7`">
 <div class="table-wrapper scrollbar overflow-hidden">
 <table class="comfortable">
 <thead>
@@ -362,33 +362,43 @@ Merkle root upload authority | Mainnet | [!badge variant=&quot;warning&quot; tex
 <tr>
 <td>Tip payment program</td>
 <td>Mainnet</td>
-<td><code translate="no" v-pre>T1pyyaTNZsKv2WcRAB8oVnk93mLJw2XzjtVYqCsaHqt</code></td>
+<td><code translate="no" v-pre>2viWvGRQaQuTiLDVWqm6R1EtXNTQXP8pkhs44a8JYXqh</code></td>
 </tr>
 <tr>
 <td>Tip distribution program</td>
 <td>Mainnet</td>
-<td><code translate="no" v-pre>4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7</code></td>
+<td><code translate="no" v-pre>AAuXLgmQDUHKTDovmKStkG9yciYjoe1YcRmgmYLkPy3R</code></td>
 </tr>
 <tr>
 <td>Merkle root upload authority</td>
 <td>Mainnet</td>
-<td><span class="no-link inline-flex align-middle items-center justify-center font-medium leading-none whitespace-nowrap text-badge-warning-text bg-badge-warning border border-badge-warning-border h-6 px-2 text-xs rounded-md">
-    <span>TBD</span>
-</span> — published before the first tip distribution epoch</td>
+<td><code translate="no" v-pre>5LTodMSRDDKBDvvgUtSxo17gk8dv6cdnAcKFYnMnybV7</code></td>
 </tr>
 </tbody>
 </table>
 </div>
 </retype-table>
-<p>Tip <strong>accounts</strong> for searchers are served dynamically by the <code translate="no" v-pre>GetTipAccounts</code> RPC and may rotate; never hard-code them. See the <a href="../../searchers/api-reference/">API reference</a>.</p>
+<h3 id="tip-accounts">Tip accounts</h3>
+<p>Searchers pay tips by transferring lamports to any of the tip payment program&#x27;s eight tip accounts. <code translate="no" v-pre>GetTipAccounts</code> returns the current list; the addresses are:</p>
+<div id="tip-accounts-code-1" class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-none"><code v-pre class="language-none">BtAM76RgBUfijsMkpCehxbW6iRqdabxazcaek2jQXvZ5
+BgNHgADf8PV5fNhTVEgJnyYeNv3veBHicz5vMqhRVsJV
+Bq4jckjxQS1igGvNK8ct6KU6phcs81bMw4F2KqNBYbsD
+46ba4KqsD25nAwNK8uoQ5cvaAKf4v46DZZHTmJ8TDKwT
+HRbTWnz5P3RHQH8KPL2478mm2URC3CShiTdPSm1smmgg
+2AFp51z4GQ41BLpNqYBLWEJta1Daw6vAz4HkFCjNeipo
+Gg2VMr5DuuHiaTrbQMaNnY51Ut46HSTCi1U9EriEHqRy
+SH98FYfX3XmEKtNCTvwpcX56Jj3ZtCpYaLwFdQq6Y48</code></pre>
+</doc-codeblock></div>
+<p>Pick one at random per bundle to spread write locks, and prefer reading the list from <code translate="no" v-pre>GetTipAccounts</code> at startup so a rotation never breaks you. See the <a href="../../searchers/api-reference/">API reference</a>.</p>
 <h2 id="verifying-connectivity">Verifying connectivity</h2>
-<p>Verify reachability before restarting your validator. The endpoints are plain HTTP/2, so use <code translate="no" v-pre>-plaintext</code>:</p>
+<p>Verify reachability before restarting your validator:</p>
 <div id="verifying-connectivity-code-1" class="codeblock-wrapper"><doc-codeblock>
-<pre translate="no" class="language-bash"><code v-pre class="language-bash"># Block Engine: list services on the validator port
-grpcurl -plaintext frankfurt.mainnet.blockengine.flowra.wtf:8003 list
+<pre translate="no" class="language-bash"><code v-pre class="language-bash"># Block Engine: TLS handshake + service list on the validator port
+grpcurl frankfurt.mainnet.blockengine.flowra.wtf:8003 list
 
 # Relayer
-grpcurl -plaintext frankfurt.mainnet.relayer.flowra.wtf:11226 list
+grpcurl frankfurt.mainnet.relayer.flowra.wtf:11226 list
 
 # Round-trip latency matters for auction competitiveness
 ping -c 10 frankfurt.mainnet.blockengine.flowra.wtf</code></pre>

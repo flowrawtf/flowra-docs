@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841666948215">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.6.0.841667791206">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 4.6.0">
@@ -38,11 +38,11 @@
     <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
 
     <link id="retype-favicon" rel="icon" href="../../static/favicon.png" />
-    <link href="../../resources/css/retype.css?v=4.6.0.841666948215" rel="stylesheet">
+    <link href="../../resources/css/retype.css?v=4.6.0.841667791206" rel="stylesheet">
 
-    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841666948215" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.6.0.841667791206" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../../resources/js/retype.js?v=4.6.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841666948215" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.6.0.841667791206" data-turbo-eval="false" defer></script>
 </head>
 <body>
     <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
@@ -239,7 +239,7 @@ SubscribePendingTransactions {
 <li><strong>Full</strong> — every batch, all the time.</li>
 <li><strong>Leader scope</strong> — batches only while one of the validators in your scope is leading or about to lead (within the next 8 slots). Outside those windows the stream stays open but silent.</li>
 </ul>
-<p>The scope is re-checked on every batch, so a change made by an operator takes effect mid-stream without reconnecting. If your key is set to enforcement level 3 or above, or is no longer approved, the stream ends with <code translate="no" v-pre>PERMISSION_DENIED</code> and the reason.</p>
+<p>The scope is re-checked on every batch, so a change made by an operator takes effect mid-stream without reconnecting. If your key is restricted or no longer approved, the stream ends with <code translate="no" v-pre>PERMISSION_DENIED</code> and the reason.</p>
 <h2 id="whats-in-a-stream-message">What&#x27;s in a stream message</h2>
 <p>Messages carry packet batches with a timestamp header:</p>
 <retype-table copy-text="Field | Description

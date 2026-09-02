@@ -29,7 +29,7 @@
 
 - [Getting Started](https://docs.flowra.wtf/searchers/getting-started.md): Register your searcher key, authenticate against the Block Engine, and make your first calls.
 - [Orderflow Stream](https://docs.flowra.wtf/searchers/orderflow-stream.md): Subscribing to the pending-transaction stream: filters, scope, message contents, and delivery semantics.
-- [Bundles](https://docs.flowra.wtf/searchers/bundles.md): Bundle structure, tipping, dry runs, auction submission, and what gets a key throttled.
+- [Bundles](https://docs.flowra.wtf/searchers/bundles.md): Bundle structure, tipping, auction submission, and what gets a key sanctioned.
 - [API Reference](https://docs.flowra.wtf/searchers/api-reference.md): gRPC services, messages, result states, and error semantics for the searcher API.
 
 ## Resources

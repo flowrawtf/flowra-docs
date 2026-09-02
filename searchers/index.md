@@ -16,10 +16,6 @@ Auction ticks close every 10&nbsp;ms, roughly forty per Solana slot. Within a ti
 
 Bundles execute in order and in full, or not at all. Failed bundles never land, so multi-leg strategies carry no partial-execution risk and no wasted fees on reverts. See [Bundles](bundles.md).
 
-### A free dry run
-
-`SendBundle` with `simulate_only` simulates your bundle against the leader's live state and returns the full report (logs, compute units, token balances, pre/post account state) without entering the auction. Nothing is spent and nothing can land, so you can verify a pricing formula as often as you like.
-
 ### Strategy confidentiality
 
 The *orderflow* is open; your *bundles* are not. Submissions go point-to-point to the Block Engine and are never exposed to other searchers or a public mempool.
@@ -37,7 +33,7 @@ The protocol fee is **5% of tips**. No subscriptions, no per-seat access fees, n
 Requirement | Detail
 --- | ---
 Keypair | An Ed25519 keypair identifying your searcher. It is registered once at [portal.flowra.wtf](https://portal.flowra.wtf) and then used for authentication and bundle signing.
-Connectivity | Plain gRPC (HTTP/2, no TLS) to your nearest Flowra region ([endpoints](../validators/endpoints.md))
+Connectivity | gRPC over TLS to your nearest Flowra region ([endpoints](../validators/endpoints.md))
 Tips | SOL for auction tips, paid as lamport transfers to tip accounts (`GetTipAccounts`)
 Bundle size | Up to 5 transactions per bundle
 
