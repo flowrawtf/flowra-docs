@@ -38,7 +38,7 @@ Paste the signature, add a name and a one-line purpose, and submit.
 
 >>> Wait for approval
 
-Keys are reviewed by the Flowra operators. Until a key is approved, `GenerateAuthChallenge` answers `PERMISSION_DENIED: Searcher key is pending`. Approved keys show their status, mempool scope, and bundle limit on the portal.
+Keys are reviewed by the Flowra operators. Until a key is approved, `GenerateAuthChallenge` answers `PERMISSION_DENIED: Searcher key is pending`. Approved keys show their status and limits on the portal.
 
 >>>
 
