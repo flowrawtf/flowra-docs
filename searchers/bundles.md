@@ -94,7 +94,7 @@ Attach the tip transfer within a transaction that is essential to the bundle's s
 
 ### One bundle per opportunity
 
-Overlapping variants supersede each other within the 2-second window. Pick your bid and let the bundle re-enter ticks on its own.
+Once a bundle has been sent to a leader, the engine remembers its transaction signatures for 2 seconds and drops any later bundle that reuses one of them (`Dropped / PartiallyProcessed`). So do not submit several bundles that share a transaction — the same swap wrapped with different tips, say — expecting the best one to win: only the first to reach a leader counts, and the rest are dropped. Submit one bundle per opportunity with the bid you actually want; if it loses a tick it competes again in the following ticks by itself, so there is nothing to resubmit.
 
 ### Treat results as market data
 
