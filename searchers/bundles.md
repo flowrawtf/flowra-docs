@@ -16,7 +16,7 @@ Property | Rule
 Size | Up to **5 transactions** per bundle
 Ordering | Executed strictly in the order submitted
 Atomicity | **All-or-nothing**: if any transaction fails, the entire bundle is dropped
-Tip | At least one transaction transfers lamports to a **tip account** (see below)
+Tip | At least one transaction transfers lamports to a **tip account** (see below); **1,000 lamports minimum** per bundle
 Signing | Every transaction fully signed before submission; each transaction's first signature identifies it
 
 ### Atomic execution means no revert risk
@@ -29,6 +29,7 @@ Your tip is your **bid** in the 10&nbsp;ms auction:
 
 - Fetch the current tip accounts with `GetTipAccounts`, then include a lamport transfer to one of them inside your bundle.
 - Your bid equals the **sum of transfers to tip accounts** across the bundle, as measured in simulation. Misreported tips are caught there and the bundle is dropped.
+- **Minimum tip: 1,000 lamports** per bundle (the same floor Jito uses). The engine reads the tip from the transactions at submission and rejects a bundle under the floor with `INVALID_ARGUMENT` before it costs a simulation. Priority fees do not count toward the floor. Operators can set a different floor for a key, or exempt it.
 - Ranking within a tick is by tip, subject to conflict-aware selection and the validator's policy.
 - After the **5% protocol fee**, tips flow to the validator and its stakers through the on-chain tip distribution mechanism.
 
@@ -60,11 +61,16 @@ SubscribeBundleResults {}
 --> stream of BundleResult { bundle_id, accepted | rejected | dropped }
 ```
 
-A bundle that loses a tick is not gone: it re-enters the following ticks and keeps competing until it wins, is superseded, or its blockhash expires, so a near-miss can still land in a later tick without resubmission. Resubmitting the same transactions yourself does the opposite — see *superseded* below.
+A bundle that loses a tick is not gone: it re-enters the following ticks and keeps competing until it wins or its blockhash expires, so a near-miss can still land in a later tick without resubmission.
 
-### Superseded bundles
+### Overlapping bundles
 
-The engine remembers every transaction signature it has emitted to a leader for the last **2 seconds**. A bundle that repeats one of those signatures cannot land atomically (the earlier copy is already on its way), so it is dropped immediately with `Dropped / PartiallyProcessed` and the conflicting signature named in the result. In practice this is almost always the searcher's own overlapping variant arriving second: build one bundle per opportunity and let it compete, rather than firing variants with shared legs.
+The engine remembers every transaction signature it has sent to a leader for the last **2 seconds**. A later bundle that repeats one of those signatures can only land if the earlier bundle fails — a signature executes once — so the engine does not drop it, but it does not let it compete on equal terms either:
+
+- It is forwarded **behind every bundle that carries no repeated signature** in that tick. If the earlier bundle executed, it fails cheaply at the leader; if the earlier bundle died on a leg of its own, it is the one that lands.
+- At most **3 bundles per signature** are forwarded within the window, best reward first. Further repeats are dropped with `Dropped / PartiallyProcessed` and the shared signature named in the result.
+
+This is what makes hedged variants work — `[A, C]` and `[A, B, C]` for the same opportunity both go out, and whichever fits lands — while keeping one hot transaction from filling the leader's bundle window with copies. Keep it to a few deliberate variants; a resubmission of the same bundle gains nothing.
 
 ## Timing your submissions
 
@@ -92,12 +98,12 @@ Where possible, encode pre- and post-checks into the transactions themselves (ba
 
 Attach the tip transfer within a transaction that is essential to the bundle's success, not as a detached final transfer. This prevents any path where your tip could land while your strategy legs do not.
 
-### One bundle per opportunity
+### A few variants, not a spray
 
-Once a bundle has been sent to a leader, the engine remembers its transaction signatures for 2 seconds and drops any later bundle that reuses one of them (`Dropped / PartiallyProcessed`). So do not submit several bundles that share a transaction — the same swap wrapped with different tips, say — expecting the best one to win: only the first to reach a leader counts, and the rest are dropped. Submit one bundle per opportunity with the bid you actually want; if it loses a tick it competes again in the following ticks by itself, so there is nothing to resubmit.
+Overlapping variants of one opportunity are allowed and go out behind the fresh bundles, up to three per shared signature. Beyond that they are dropped, and none of them can beat a bundle that carries no repeat. Submit the two or three variants you actually mean, with the bids you actually want; a bundle that loses a tick competes again by itself, so there is nothing to resubmit.
 
 ### Treat results as market data
 
-`Rejected` and `Dropped` results carry structured reasons, the failing signature, and simulation logs. They are calibration signals, not errors.
+`Rejected` and `Dropped` results carry structured reasons, the failing signature, and simulation logs; a rejection at `SendBundle` names the exact number that was short. They are calibration signals, not errors.
 
 [!ref Full API reference](api-reference.md)
