@@ -20,7 +20,7 @@ This guide takes a working Solana validator to a Flowra-connected validator. The
 
 >>> Register your validator identity
 
-Send your identity pubkey and preferred region to [info@flowra.wtf](mailto:info@flowra.wtf). Validator registration is handled directly by the Flowra team (the self-service portal at [portal.flowra.wtf](https://portal.flowra.wtf) is for searcher keys). You will receive confirmation once your identity is on the relayer allowlist, along with the endpoint values for your region — they are also listed on [Endpoints & addresses](endpoints.md).
+Send your identity pubkey and preferred region to [info@flowra.wtf](mailto:info@flowra.wtf); validator registration is handled directly by the Flowra team. You will receive confirmation once your identity is on the relayer allowlist, along with the endpoint values for your region — they are also listed on [Endpoints & addresses](endpoints.md).
 
 >>> Install the Flowra Validator Client
 

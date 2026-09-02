@@ -15,11 +15,11 @@ All of a validator's regional settings must point at the **same region**. Choose
 
 Region | Block Engine (`--block-engine-url`) | Relayer (`--relayer-url`)
 --- | --- | ---
-Frankfurt | `http://frankfurt.mainnet.blockengine.flowra.wtf:8003` | `http://frankfurt.mainnet.relayer.flowra.wtf:11226`
-London | `http://london.testnet.blockengine.flowra.wtf:8003` | `http://london.testnet.relayer.flowra.wtf:11226`
+Frankfurt | `https://frankfurt.mainnet.blockengine.flowra.wtf:8003` | `https://frankfurt.mainnet.relayer.flowra.wtf:11226`
+London | `https://london.mainnet.blockengine.flowra.wtf:8003` | `https://london.mainnet.relayer.flowra.wtf:11226`
 
 !!!
-The London hostnames carry `testnet` for historical reasons; both regions serve **mainnet**. A second Frankfurt-region relayer runs in Lithuania (`lithuania.mainnet.relayer.flowra.wtf:11226`) and feeds the Frankfurt Block Engine — validators in the Baltics and Poland may see lower latency pointing `--relayer-url` there while keeping the Frankfurt Block Engine.
+A second Frankfurt-region relayer runs in Lithuania (`https://lithuania.mainnet.relayer.flowra.wtf:11226`) and feeds the Frankfurt Block Engine — validators in the Baltics and Poland may see lower latency pointing `--relayer-url` there while keeping the Frankfurt Block Engine.
 !!!
 
 Further regions are added as validator demand clusters; the [roadmap](../resources/roadmap.md) lists what is planned.
@@ -30,14 +30,14 @@ Searchers connect to the same Block Engine hosts on the searcher ports:
 
 Region | AuthService | SearcherService
 --- | --- | ---
-Frankfurt | `http://frankfurt.mainnet.blockengine.flowra.wtf:8005` | `http://frankfurt.mainnet.blockengine.flowra.wtf:8234`
-London | `http://london.testnet.blockengine.flowra.wtf:8005` | `http://london.testnet.blockengine.flowra.wtf:8234`
+Frankfurt | `https://frankfurt.mainnet.blockengine.flowra.wtf:8005` | `https://frankfurt.mainnet.blockengine.flowra.wtf:8234`
+London | `https://london.mainnet.blockengine.flowra.wtf:8005` | `https://london.mainnet.blockengine.flowra.wtf:8234`
 
 Keys are registered once at [portal.flowra.wtf](https://portal.flowra.wtf) and work in every region.
 
 ## Service ports
 
-The Block Engine exposes separate gRPC services per audience. All are plain gRPC over HTTP/2 without TLS: use `http://` URLs.
+The Block Engine exposes separate gRPC services per audience. All are gRPC over TLS with publicly trusted certificates: use `https://` URLs, no custom root certificate required.
 
 Service | Consumer | Port
 --- | --- | ---
@@ -50,30 +50,45 @@ The Relayer serves validators on `11226` (its gRPC port; the validator fetches t
 
 ## Testnet
 
-There is currently no separate public testnet: the London and Frankfurt regions above are mainnet. For searchers, the [dry run](../searchers/bundles.md#dry-run) (`SendBundle` with `simulate_only`) simulates a bundle against live mainnet state without spending anything or entering the auction, which covers most integration testing. Validators wanting a staging environment before pointing a mainnet node at Flowra can request one at [info@flowra.wtf](mailto:info@flowra.wtf).
+There is currently no separate public testnet: the London and Frankfurt regions above are mainnet. Validators wanting a staging environment before pointing a mainnet node at Flowra, and searchers wanting to integrate without tipping, can request one at [info@flowra.wtf](mailto:info@flowra.wtf).
 
 ## On-chain addresses
 
-Flowra uses the canonical tip programs that Jito-lineage validators already ship with, so a validator's `--tip-payment-program-pubkey` and `--tip-distribution-program-pubkey` do not change when it joins Flowra.
+Flowra runs its own tip programs on mainnet. Set them on the validator with `--tip-payment-program-pubkey` and `--tip-distribution-program-pubkey` ([configuration](configuration.md)).
 
 Purpose | Network | Address
 --- | --- | ---
-Tip payment program | Mainnet | `T1pyyaTNZsKv2WcRAB8oVnk93mLJw2XzjtVYqCsaHqt`
-Tip distribution program | Mainnet | `4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7`
-Merkle root upload authority | Mainnet | [!badge variant="warning" text="TBD"] — published before the first tip distribution epoch
+Tip payment program | Mainnet | `2viWvGRQaQuTiLDVWqm6R1EtXNTQXP8pkhs44a8JYXqh`
+Tip distribution program | Mainnet | `AAuXLgmQDUHKTDovmKStkG9yciYjoe1YcRmgmYLkPy3R`
+Merkle root upload authority | Mainnet | `5LTodMSRDDKBDvvgUtSxo17gk8dv6cdnAcKFYnMnybV7`
 
-Tip **accounts** for searchers are served dynamically by the `GetTipAccounts` RPC and may rotate; never hard-code them. See the [API reference](../searchers/api-reference.md).
+### Tip accounts
+
+Searchers pay tips by transferring lamports to any of the tip payment program's eight tip accounts. `GetTipAccounts` returns the current list; the addresses are:
+
+```text
+BtAM76RgBUfijsMkpCehxbW6iRqdabxazcaek2jQXvZ5
+BgNHgADf8PV5fNhTVEgJnyYeNv3veBHicz5vMqhRVsJV
+Bq4jckjxQS1igGvNK8ct6KU6phcs81bMw4F2KqNBYbsD
+46ba4KqsD25nAwNK8uoQ5cvaAKf4v46DZZHTmJ8TDKwT
+HRbTWnz5P3RHQH8KPL2478mm2URC3CShiTdPSm1smmgg
+2AFp51z4GQ41BLpNqYBLWEJta1Daw6vAz4HkFCjNeipo
+Gg2VMr5DuuHiaTrbQMaNnY51Ut46HSTCi1U9EriEHqRy
+SH98FYfX3XmEKtNCTvwpcX56Jj3ZtCpYaLwFdQq6Y48
+```
+
+Pick one at random per bundle to spread write locks, and prefer reading the list from `GetTipAccounts` at startup so a rotation never breaks you. See the [API reference](../searchers/api-reference.md).
 
 ## Verifying connectivity
 
-Verify reachability before restarting your validator. The endpoints are plain HTTP/2, so use `-plaintext`:
+Verify reachability before restarting your validator:
 
 ```bash
-# Block Engine: list services on the validator port
-grpcurl -plaintext frankfurt.mainnet.blockengine.flowra.wtf:8003 list
+# Block Engine: TLS handshake + service list on the validator port
+grpcurl frankfurt.mainnet.blockengine.flowra.wtf:8003 list
 
 # Relayer
-grpcurl -plaintext frankfurt.mainnet.relayer.flowra.wtf:11226 list
+grpcurl frankfurt.mainnet.relayer.flowra.wtf:11226 list
 
 # Round-trip latency matters for auction competitiveness
 ping -c 10 frankfurt.mainnet.blockengine.flowra.wtf

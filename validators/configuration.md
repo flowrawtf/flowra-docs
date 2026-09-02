@@ -15,8 +15,8 @@ Flag | Required | Description
 --- | --- | ---
 `--block-engine-url` | Yes | Your regional Block Engine endpoint. See [Endpoints](endpoints.md).
 `--relayer-url` | Yes | Your regional Relayer endpoint. The validator fetches the relayer's TPU sockets and advertises them in gossip.
-`--tip-payment-program-pubkey` | Yes | `T1pyyaTNZsKv2WcRAB8oVnk93mLJw2XzjtVYqCsaHqt` — the canonical tip payment program; unchanged from a Jito setup. See [Endpoints](endpoints.md#on-chain-addresses).
-`--tip-distribution-program-pubkey` | Yes | `4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7` — the canonical tip distribution program; unchanged from a Jito setup.
+`--tip-payment-program-pubkey` | Yes | `2viWvGRQaQuTiLDVWqm6R1EtXNTQXP8pkhs44a8JYXqh` — Flowra's tip payment program. See [Endpoints](endpoints.md#on-chain-addresses).
+`--tip-distribution-program-pubkey` | Yes | `AAuXLgmQDUHKTDovmKStkG9yciYjoe1YcRmgmYLkPy3R` — Flowra's tip distribution program.
 `--merkle-root-upload-authority` | Yes | Authority for tip distribution merkle root uploads
 `--commission-bps` | Yes | Your MEV commission in basis points (0 to 10000), applied to tips before staker distribution
 `--bundle-cu-reserve-pct` | No | Share of block compute units reserved for bundles. Default `15`

@@ -2,7 +2,7 @@
 label: Bundles
 icon: package
 order: 80
-description: "Bundle structure, tipping, dry runs, auction submission, and what gets a key throttled."
+description: "Bundle structure, tipping, auction submission, and what gets a key sanctioned."
 ---
 
 # Bundles
@@ -38,26 +38,7 @@ There is no universal answer; the auction discovers it. Practical guidance:
 
 1. **Start from opportunity value, not from fee floors.** Bid a fraction of your expected profit. As competition on an opportunity type matures, margins compress, and your bid has to reflect what the opportunity is worth.
 2. **Remember conflict-awareness.** You are only bidding against bundles that touch *your* accounts. A modest tip can win an uncontested opportunity; a hot pool during volatility is a different auction entirely.
-3. **Use the dry run to price.** `simulate_only` shows you exactly what your bundle does against live state, including the tip the engine will measure, before you commit it.
-
-## Dry run
-
-`SendBundle` accepts a Flowra-only flag, `simulate_only`. The bundle is simulated against the leader's bank exactly as a real submission would be, and the full report comes back inline — but it never enters the auction and is never broadcast. Nothing is spent and nothing can land.
-
-```text
-SendBundle { bundle: {...}, simulate_only: true }
---> {
-  uuid,
-  simulated_ok: true | false,
-  simulation_err: "<bundle-level failure, JSON>",   // empty when ok
-  simulation: [                                   // one per transaction, in order
-    { logs, units_consumed, pre/post token balances, pre/post write-locked accounts }
-  ],
-  simulation_skipped: true | false                // set when simulation could not run at all
-}
-```
-
-Dry runs count against your key's bundle rate limit like any other `SendBundle`.
+3. **Read your simulation failures.** A `SimulationFailure` result carries the program error and logs of the leg that failed; most mispriced or stale bundles show up there before they cost you a tick.
 
 ## Submitting
 
@@ -89,29 +70,19 @@ The engine remembers every transaction signature it has emitted to a leader for 
 
 Bundles only land while a Flowra validator is the leader. Use `GetNextScheduledLeader` for the next connected leader slot and `GetConnectedLeaders` for every connected validator's remaining slots this epoch, and shape your submission timing around those windows. With no connected leader upcoming, a bundle waits in the auction until one is.
 
-## What gets you throttled
+## What gets you sanctioned
 
 Flowra keeps the stream open by holding keys accountable rather than by gating access. Two mechanisms act on a key:
 
 **The validator's policy (PBP).** Each validator sets its own [block policy](../concepts/programmable-block-policy.md). A bundle that violates it — a blacklisted address or program, a searcher outside a whitelist, or a sandwich pattern where `allow_aggressive_mev` is off — is rejected at submission with `PERMISSION_DENIED: PBP violation: <reason>`. The engine classifies a bundle as a sandwich when it has three or more transactions, the first and last share a fee payer, and a middle transaction has a different one.
 
-**Network enforcement levels.** The control plane raises a key's level when network rules trip, and an operator lowers it:
-
-Level | Effect
---- | ---
-L0 | Normal
-L1 | Warning; no change in service
-L2 | Bundle submission limited
-L3 | Mempool stream withheld (subscriptions end with `PERMISSION_DENIED`)
-L4 | Suspended; authentication fails
-
-A single detected sandwich sets a key to **L3**. Sustained request-rate abuse raises the level one step per window. Your current level and its reason are shown on the portal.
+**Network-level sanctions.** Aggressive MEV strategies such as sandwiching, and bundle spamming (sustained submission far above your key's limit), can get a key restricted — from a lower bundle limit to losing the mempool stream or being suspended. Restrictions are applied by the Flowra operators and shown on the portal, with the reason.
 
 ## Best practices
 
-### Dry-run before you submit
+### Simulate before you submit
 
-The engine will catch failing bundles for free, but a submission that was never viable wastes your latency window. `simulate_only` against the leader's live state is cheaper than a wasted tick.
+The engine will catch failing bundles for free, but a submission that was never viable wastes your latency window. Run `simulateTransaction` against fresh state for each leg first.
 
 ### Guard your assumptions in-program
 

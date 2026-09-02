@@ -40,7 +40,7 @@ Your key's **mempool scope** ([set at registration](getting-started.md#registeri
 - **Full** — every batch, all the time.
 - **Leader scope** — batches only while one of the validators in your scope is leading or about to lead (within the next 8 slots). Outside those windows the stream stays open but silent.
 
-The scope is re-checked on every batch, so a change made by an operator takes effect mid-stream without reconnecting. If your key is set to enforcement level 3 or above, or is no longer approved, the stream ends with `PERMISSION_DENIED` and the reason.
+The scope is re-checked on every batch, so a change made by an operator takes effect mid-stream without reconnecting. If your key is restricted or no longer approved, the stream ends with `PERMISSION_DENIED` and the reason.
 
 ## What's in a stream message
 
